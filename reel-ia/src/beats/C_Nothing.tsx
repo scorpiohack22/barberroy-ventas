@@ -6,11 +6,12 @@ import { fadeIn, outExpo, popIn, prog, sp } from "../anim";
 import { Glass, Pill, fmt } from "../components/UI";
 import { ICamera, IPerson, IPin } from "../components/Icons";
 import { Particles } from "../components/Stage";
+import { Photo } from "../components/Ad";
 
 const ROWS = [
-  { at: N.noModelos, label: "Modelos", value: 48000, Icon: IPerson, y: 520 },
-  { at: N.noCamaras, label: "Cámaras y equipo", value: 62000, Icon: ICamera, y: 800 },
-  { at: N.locacion, label: "Locaciones", value: 75000, Icon: IPin, y: 1080 },
+  { at: N.noModelos, label: "Modelos", value: 48000, Icon: IPerson, y: 520, img: "img/perfume-modelo.jpg", focus: "50% 30%" },
+  { at: N.noCamaras, label: "Cámaras y equipo", value: 62000, Icon: ICamera, y: 800, img: "img/set-camaras.jpg", focus: "40% 55%" },
+  { at: N.locacion, label: "Locaciones", value: 75000, Icon: IPin, y: 1080, img: "img/locacion.jpg", focus: "60% 40%" },
 ];
 
 const cl = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -48,11 +49,11 @@ export const C_Nothing: React.FC = () => {
           <React.Fragment key={r.label}>
             <Glass
               style={{
-                left: 110,
+                left: 60,
                 top: r.y,
-                width: 860,
+                width: 960,
                 height: 230,
-                padding: "0 46px",
+                padding: "0 40px 0 22px",
                 display: "flex",
                 alignItems: "center",
                 gap: 30,
@@ -62,21 +63,30 @@ export const C_Nothing: React.FC = () => {
                 filter: dissolve > 0 ? `blur(${dissolve * 14}px)` : undefined,
               }}
             >
-              <div style={{ width: 104, height: 104, borderRadius: 28, background: "rgba(61,123,255,0.16)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <r.Icon size={54} color={strike > 0.5 ? C.muted : C.cyan} />
+              {/* Miniatura real: parallax mientras existe, se desatura y apaga al tacharse */}
+              <div style={{ position: "relative", width: 186, height: 186, borderRadius: 22, overflow: "hidden", flexShrink: 0, boxShadow: "0 12px 30px rgba(0,0,0,0.5)" }}>
+                <Photo
+                  src={r.img}
+                  focus={r.focus}
+                  frame={{ z: 1.35 - 0.12 * prog(t, 13.5, r.at + 0.6, (x) => x) + 0.2 * strike, x: (i % 2 ? 1 : -1) * (3 - 6 * prog(t, 13.5, 18.4, (x) => x)), y: 4 - 8 * prog(t, 13.5, 18.4, (x) => x) }}
+                  imgStyle={{ filter: `grayscale(${strike}) brightness(${1 - 0.55 * strike}) contrast(${1 - 0.2 * strike})` }}
+                />
+                <div style={{ position: "absolute", left: 8, bottom: 8, width: 38, height: 38, borderRadius: 11, background: "rgba(6,7,10,0.65)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <r.Icon size={22} color={strike > 0.5 ? C.muted : C.cyan} />
+                </div>
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 46, fontWeight: 800 }}>{r.label}</div>
+                <div style={{ fontSize: 42, fontWeight: 800 }}>{r.label}</div>
                 <div style={{ fontSize: 30, fontWeight: 600, color: strike > 0.5 ? C.red : C.muted, marginTop: 6 }}>
                   {strike > 0.5 ? (gone ? "Nunca existió" : "No había") : "Producción"}
                 </div>
               </div>
-              <div style={{ fontSize: 54, fontWeight: 800, fontVariantNumeric: "tabular-nums" }}>${fmt(v)}</div>
+              <div style={{ fontSize: 50, fontWeight: 800, fontVariantNumeric: "tabular-nums" }}>${fmt(v)}</div>
               {/* Tachado */}
               <div
                 style={{
                   position: "absolute",
-                  left: 30,
+                  left: 20,
                   top: 113,
                   height: 6,
                   width: `${strike * 92}%`,
@@ -90,9 +100,9 @@ export const C_Nothing: React.FC = () => {
               <div
                 style={{
                   position: "absolute",
-                  left: 110,
+                  left: 60,
                   top: r.y,
-                  width: 860,
+                  width: 960,
                   height: 230,
                   borderRadius: 28,
                   border: `3px dashed rgba(255,92,122,0.6)`,

@@ -33,3 +33,10 @@ npm run render   # genera out/reel.mp4
 - `src/beats/`: una escena por archivo. `src/components/Beat.tsx` gestiona las transiciones (whip, zoom, pull).
 - `src/components/Ad.tsx`: el anuncio de perfume, construido en capas (fondo, producto, texto).
 - `scripts/sound.py`: música (Am–F–C–G, 120 BPM) y efectos sintetizados, con ducking bajo la voz.
+
+## Imágenes fotorrealistas
+
+Las fotos de `public/img/` se generaron con Higgsfield Soul 2.0 (9:16, 1152×2048) siguiendo
+`IMAGENES_SOUL.md`. `perfume-hero-cut.png` es el mismo frasco sin fondo (alineado 1:1 con
+`perfume-hero.jpg`) y permite el despiece en capas y el texto "REAL" detrás del producto.
+`components/Ad.tsx` expone `Photo` (recorte con zoom y paneo, nunca quieta) y el anuncio en capas.

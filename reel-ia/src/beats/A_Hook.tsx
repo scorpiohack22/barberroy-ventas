@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { C, FPS, GRAD, font } from "../theme";
 import { N } from "../timing";
 import { fadeIn, fadeOut, outExpo, popIn, prog, sp } from "../anim";
-import { Ad } from "../components/Ad";
+import { Ad, Photo } from "../components/Ad";
 import { FeedFooter, FeedHeader, Phone } from "../components/Devices";
 import { Glass, Kinetic, Pill, Wire, fmt } from "../components/UI";
 import { Particles } from "../components/Stage";
@@ -15,10 +15,37 @@ const SW = PW * 0.93; // ancho de pantalla
 const SH = PH - PW * 0.07;
 
 const ITEMS = [
-  { at: N.modelos, label: "Modelos", value: 48000, Icon: IPerson },
-  { at: N.camaras, label: "Cámaras y equipo", value: 62000, Icon: ICamera },
-  { at: N.locaciones, label: "Locaciones", value: 75000, Icon: IPin },
+  { at: N.modelos, label: "Modelos", value: 48000, Icon: IPerson, img: "img/perfume-modelo.jpg", focus: "50% 30%" },
+  { at: N.camaras, label: "Cámaras y equipo", value: 62000, Icon: ICamera, img: "img/set-camaras.jpg", focus: "40% 55%" },
+  { at: N.locaciones, label: "Locaciones", value: 75000, Icon: IPin, img: "img/locacion.jpg", focus: "60% 45%" },
 ];
+
+/** El anuncio cambia de encuadre en cada golpe de la frase (cortes de 1,5–2 s) y nunca se queda quieto. */
+const CROPS = [
+  { at: 0, z: 1.12, x: 0, y: 0 },
+  { at: N.publicidad, z: 1.35, x: 4, y: -3 },
+  { at: N.costar, z: 1.18, x: -3, y: 2 },
+  { at: N.locaciones + 1.1, z: 1.4, x: 2, y: -6 },
+];
+const heroCrop = (t: number) => {
+  let i = 0;
+  while (i + 1 < CROPS.length && t >= CROPS[i + 1].at) i++;
+  const c = CROPS[i];
+  const k = t - c.at;
+  return { z: c.z + 0.035 * k, x: c.x + (i % 2 ? -1 : 1) * 0.9 * k, y: c.y - 0.6 * k };
+};
+
+/** Plano corto (0,5–2 s) de cada partida dentro del teléfono, con zoom de entrada. */
+const Insert: React.FC<{ t: number; at: number; until: number; img: string; focus: string }> = ({ t, at, until, img, focus }) => {
+  if (t < at - 0.05 || t > until + 0.12) return null;
+  const p = prog(t, at - 0.05, until + 0.12, (x) => x);
+  const op = fadeIn(t, at - 0.05, 0.08) * fadeOut(t, until, 0.12);
+  return (
+    <div style={{ position: "absolute", inset: 0, opacity: op }}>
+      <Photo src={img} focus={focus} frame={{ z: 1.32 - 0.16 * p, x: -2 + 4 * p, y: 1.5 - 3 * p }} />
+    </div>
+  );
+};
 
 /**
  * 0 – 8,1 s. Hook + planteamiento: el anuncio en un teléfono, la pregunta
@@ -76,7 +103,10 @@ export const A_Hook: React.FC = () => {
           }}
         >
           <Phone w={PW}>
-            <Ad w={SW} h={SH} palette={0} textTop={0.15} />
+            <Ad w={SW} h={SH} palette={0} textTop={0.12} frame={heroCrop(t)} />
+            {ITEMS.map((it, i) => (
+              <Insert key={it.label} t={t} at={it.at} until={i < 2 ? ITEMS[i + 1].at - 0.02 : it.at + 1.1} img={it.img} focus={it.focus} />
+            ))}
             <FeedHeader w={SW} />
             <FeedFooter w={SW} likes={fmt(likes)} />
           </Phone>
@@ -139,8 +169,11 @@ export const A_Hook: React.FC = () => {
         <div style={{ height: 1, background: C.stroke, margin: "24px 0 6px" }} />
         {ITEMS.map((it) => (
           <div key={it.label} style={{ height: 132, display: "flex", alignItems: "center", gap: 18, ...popIn(t, it.at, 40) }}>
-            <div style={{ width: 64, height: 64, borderRadius: 18, background: "rgba(61,123,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 34, color: C.cyan }}>
-              <it.Icon size={34} color={C.cyan} />
+            <div style={{ position: "relative", width: 104, height: 104, borderRadius: 22, overflow: "hidden", boxShadow: `0 0 0 2px rgba(61,217,245,${0.6 * fadeOut(t, it.at + 0.3, 0.6)}), 0 10px 30px rgba(0,0,0,0.5)` }}>
+              <Photo src={it.img} focus={it.focus} frame={{ z: 1.5 - 0.25 * prog(t, it.at, it.at + 2.2, outExpo), x: 0, y: 6 - 12 * prog(t, it.at, 8.1, (x) => x) }} />
+              <div style={{ position: "absolute", right: 6, bottom: 6, width: 30, height: 30, borderRadius: 9, background: "rgba(6,7,10,0.65)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <it.Icon size={18} color={C.cyan} />
+              </div>
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 30, fontWeight: 700 }}>{it.label}</div>

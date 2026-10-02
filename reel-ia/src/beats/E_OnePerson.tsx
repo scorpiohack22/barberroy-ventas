@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, random, useCurrentFrame } from "remotion";
 import { C, FPS, GRAD, font } from "../theme";
 import { N } from "../timing";
 import { fadeIn, lerp, outExpo, popIn, prog, sp } from "../anim";
-import { Ad } from "../components/Ad";
+import { Ad, Photo } from "../components/Ad";
 import { Laptop } from "../components/Devices";
 import { Glass, Kinetic, Wire } from "../components/UI";
 import { ICheck, IImage, IMegaphone, IPerson, IText, IVideo } from "../components/Icons";
@@ -23,6 +23,9 @@ const NODES = [
 const NODE_Y = 1700;
 const nodeX = (i: number) => 135 + i * 270;
 const NODE_T = [23.85, 24.05, 24.25, 24.45];
+
+const PHOTO_A = 23.0;
+const PHOTO_B = 24.85;
 
 const cl = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
@@ -63,7 +66,7 @@ const StudioApp: React.FC<{ t: number }> = ({ t }) => {
               opacity: fadeIn(t, at, 0.1),
             }}
           >
-            <Ad w={tw} h={th * 1.6} palette={i} style={{ marginTop: -th * 0.18, filter: `blur(${(1 - g) * 18}px)` }} />
+            <Ad w={tw} h={th * 1.6} palette={i} hideText seed={`app-${i}`} style={{ marginTop: -th * 0.3, filter: `blur(${(1 - g) * 18}px)` }} />
           </div>
         );
       })}
@@ -88,6 +91,41 @@ export const E_OnePerson: React.FC = () => {
     <AbsoluteFill style={{ transform: `scale(${push})` }}>
       {/* "Y lo más loco…" */}
       <Kinetic t={t} at={N.masLoco + 0.05} size={86} out={22.45} words={[{ w: "Y" }, { w: "lo" }, { w: "más" }, { w: "loco…", hl: true }]} style={{ left: 40, right: 40, top: 300 }} />
+
+      {/* Laptop */}
+      <div
+        style={{
+          position: "absolute",
+          left: LX,
+          top: LY,
+          perspective: 1600,
+          opacity: fadeIn(t, N.masLoco - 0.05, 0.15),
+        }}
+      >
+        <div style={{ transform: `translateY(${(1 - rise) * 500}px) rotateX(${(1 - rise) * 30 + 6}deg)`, transformOrigin: "50% 100%" }}>
+          <Laptop w={LW} style={{ filter: glow > 0 ? `drop-shadow(0 0 ${50 * glow}px rgba(61,217,245,${0.7 * glow}))` : undefined }}>
+            <StudioApp t={t} />
+          </Laptop>
+        </div>
+      </div>
+
+      {/* Match cut: la persona real con su laptop (23,0 – 24,9 s) */}
+      {t > PHOTO_A - 0.05 && t < PHOTO_B + 0.2 ? (
+        <AbsoluteFill style={{ opacity: fadeIn(t, PHOTO_A - 0.05, 0.1) * (1 - prog(t, PHOTO_B, PHOTO_B + 0.18, (x) => x)) }}>
+          {t < N.computador ? (
+            <Photo src="img/creador-laptop.jpg" focus="62% 40%" frame={{ z: lerp(prog(t, PHOTO_A, N.computador, (x) => x), 1.12, 1.3), x: lerp(prog(t, PHOTO_A, N.computador, (x) => x), -2, 1.5), y: 0 }} />
+          ) : (
+            <Photo
+              src="img/creador-laptop.jpg"
+              focus="30% 52%"
+              frame={{ z: lerp(prog(t, N.computador, PHOTO_B + 0.2, outExpo), 1.75, 1.95), x: 0, y: 0 }}
+              imgStyle={{ filter: `brightness(${1 + 0.35 * glow})` }}
+            />
+          )}
+          <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(6,7,10,0.7) 0%, rgba(6,7,10,0.05) 30%, rgba(6,7,10,0.1) 60%, rgba(6,7,10,0.85) 100%)" }} />
+          <AbsoluteFill style={{ background: `radial-gradient(circle at 30% 55%, rgba(61,217,245,${0.25 * glow}), rgba(0,0,0,0) 45%)` }} />
+        </AbsoluteFill>
+      ) : null}
 
       {/* Equipo de producción: 48 → 1 */}
       <Glass style={{ left: 120, top: 250, width: 840, padding: "26px 34px", ...popIn(t, 22.45, 60) }}>
@@ -121,23 +159,6 @@ export const E_OnePerson: React.FC = () => {
           })}
         </div>
       </Glass>
-
-      {/* Laptop */}
-      <div
-        style={{
-          position: "absolute",
-          left: LX,
-          top: LY,
-          perspective: 1600,
-          opacity: fadeIn(t, N.masLoco - 0.05, 0.15),
-        }}
-      >
-        <div style={{ transform: `translateY(${(1 - rise) * 500}px) rotateX(${(1 - rise) * 30 + 6}deg)`, transformOrigin: "50% 100%" }}>
-          <Laptop w={LW} style={{ filter: glow > 0 ? `drop-shadow(0 0 ${50 * glow}px rgba(61,217,245,${0.7 * glow}))` : undefined }}>
-            <StudioApp t={t} />
-          </Laptop>
-        </div>
-      </div>
 
       {/* Notificación (delante de la laptop) */}
       <Glass

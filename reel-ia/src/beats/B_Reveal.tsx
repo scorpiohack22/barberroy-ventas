@@ -51,10 +51,10 @@ export const B_Reveal: React.FC = () => {
 
   // Foco que persigue el producto
   const af = prog(t, 8.35, 8.95, outExpo);
-  const fx = lerp(af, 170, 330);
-  const fy = lerp(af, 420, 560);
-  const fw = lerp(af, 740, 420);
-  const fh = lerp(af, 1080, 680);
+  const fx = lerp(af, 150, 285);
+  const fy = lerp(af, 260, 325);
+  const fw = lerp(af, 780, 520);
+  const fh = lerp(af, 1300, 1060);
   const locked = t > 8.95;
 
   // Escaneo y despiece
@@ -84,6 +84,8 @@ export const B_Reveal: React.FC = () => {
   });
 
   const scanY = scan * H;
+  // Encuadre común de la foto y del recorte (así el producto queda alineado)
+  const shot = { z: 1.06 + 0.05 * prog(t, 8.1, 13.5, (x) => x), x: -0.6 + 1.2 * prog(t, 8.1, 13.5, (x) => x), y: 0 };
   const showWire = t > 10.05;
 
   const label = (txt: string, at: number, style: React.CSSProperties) => (
@@ -102,20 +104,25 @@ export const B_Reveal: React.FC = () => {
       >
         {/* Capa 1: fondo */}
         <div style={wire(-gap)}>
-          <AdBackground p={P} style={{ borderRadius: 40 * ex, boxShadow: ex > 0 ? `0 0 0 ${3 * ex}px rgba(61,217,245,0.6)` : undefined }} />
+          <AdBackground
+            p={P}
+            frame={shot}
+            style={{ borderRadius: 40 * ex, boxShadow: ex > 0 ? `0 0 0 ${3 * ex}px rgba(61,217,245,0.6)` : undefined }}
+            imgStyle={{ filter: ex > 0 ? `blur(${10 * ex}px) brightness(${1 - 0.25 * ex})` : undefined }}
+          />
           {/* "DEMASIADO REAL" entre el fondo y el producto */}
-          <Kinetic t={t} at={N.demasiado - 0.05} size={130} out={N.pero - 0.05} words={[{ w: "DEMASIADO" }]} style={{ left: 0, right: 0, top: 400, color: "#2A1B12" }} />
-          <Kinetic t={t} at={N.real - 0.08} size={340} out={N.pero - 0.05} words={[{ w: "REAL" }]} style={{ left: 0, right: 0, top: 1060, color: "#2A1B12" }} />
+          <Kinetic t={t} at={N.demasiado - 0.05} size={130} out={N.pero - 0.05} words={[{ w: "DEMASIADO" }]} style={{ left: 0, right: 0, top: 420, color: "#2A1B12" }} />
+          <Kinetic t={t} at={N.real - 0.08} size={340} out={N.pero - 0.05} words={[{ w: "REAL" }]} style={{ left: 0, right: 0, top: 1170, color: "#2A1B12" }} />
         </div>
         {/* Capa 2: producto */}
         <div style={wire(0)}>
           <div style={frame(C.cyan)} />
-          <AdProduct p={P} w={W} h={H} />
+          <AdProduct p={P} frame={shot} imgStyle={{ filter: `drop-shadow(0 ${30 * ex}px ${40 * ex}px rgba(0,0,0,${0.5 * ex}))` }} />
         </div>
         {/* Capa 3: texto y luz */}
         <div style={wire(gap)}>
           <div style={frame(C.violet)} />
-          <AdText p={P} w={W} h={H} />
+          <AdText p={P} w={W} h={H} top={0.06} style={{ opacity: ex }} />
         </div>
 
         {/* Versión "wireframe": por encima de la línea de escaneo */}
@@ -129,8 +136,8 @@ export const B_Reveal: React.FC = () => {
                 backgroundSize: "60px 60px",
               }}
             />
-            <div style={{ position: "absolute", left: 345, top: 576, width: 390, height: 622, border: `3px solid ${C.cyan}`, borderRadius: 50 }} />
-            <div style={{ position: "absolute", left: 100, top: 120, width: 880, height: 190, border: `3px dashed ${C.violet}`, borderRadius: 14 }} />
+            <div style={{ position: "absolute", left: 295, top: 339, width: 506, height: 1034, border: `3px solid ${C.cyan}`, borderRadius: 60 }} />
+            <div style={{ position: "absolute", left: 100, top: 100, width: 880, height: 200, border: `3px dashed ${C.violet}`, borderRadius: 14 }} />
           </AbsoluteFill>
         ) : null}
       </AbsoluteFill>

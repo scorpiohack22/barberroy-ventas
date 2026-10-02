@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { C, FPS, GRAD, font } from "../theme";
 import { N } from "../timing";
 import { fadeIn, lerp, outExpo, popIn, prog, sp } from "../anim";
-import { Ad } from "../components/Ad";
+import { Ad, Photo } from "../components/Ad";
 import { Glass, Kinetic, Pill, Progress } from "../components/UI";
 import { Cursor } from "../components/Cursor";
 import { Particles } from "../components/Stage";
@@ -15,6 +15,9 @@ const TYPE_B = 19.4;
 const CLICK = 19.58;
 const GEN_A = 19.65;
 const GEN_B = 20.45;
+// Plano corto de las manos en el teclado (0,6 s) justo antes del clic
+const HANDS_A = 18.92;
+const HANDS_B = 19.52;
 
 const CANVAS = { x: 170, y: 470, w: 740, h: 1000 };
 const BTN = { x: 870, y: 335 };
@@ -81,6 +84,8 @@ export const D_Generate: React.FC = () => {
               w={CANVAS.w}
               h={CANVAS.h}
               palette={0}
+              hideText
+              frame={{ z: 1.2 - 0.06 * g + 0.04 * prog(t, GEN_B, 21.4, (x) => x), x: 1.5 - 1.5 * g, y: -2 + 2 * g }}
               style={{ filter: `blur(${(1 - g) * 46}px) saturate(${0.3 + 0.7 * g}) contrast(${1.4 - 0.4 * g})`, transform: `scale(${1.15 - 0.15 * g})` }}
             />
             <svg width={CANVAS.w} height={CANVAS.h} style={{ position: "absolute", inset: 0, opacity: (1 - g) * 0.9, mixBlendMode: "overlay" }}>
@@ -104,6 +109,18 @@ export const D_Generate: React.FC = () => {
           </div>
         ) : null}
       </Glass>
+
+      {/* Plano corto: manos escribiendo el prompt */}
+      {t > HANDS_A - 0.05 && t < HANDS_B + 0.1 ? (
+        <AbsoluteFill style={{ opacity: fadeIn(t, HANDS_A - 0.05, 0.07) * (1 - prog(t, HANDS_B, HANDS_B + 0.1, (x) => x)) }}>
+          <Photo
+            src="img/manos-teclado.jpg"
+            focus="60% 60%"
+            frame={{ z: lerp(prog(t, HANDS_A, HANDS_B, (x) => x), 1.18, 1.34), x: lerp(prog(t, HANDS_A, HANDS_B, (x) => x), 2, -2), y: 0 }}
+          />
+          <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(6,7,10,0.75) 0%, rgba(6,7,10,0) 35%, rgba(6,7,10,0) 70%, rgba(6,7,10,0.6) 100%)" }} />
+        </AbsoluteFill>
+      ) : null}
 
       {/* Prompt */}
       <Glass style={{ left: 50, top: 250, width: 980, height: 170, padding: "0 30px", display: "flex", alignItems: "center", gap: 22, borderRadius: 40, ...popIn(t, N.todoCreado, 90) }}>
@@ -151,6 +168,7 @@ export const D_Generate: React.FC = () => {
 
       <Particles t={t} seed="gen" count={46} cx={540} cy={CANVAS.y + CANVAS.h / 2} spread={420} burst={N.artificial} color={C.cyan} opacity={t > N.artificial ? 1 : 0} />
 
+      <div style={{ opacity: t > HANDS_A && t < HANDS_B - 0.04 ? 0 : 1 }}>
       <Cursor
         frameOffset={0}
         points={[
@@ -160,6 +178,7 @@ export const D_Generate: React.FC = () => {
           { frame: Math.round(20.6 * FPS), x: 900, y: 760 },
         ]}
       />
+      </div>
     </AbsoluteFill>
   );
 };

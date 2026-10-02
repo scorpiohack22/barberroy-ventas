@@ -46,7 +46,7 @@ export const G_Wall: React.FC = () => {
               <div key={c} style={{ position: "absolute", left: x, top: -400 + (off % (CH + GAP)) - (c % 2) * 200 }}>
                 {new Array(ROWS).fill(0).map((__, r) => {
                   const center = c === 2 && r === 2;
-                  const idx = (c * 3 + r * 2) % 6;
+                  const idx = center ? 0 : (c * 3 + r * 2) % 7;
                   return (
                     <div
                       key={r}
@@ -61,7 +61,7 @@ export const G_Wall: React.FC = () => {
                         opacity: center ? 1 : 0.55 + 0.45 * pull,
                       }}
                     >
-                      <Ad w={CW} h={CH} palette={idx} />
+                      <Ad w={CW} h={CH} palette={idx} hideText seed={`wall-${c}-${r}`} />
                       <div style={{ position: "absolute", left: 12, top: 12, display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 99, background: "rgba(0,0,0,0.45)", color: "#fff", fontFamily: font, fontSize: 18, fontWeight: 700 }}>
                         <ISpark size={18} color={C.cyan} /> IA
                       </div>
