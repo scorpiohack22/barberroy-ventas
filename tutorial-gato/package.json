@@ -24,7 +24,9 @@
     "dev": "remotion studio",
     "render": "remotion render Tutorial out/tutorial.mp4",
     "audio": "python3 scripts/sfx.py",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "render:h": "remotion render TutorialH out/tutorial-horizontal.mp4",
+    "audio:h": "python3 scripts/sfx.py timelineH.json sfx-h.wav"
   },
   "sideEffects": [
     "*.css"

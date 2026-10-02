@@ -6,15 +6,19 @@ Los primeros 10,17 s quedan en silencio aquí: suena solo el audio original
 del video (va en la pista de public/gato.mp4).
 
 Genera public/sfx.wav (48 kHz, estéreo).  Uso: python3 scripts/sfx.py
+Versión horizontal: python3 scripts/sfx.py timelineH.json sfx-h.wav
 """
 import json
+import sys
 import wave
 from pathlib import Path
 
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-TL = json.loads((ROOT / "src" / "timeline.json").read_text())
+TL_FILE = sys.argv[1] if len(sys.argv) > 1 else "timeline.json"
+OUT_FILE = sys.argv[2] if len(sys.argv) > 2 else "sfx.wav"
+TL = json.loads((ROOT / "src" / TL_FILE).read_text())
 SR = 48000
 N = int(SR * TL["duration"])
 rng = np.random.default_rng(3)
@@ -198,7 +202,7 @@ for a, b in zip(cam, cam[1:]):
 # Cierre
 place(impact(), E["from"], 0.75)
 place(whoosh(0.3), E["from"] - 0.1, 0.6)
-place(whoosh(0.3), E["photo"] - 0.1, 0.6)
+place(whoosh(0.3), E.get("photo", E["cta"] - 0.05) - 0.1, 0.6)
 place(pop(), E["cta"], 0.55)
 place(ding((1568, 2349)), E["follow"] + 0.03, 0.5)
 
@@ -210,9 +214,9 @@ peak = np.max(np.abs(buf))
 drive = 2.2
 out = np.tanh(buf / peak * drive) / np.tanh(drive) * 10 ** (-1 / 20)
 pcm = (out * 32767).astype("<i2")
-with wave.open(str(ROOT / "public" / "sfx.wav"), "wb") as w:
+with wave.open(str(ROOT / "public" / OUT_FILE), "wb") as w:
     w.setnchannels(2)
     w.setsampwidth(2)
     w.setframerate(SR)
     w.writeframes(pcm.tobytes())
-print("public/sfx.wav", round(N / SR, 2), "s")
+print("public/" + OUT_FILE, round(N / SR, 2), "s")

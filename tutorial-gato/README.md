@@ -28,3 +28,10 @@ npm run render   # genera out/tutorial.mp4
 ```
 
 Todos los tiempos están en `src/timeline.json` (lo leen la animación y `scripts/sfx.py`).
+
+## Versión horizontal (16:9, sin fotos del creador)
+
+`npm run audio:h && npm run render:h` → `out/tutorial-horizontal.mp4` (1920x1080).
+Composición `TutorialH` (`src/TutorialH.tsx`, `src/AppH.tsx`, tiempos en `src/timelineH.json`).
+Los primeros 10,2 s son el video original centrado sobre su propio fondo desenfocado, con su audio.
+La interfaz de Higgsfield es una recreación (no una grabación real de pantalla).
