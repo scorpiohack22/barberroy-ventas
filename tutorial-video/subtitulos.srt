@@ -1,0 +1,43 @@
+1
+00:00:00,500 --> 00:00:06,000
+Rechazaban mis documentos una y otra vez. Este fue el error real.
+
+2
+00:00:06,200 --> 00:00:14,000
+Primero reviso el estado: la monetización del perfil está suspendida.
+
+3
+00:00:14,200 --> 00:00:22,000
+Las cuentas publicitarias son otro tema: una solo tiene un pago pendiente.
+
+4
+00:00:22,200 --> 00:00:32,000
+Aquí está el problema real: no es mi identidad, es “actividad inusual”.
+
+5
+00:00:32,200 --> 00:00:38,500
+Mi identidad fiscal ya estaba verificada.
+
+6
+00:00:38,700 --> 00:00:48,000
+Meta compara el documento con estos datos. Si no coinciden, lo rechaza automáticamente.
+
+7
+00:00:48,200 --> 00:00:58,000
+Por eso mandar la licencia una y otra vez nunca iba a funcionar.
+
+8
+00:00:58,200 --> 00:01:07,000
+Este formulario sí llega a un representante, no al robot.
+
+9
+00:01:07,200 --> 00:01:14,500
+Explica tu caso completo en un solo mensaje.
+
+10
+00:01:14,700 --> 00:01:20,000
+Enviado. La respuesta llega al correo y al buzón de ayuda.
+
+11
+00:01:20,200 --> 00:01:28,000
+Y cuando te respondan, manda un solo paquete limpio.
