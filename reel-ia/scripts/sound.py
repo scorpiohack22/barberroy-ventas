@@ -336,7 +336,9 @@ music_st[:, 0] += arp * 0.15
 music_st[:, 1] -= arp * 0.15
 music_st *= duck[:, None]
 
-mix = music_st * 0.42 + sfx * 0.3
+# Los efectos también bajan cuando hablas, para que nunca tapen la voz.
+sfx_duck = 1 - 0.6 * act
+mix = music_st * 0.34 + sfx * 0.11 * sfx_duck[:, None]
 
 # Niveles: música ~ -26 dB RMS y voz bastante por encima
 fade_out = np.clip((DUR - T) / 0.6, 0, 1)
@@ -346,7 +348,9 @@ if peak > 0.9:
     mix *= 0.9 / peak
 
 voice_rms = np.sqrt(np.mean(v[np.abs(v) > 0.01] ** 2))
-mus_rms = np.sqrt(np.mean((music_st * 0.42) ** 2))
+mus_rms = np.sqrt(np.mean((music_st * 0.34) ** 2))
+sfx_rms = np.sqrt(np.mean((sfx * 0.11 * sfx_duck[:, None]) ** 2))
+print(f"efectos RMS {20*np.log10(sfx_rms):.1f} dBFS")
 print(f"voz RMS {20*np.log10(voice_rms):.1f} dBFS · música RMS {20*np.log10(mus_rms):.1f} dBFS · pico mezcla {20*np.log10(np.max(np.abs(mix))):.1f} dBFS")
 
 out = (np.clip(mix, -1, 1) * 32767).astype(np.int16)
