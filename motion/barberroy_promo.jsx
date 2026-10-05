@@ -237,7 +237,7 @@
     smooth(tr(ring).property("ADBE Rotate Z"), [0, 3], [-40, 140]);
 
     var ringColors = [C.cyan, C.pink, C.purple, C.yellow, C.lime, C.f2];
-    var R = 400;
+    var R = 480;
     for (var i = 0; i < ringColors.length; i++) {
         var ang = (i * 60 - 90) * Math.PI / 180;
         var dot = addShape(comp, "Color_" + (i + 1), "ellipse", [190, 190], ringColors[i],
