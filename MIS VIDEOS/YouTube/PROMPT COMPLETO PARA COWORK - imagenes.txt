@@ -6,7 +6,7 @@ PREPARACIÓN
 3. IMPORTANTE: el botón "Generar" debe decir "generaciones gratis restantes". Si en algún momento dice que va a cobrar CRÉDITOS, DETENTE y avísame. No gastes créditos.
 
 PROCESO (repite con cada uno de los 66 prompts de abajo, en orden)
-1. Si el prompt dice [CON PERSONAJE], selecciona MI personaje (mi Soul con mi cara).
+1. Si el prompt dice [CON PERSONAJE], selecciona mi personaje "scorpio 2.0" (NO uses "La Gótica", "Chic Scholar Vibes" ni otro).
    Si dice [SIN PERSONAJE], cambia a "General" (sin personaje).
    Esto es muy importante: si dejas mi personaje en las escenas de otras personas, les pone mi cara.
 2. Copia SOLO el texto en inglés del prompt (sin el número ni la etiqueta) y pégalo en la caja.

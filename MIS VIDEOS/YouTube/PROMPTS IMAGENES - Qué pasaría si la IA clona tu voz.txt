@@ -1,7 +1,7 @@
 LISTA DE IMÁGENES – "¿Qué pasaría si la IA clona tu voz y se hace pasar por ti?"
 Soul 2.0 · Formato 16:9 · 2 variantes por prompt · 66 prompts (63 escenas + 3 miniaturas)
 
-[CON PERSONAJE] = usar mi personaje (mi Soul / mi cara).
+[CON PERSONAJE] = usar mi personaje "scorpio 2.0".
 [SIN PERSONAJE] = usar "General", sin mi personaje.
 Nombre de archivo al descargar: número + letra. Ejemplo: 07a.jpg, 07b.jpg
 
