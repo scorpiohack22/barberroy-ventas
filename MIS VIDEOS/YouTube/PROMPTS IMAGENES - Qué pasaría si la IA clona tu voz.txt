@@ -1,0 +1,92 @@
+LISTA DE IMÁGENES – "¿Qué pasaría si la IA clona tu voz y se hace pasar por ti?"
+Soul 2.0 · Formato 16:9 · 2 variantes por prompt · 66 prompts (63 escenas + 3 miniaturas)
+
+[CON PERSONAJE] = usar mi personaje (mi Soul / mi cara).
+[SIN PERSONAJE] = usar "General", sin mi personaje.
+Nombre de archivo al descargar: número + letra. Ejemplo: 07a.jpg, 07b.jpg
+
+======================== BLOQUE 1 – LA LLAMADA ========================
+01 [SIN PERSONAJE] Cinematic film still, close-up of a digital alarm clock on a wooden nightstand glowing red, dark bedroom at night, moody blue moonlight through the window, shallow depth of field, no readable text
+02 [SIN PERSONAJE] Cinematic film still, a Latina mother in her fifties asleep in bed at night, hair in a bun, her smartphone on the nightstand lighting up with an incoming call, dark bedroom, blue phone glow
+03 [SIN PERSONAJE] Cinematic film still, a Latina mother in her fifties sitting up in bed holding a phone to her ear, sleepy and confused, face lit only by the phone screen, dark bedroom at night
+04 [SIN PERSONAJE] Cinematic film still, a hooded figure in a dark room, face completely hidden in shadow, speaking into a studio microphone in front of a laptop showing an audio waveform, eerie green monitor glow
+05 [SIN PERSONAJE] Cinematic film still, extreme close-up of a Latina mother's face in panic, tears in her eyes, hand over her mouth, phone at her ear, dark bedroom at night
+06 [SIN PERSONAJE] Cinematic film still, close-up of trembling hands holding a smartphone making a bank transfer, generic banking app with a big send button, night, blue light, no logos
+07 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man peacefully asleep in his bed at night, relaxed face, his phone face down on the nightstand, soft moonlight, calm
+
+======================== BLOQUE 2 – LA PROMESA ========================
+08 [SIN PERSONAJE] Cinematic film still, laptop screen in a dark room showing voice cloning software with a large audio waveform and a full progress bar, green glow, no readable text
+09 [SIN PERSONAJE] Cinematic film still, a huge world map on a wall screen in a dark operations room, dozens of red alert dots glowing across every continent
+10 [SIN PERSONAJE] Cinematic film still, three closed manila case folders on a dark wooden desk under a single desk lamp, film noir atmosphere, no text
+11 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man looking seriously into the camera, dramatic side lighting, dark background, confident expression
+12 [SIN PERSONAJE] Cinematic film still, a warm cozy living room at night with a framed family photo and a smartphone on the coffee table, protective warm lamp light
+
+======================== BLOQUE 3 – CÓMO COPIAN TU VOZ ========================
+13 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man recording a voice note on his smartphone held near his mouth, casual, in his bedroom, natural window light
+14 [SIN PERSONAJE] Cinematic film still, macro close-up of a vintage stopwatch, dark background, dramatic rim light
+15 [SIN PERSONAJE] Cinematic film still, two audio waveforms on a computer monitor overlapping almost perfectly, one blue and one green, dark recording studio
+16 [SIN PERSONAJE] Cinematic film still, close-up of a hand holding a smartphone showing a chat with several voice message bubbles, generic app, no logos, soft light
+17 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man filming himself with his phone on a small tripod and a ring light, smiling, making content in his room
+18 [SIN PERSONAJE] Cinematic film still, a smartphone vibrating on a dark table with an incoming call from an unknown number, moody dramatic light, no readable text
+19 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man answering a phone call in his kitchen, slightly curious expression, daylight
+20 [SIN PERSONAJE] Cinematic film still, a hooded hacker seen from behind typing in a dark room with multiple monitors showing voice waveforms and code, green light
+21 [SIN PERSONAJE] Digital art, a glowing human head made of thin light lines and neural network connections, with sound waves coming out of the mouth, dark background, futuristic
+22 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man looking shocked at his phone screen, eyebrows raised, dramatic blue light at night
+
+======================== BLOQUE 4 – CASO 1 (ARIZONA) ========================
+23 [SIN PERSONAJE] Cinematic film still, a quiet suburban street in the Arizona desert at golden hour, cacti, desert houses, wide shot
+24 [SIN PERSONAJE] Cinematic film still, an American mother in her forties in a parking lot holding a phone to her ear, terrified expression, harsh afternoon sun
+25 [SIN PERSONAJE] Cinematic film still, silhouette of a man in a dark room speaking threateningly on a phone, red light, face not visible
+26 [SIN PERSONAJE] Cinematic film still, stacks of hundred dollar bills on a dark table under a hard spotlight, tense atmosphere
+27 [SIN PERSONAJE] Cinematic film still, a father opening a bedroom door and finding his teenage daughter safe in bed with headphones, warm light, relief
+28 [SIN PERSONAJE] Cinematic film still, a woman speaking at a wooden witness table with microphones in a formal hearing room, generic, no flags, no seals, no text
+
+======================== BLOQUE 4 – CASO 2 (EL BANCO) ========================
+29 [SIN PERSONAJE] Cinematic film still, a British journalist in his thirties with glasses at a desk in a London apartment, rainy window, laptop, moody grey light
+30 [SIN PERSONAJE] Cinematic film still, over the shoulder of a man wearing headphones editing an audio waveform on a laptop, dark room
+31 [SIN PERSONAJE] Cinematic film still, a man holding a smartphone on speaker next to a laptop playing audio, tense concentration, desk lamp
+32 [SIN PERSONAJE] Cinematic film still, close-up of a smartphone showing a generic bank account screen with balance and transaction list, green check icon, no logos
+33 [SIN PERSONAJE] Cinematic film still, a man leaning back in his chair with both hands on his head in disbelief, rainy window behind him
+34 [SIN PERSONAJE] Cinematic film still, an open metal padlock lying on a computer keyboard with green digital light, cyber security concept
+
+======================== BLOQUE 4 – CASO 3 (HONG KONG) ========================
+35 [SIN PERSONAJE] Cinematic film still, Hong Kong skyline at night, neon reflections on the water, skyscrapers, wide shot
+36 [SIN PERSONAJE] Cinematic film still, modern corporate office at night, an office worker in his thirties at a desk on a video call, focused
+37 [SIN PERSONAJE] Cinematic film still, laptop screen showing a video conference grid with several business executives in suits, generic, no logos
+38 [SIN PERSONAJE] Cinematic film still, close-up of hands typing a large money transfer on a laptop, tense, office at night
+39 [SIN PERSONAJE] Cinematic film still, office worker staring at his laptop in shock as the faces on the video call glitch and break into pixels
+40 [SIN PERSONAJE] Digital art, human faces made of pixels dissolving into digital particles, deepfake concept, dark background
+41 [SIN PERSONAJE] Cinematic film still, a pile of cash dissolving into glowing digital particles on a dark table
+42 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man reading news on his phone at night, worried expression, blue screen light
+
+======================== BLOQUE 5 – ¿Y SI SE HACEN PASAR POR TI? ========================
+43 [SIN PERSONAJE] Cinematic film still, a young Latina woman sitting on her bed reading a breakup message on her phone, heartbroken, soft window light
+44 [SIN PERSONAJE] Cinematic film still, an angry middle-aged boss in a suit listening to an audio message on his phone in an office
+45 [SIN PERSONAJE] Cinematic film still, an elderly Latina grandmother on the phone in her living room holding her credit card, trusting smile, warm light
+46 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man looking at his reflection in a dark phone screen at night, eerie mood
+47 [SIN PERSONAJE] Cinematic film still, reflection in a black phone screen of a hooded figure with no visible face, eerie, dark
+48 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man with a worried expression, green glitchy light on his face, dark room
+
+======================== BLOQUE 6 – CÓMO PROTEGERTE ========================
+49 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man smiling at a family dinner table, family members seen from behind and from the side, warm golden light
+50 [SIN PERSONAJE] Cinematic film still, a small sealed envelope on a dinner table among plates, warm light, family secret concept
+51 [SIN PERSONAJE] Cinematic film still, a Latina mother in her fifties on the phone in a bright kitchen, confident knowing smile, daylight
+52 [SIN PERSONAJE] Cinematic film still, close-up of a finger pressing the red end call button on a smartphone
+53 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man calmly calling someone back on his phone, sitting on a sofa, daylight
+54 [SIN PERSONAJE] Cinematic film still, a steaming cup of coffee next to a phone on a wooden table, calm morning light
+55 [SIN PERSONAJE] Cinematic film still, close-up of a smartphone settings screen with a toggle switch turned off, generic, no logos
+56 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man on a sofa showing a video on his phone to his grandparents, grandparents seen from the side, warm living room
+57 [SIN PERSONAJE] Cinematic film still, an elderly Latino couple holding hands on a sofa, warm afternoon light
+58 [SIN PERSONAJE] Cinematic film still, several family hands joined together on a wooden table, warm light
+
+======================== BLOQUE 7 – CIERRE ========================
+59 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man smiling at the camera in a home studio with a laptop and microphone, golden hour light
+60 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man working on his laptop creating content, ring light, warm cozy room
+61 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man holding his phone and pointing at it, friendly smile, inviting
+62 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man hugging his mother, the mother seen from behind, warm golden light
+63 [CON PERSONAJE] Flattering cinematic portrait, eye-level camera, 85mm lens, a young Latino man smiling warmly, golden hour, soft bokeh background
+
+======================== MINIATURAS ========================
+64 [CON PERSONAJE] Flattering cinematic close-up portrait, eye-level camera, 85mm lens, a young Latino man with a serious expression, blue digital sound waves glowing across half of his face, dark background, dramatic lighting
+65 [CON PERSONAJE] Flattering cinematic close-up portrait, eye-level camera, 85mm lens, a young Latino man with a shocked expression holding a glowing smartphone near his face, dark background
+66 [CON PERSONAJE] Flattering cinematic portrait, eye-level camera, 85mm lens, a young Latino man with a serious expression in the foreground, a dark hooded figure with hidden face standing behind him in shadow, dramatic lighting
