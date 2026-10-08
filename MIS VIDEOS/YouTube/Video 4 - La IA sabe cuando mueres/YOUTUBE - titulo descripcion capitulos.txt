@@ -1,0 +1,41 @@
+TÍTULO
+¿Qué pasaría si la IA supiera cuándo vas a morir?
+
+(Alternativas)
+- La IA ya predice quién va a morir… y le está yendo demasiado bien
+- La "calculadora de la muerte" existe: 3 casos reales
+
+DESCRIPCIÓN
+Abres una app, metes tus datos… y te sale una fecha: el día en que te vas a morir. Suena a película, pero ya hay inteligencias artificiales que lo intentan. En este expediente te cuento 3 casos reales: la "calculadora de la muerte" de Dinamarca, la IA que lee tu salud en tus ojos y la que ve en un electrocardiograma "normal" lo que ningún médico ve. Y lo más importante: qué pasaría si ese dato lo tuviera tu seguro, tu banco o tu jefe… y cómo proteger tus datos de salud.
+
+🔒 Nunca subas tus exámenes a apps que prometen decirte cuánto vas a vivir: son páginas falsas para robarte los datos. Y recuerda: una predicción no es un destino.
+
+CAPÍTULOS
+0:00 La fecha
+0:19 Expediente 004
+0:42 ¿Cómo es posible?
+1:04 Caso 1: La calculadora de la muerte
+1:38 Caso 2: Tus ojos te delatan
+2:00 Caso 3: El electrocardiograma "normal"
+2:30 ¿Y si lo supiera otro?
+2:55 Cómo protegerte
+3:36 Caso cerrado
+
+FUENTES
+- Savcisens et al., "Using sequences of life-events to predict human lives" (life2vec), Nature Computational Science, diciembre de 2023 (DTU, Dinamarca)
+- Advertencia de los investigadores de life2vec sobre páginas falsas de "calculadora de la muerte" (2024)
+- Poplin et al., "Prediction of cardiovascular risk factors from retinal fundus photographs via deep learning", Nature Biomedical Engineering, 2018 (Google/Verily)
+- Raghunath et al., "Deep neural networks can predict mortality from 12-lead electrocardiogram voltage data", Geisinger, 2019/2020
+
+Este video usa voz, imágenes y música generadas con inteligencia artificial y código, con fines educativos. Música original. No es consejo médico.
+
+#InteligenciaArtificial #Salud #Privacidad #Ciencia #QuéPasaríaSi
+
+ETIQUETAS
+qué pasaría si, calculadora de la muerte, life2vec, inteligencia artificial, ia predice la muerte, datos de salud, privacidad, electrocardiograma, inteligencia artificial medicina, cuándo voy a morir, seguridad digital
+
+EN YOUTUBE STUDIO
+- Contenido alterado o sintético: SÍ
+- Miniatura: "Miniatura - La IA sabe cuando mueres.jpg"
+- Público: No es contenido para niños
+- Añádelo a la lista "Expedientes ¿Qué pasaría si…?" junto con los videos 1, 2 y 3
