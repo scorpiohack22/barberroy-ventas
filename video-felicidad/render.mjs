@@ -31,7 +31,7 @@ async function tramo(k) {
   await page.evaluate(() => document.fonts.ready);
   const archivo = path.join(tmp, `tramo${k}.mp4`);
   const ff = spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', archivo], { stdio: ['pipe', 'inherit', 'inherit'] });
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '22', '-pix_fmt', 'yuv420p', archivo], { stdio: ['pipe', 'inherit', 'inherit'] });
   const cerrado = new Promise(r => ff.on('close', r));
   for (let i = desde; i < hasta; i++) {
     const b64 = await page.evaluate(([t, fps, sub]) => { cuadro(t, fps, sub); return document.getElementById('c').toDataURL('image/jpeg', 0.95).split(',')[1]; }, [i / fps, fps, SUB]);
