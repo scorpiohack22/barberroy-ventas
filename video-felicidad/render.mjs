@@ -13,7 +13,7 @@ const desde = Number(process.argv[4] || 0), hasta = Number(process.argv[5] || 60
 const musica = path.join(dir, 'musica.wav');
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 await page.goto(pathToFileURL(path.join(dir, 'index.html')).href);
 await page.evaluate(() => document.fonts.ready);
 

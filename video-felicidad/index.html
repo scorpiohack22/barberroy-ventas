@@ -6,19 +6,20 @@
 <title>Felicidad — corto hecho con código</title>
 <style>
   body { margin: 0; background: #111; color: #ccc; font-family: Inter, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; }
-  canvas { width: min(100%, 1280px); height: auto; background: #000; }
-  .barra { display: flex; gap: 12px; align-items: center; width: min(100%, 1280px); }
+  canvas { height: min(80vh, 1920px); width: auto; max-width: 100%; background: #000; }
+  .barra { display: flex; gap: 12px; align-items: center; width: min(100%, 560px); }
   input[type=range] { flex: 1; }
 </style>
 </head>
 <body>
-<canvas id="c" width="1280" height="720"></canvas>
+<canvas id="c" width="1080" height="1920"></canvas>
 <div class="barra">
   <button id="play">▶︎ Reproducir</button>
   <input id="pos" type="range" min="0" max="60" step="0.01" value="0">
   <span id="tiempo">0.0 s</span>
 </div>
 <audio id="musica" src="musica.wav" preload="auto"></audio>
+<script src="lib.js"></script>
 <script src="escenas.js"></script>
 <script>
   const ctx = document.getElementById('c').getContext('2d');
@@ -27,7 +28,7 @@
   // Usado por render.mjs para exportar cuadro a cuadro.
   window.dibujar = t => FELICIDAD.renderFrame(ctx, t);
   // Cuadro con desenfoque de movimiento: promedia varios subcuadros dentro del obturador (180°).
-  const acum = document.createElement('canvas'); acum.width = 1280; acum.height = 720;
+  const acum = document.createElement('canvas'); acum.width = 1080; acum.height = 1920;
   const actx = acum.getContext('2d');
   window.cuadro = (t, fps, sub) => {
     for (let k = 0; k < sub; k++) {

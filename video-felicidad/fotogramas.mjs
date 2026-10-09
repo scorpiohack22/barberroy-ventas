@@ -7,7 +7,7 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const [out, ...ts] = process.argv.slice(2);
 fs.mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 const errores = [];
 page.on('pageerror', e => errores.push(e.message));
 await page.goto(pathToFileURL(path.join(dir, 'index.html')).href);
