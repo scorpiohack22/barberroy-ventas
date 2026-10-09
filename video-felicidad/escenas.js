@@ -14,6 +14,17 @@
     const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, top); g.addColorStop(1, bottom);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
+  // Dibuja en una capa a media resolución y la desenfoca de una sola vez (mucho más rápido que filter por trazo).
+  let capa = null;
+  function desenfocado(ctx, px, fn) {
+    if (!capa) { capa = document.createElement('canvas'); capa.width = W / 2; capa.height = H / 2; }
+    const c = capa.getContext('2d');
+    c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, capa.width, capa.height);
+    const m = ctx.getTransform();
+    c.setTransform(new DOMMatrix([0.5, 0, 0, 0.5, 0, 0]).multiply(m));
+    fn(c);
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = `blur(${px}px)`; ctx.drawImage(capa, 0, 0, W, H); ctx.restore();
+  }
   function velo(ctx, color, a) { if (a <= 0) return; ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = clamp(a); ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); ctx.restore(); }
 
   // texto LED (matriz de puntos)
@@ -67,10 +78,10 @@
     lista.sort((a, b) => a.y - b.y).forEach(d => d.draw());
     ctx.restore();
     if (t > 4.7) {
-      ctx.save(); ctx.filter = 'blur(6px)';
-      const r = rng(5);
-      for (let i = 0; i < 6; i++) { const sp = 4.7 + i * 0.2; if (t < sp) continue; persona(ctx, -260 + (t - sp) * 1300 + r() * 120, 2150 + r() * 80, 3.6, nuevaPersona(r, false), { run: 1, phase: t * 12 + i, shadow: false }); }
-      ctx.restore();
+      desenfocado(ctx, 6, c => {
+        const r = rng(5);
+        for (let i = 0; i < 6; i++) { const sp = 4.7 + i * 0.2; if (t < sp) continue; persona(c, -260 + (t - sp) * 1300 + r() * 120, 2150 + r() * 80, 3.6, nuevaPersona(r, false), { run: 1, phase: t * 12 + i, shadow: false }); }
+      });
     }
     velo(ctx, '#55604f', Math.pow(inv(5.3, 6, t), 2) * 0.9);
   }
@@ -227,7 +238,7 @@
     lista.push({ y: CALLE + 200, draw: () => persona(ctx, px, CALLE + 200, 1.75, PROTA, { run: andar ? 0.42 : 0, phase: t * 6.5, arms: lt < 3.4 ? 'phone' : 'swing', headTilt: lt < 3.4 ? 0.38 : lerp(0, -0.5, ease(inv(4.6, 6.2, lt))), mood: lt > 5.5 ? 'sad' : 'neutral', blink: lt > 6.6 && lt < 6.75 }) });
     lista.sort((a, b) => a.y - b.y).forEach(d => d.draw());
     const cxp = ((lt * 1300) % 3200) - 600;
-    ctx.save(); ctx.filter = 'blur(3px)'; coche(ctx, cxp, CALLE + 640, 1.7, '#e3b53c', { wheel: lt * 22, spin: 1, passenger: true }); ctx.restore();
+    desenfocado(ctx, 3, c => coche(c, cxp, CALLE + 640, 1.7, '#e3b53c', { wheel: lt * 22, spin: 1, passenger: true }));
     ctx.restore();
   }
 
