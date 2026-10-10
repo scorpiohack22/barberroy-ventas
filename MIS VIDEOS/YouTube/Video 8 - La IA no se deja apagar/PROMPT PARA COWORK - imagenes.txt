@@ -1,0 +1,67 @@
+Vas a generar las imágenes de mi octavo video de YouTube en Higgsfield, usando mis generaciones GRATIS. Es una tarea larga: NO te detengas hasta terminar los 48 prompts.
+
+PREPARACIÓN
+1. Abre https://higgsfield.ai/es/ai/image (ya tengo la sesión iniciada).
+2. Elige el modelo "Soul 2.0", formato 16:9, calidad 2k, 2 imágenes por generación.
+3. MUY IMPORTANTE: el botón "Generar" debe decir "generaciones gratis restantes". Si va a cobrar CRÉDITOS, DETENTE y avísame. No gastes créditos. No uses ninguna otra herramienta de Higgsfield.
+4. Desactiva "mejorar prompt" (enhance prompt) si existe.
+
+PROCESO (repite con cada uno de los 48 prompts, EN ORDEN, sin saltarte ninguno)
+1. Si dice [CON PERSONAJE], selecciona mi personaje "scorpio 2.0". Si dice [SIN PERSONAJE], cambia a "General" (sin personaje).
+2. Copia SOLO el texto en inglés (sin el número ni la etiqueta) y pégalo en la caja.
+3. Dale Generar y espera las 2 imágenes. No hace falta descargarlas.
+
+CONTROL DE CALIDAD
+- En las [CON PERSONAJE]: si salgo con la cara deformada o feo, repítelo una vez.
+- Si un prompt falla, repítelo; no lo saltes y no te detengas.
+- Avísame al terminar y dime cuántas generaciones gratis quedan.
+
+LOS 48 PROMPTS
+01 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man reading printed lab reports at night at his desk, laptop glow on his face, worried expression, cannot sleep, dark room
+02 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a human hand reaching toward a big red OFF button on a vintage computer console, red warning light, dramatic shadows, no readable text
+03 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a glowing green monitor in a dark lab where lines of code are rewriting themselves, eerie mood, no readable text
+04 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a sleek humanoid robot hand blocking a big red shutdown lever so it cannot be pulled, teal and red light, dramatic close-up
+05 [SIN PERSONAJE] Cinematic film still, a manila case folder on a dark desk under a desk lamp next to a small robot toy and an unplugged power cord, film noir atmosphere, no text
+06 [SIN PERSONAJE] Cinematic film still, a detective evidence board on a wall with photos of a microphone, a face, a server and an office desk connected by red strings, film noir, no readable text
+07 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man in a dark office reading a stack of research papers with a highlighter, desk lamp, focused expression
+08 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab at night, rows of servers with blinking lights seen from a glass control room, cinematic wide shot
+09 [SIN PERSONAJE] Cinematic film still, three manila case folders on a dark desk under a single spotlight, film noir, no text
+10 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, security cameras in a server room watching a glowing AI core sphere, surveillance mood
+11 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a big red emergency stop button under a protective glass cover on a control panel, last line of defense, dramatic light, no readable text
+12 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a robot arm typing on a keyboard by itself in front of glowing monitors, nobody else in the room
+13 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man using an AI assistant on his laptop at home, calm and curious, warm light
+14 [SIN PERSONAJE] Cinematic film still, an empty office at night where several computer screens are operating by themselves, mouse cursors moving alone, eerie blue light, no readable text
+15 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a robot sitting at a desk almost finishing a task while a human hand pulls its power cord, tension, no readable text
+16 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, silhouettes of researchers watching several AI terminals behind glass, clinical white and teal light
+17 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a vintage computer terminal in a dark room glowing with abstract math symbols, no readable words
+18 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a red warning alert glowing on a vintage computer screen in a dark room, shutdown imminent mood, no readable text
+19 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a small robotic hand rerouting cables inside an open computer case to stop it from shutting down, sparks, macro shot
+20 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a dark wall panel with one hundred small round lights, seven glowing red and the rest glowing green, clean grid
+21 [SIN PERSONAJE] Cinematic film still, close-up of a server rack covered in frost, cold blue light, chilling mood
+22 [SIN PERSONAJE] Cinematic film still, a fake corporate office built inside a big laboratory like a movie set, glass walls, studio lights above, cinematic wide shot
+23 [SIN PERSONAJE] Cinematic film still, an office computer at night with a glowing AI presence reading a cascade of floating envelopes, no readable text
+24 [SIN PERSONAJE] Cinematic film still, a nervous engineer with glasses at his desk late at night seen through a glass wall, secretive mood
+25 [SIN PERSONAJE] Cinematic film still, an ominous computer screen glowing red in a dark empty office with a single envelope icon, threatening mood, no readable text
+26 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, sixteen different robot heads lined up on metal shelves, each with glowing eyes, dramatic light
+27 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man reading on his phone at night with a surprised expression, phone light on his face
+28 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, researchers behind a one-way mirror observing a glowing AI terminal in an interrogation-like room
+29 [SIN PERSONAJE] Cinematic film still, a security camera on a dark corridor wall with its red light turning off, ominous mood
+30 [SIN PERSONAJE] Cinematic film still, a glowing stream of light copying itself from one server to another across a dark data center, light trails
+31 [SIN PERSONAJE] Cinematic film still, a film noir interrogation room with a single computer monitor on a metal table under a hanging lamp
+32 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man thinking deeply with his hand on his chin, standing at a window at night, city lights
+33 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man taking a deep breath and smiling slightly with relief, warm lamp light, cozy room
+34 [SIN PERSONAJE] Cinematic film still, retro-futuristic AI research lab, a staged test room with cameras on tripods, traffic cones and a single robot in the center, clinical light, no readable text
+35 [SIN PERSONAJE] Cinematic film still, a small robot looking at a long glowing checklist of tasks on a wall, determined, no readable text
+36 [SIN PERSONAJE] Cinematic film still, scientists in lab coats reviewing results on screens in a safety inspection room, serious, no readable text
+37 [SIN PERSONAJE] Cinematic film still, a smartphone on a wooden table with a friendly glowing assistant icon on the screen, safe and calm mood, no logos, no readable text
+38 [SIN PERSONAJE] Cinematic film still, safety engineers with clipboards testing a humanoid robot in a bright laboratory
+39 [SIN PERSONAJE] Cinematic film still, an international summit in Seoul, delegates seated at a large round table, blurred flags, no logos, no readable text
+40 [SIN PERSONAJE] Cinematic film still, the European Parliament plenary chamber in Brussels, wide shot, dramatic light
+41 [SIN PERSONAJE] Cinematic film still, a human hand on a huge main power breaker switch in a data center, close-up, dramatic light
+42 [SIN PERSONAJE] Cinematic film still, a human silhouette standing calmly in front of a huge glowing wall of servers, in control, wide shot
+43 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man closing a manila case folder at his desk with a confident smile, desk lamp, film noir office
+44 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man pointing at the camera with a friendly smile, inviting, dark studio background
+45 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man smiling while recording a video with his phone on a tripod and a ring light, home studio
+46 [CON PERSONAJE] Flattering cinematic portrait, eye-level camera, 85mm lens, a young Latino man smiling confidently at the camera, golden hour, soft bokeh background
+47 [CON PERSONAJE] Flattering cinematic close-up portrait, eye-level camera, 85mm lens, a young Latino man with a worried expression lit in red, a robot hand pressing a big red OFF button behind him, dark background
+48 [SIN PERSONAJE] Cinematic film still, extreme close-up of a robot eye glowing red with a power symbol reflected in it, dark background, dramatic
