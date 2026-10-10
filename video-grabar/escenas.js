@@ -217,7 +217,7 @@
       persona(ctx, xA, y, k, ABUELO, { modo: 'camina', fase: CAIDA * 6.5, lateral: 1, dir: 1, giro: 0.5, gesto: 'sorpresa', manoI: (sx, sy) => ({ x: sx + 10, y: sy - 10, tipo: 'abierta', codo: -1 }), manoD: (sx, sy) => ({ x: sx + 18, y: sy - 5, tipo: 'abierta', codo: -1 }) });
       ctx.restore();
     } else {
-      persona(ctx, xA + 25 * k, y + 2 * k, k, ABUELO, { modo: 'sentado', fondoAsiento: 0, rodillasY: -20, piesY: 6, abreRodillas: 4, sombraAsiento: false, gesto: 'triste', encorvado: 0.8, inclina: -0.12,
+      persona(ctx, xA + 25 * k, y + 2 * k, k, ABUELO, { modo: 'suelo', flex: [0.1, 0.7], gesto: 'triste', encorvado: 0.8, inclina: -0.12,
         manoI: (sx, sy, M) => ({ x: -26, y: 2, tipo: 'abierta' }), manoD: (sx, sy, M) => ({ x: 26, y: 2, tipo: 'abierta' }) });
       bolsa(ctx, xA + 70 * k, y + 4 * k, k, 1.4, false);
     }
@@ -269,12 +269,12 @@
       const pide = ease(inv(4.2, 5.2, lt)) * (1 - ease(inv(6.8, 7.4, lt)));
       const coge = ease(inv(30.6, 31.8, t));
       persona(ctx, xA, yA, kA, ABUELO, {
-        modo: 'sentado', fondoAsiento: 0, rodillasY: -20, piesY: 6, abreRodillas: 4, sombraAsiento: false, encorvado: 0.7 - intenta * 0.4,
+        modo: 'suelo', flex: [0.1, 0.7], encorvado: 0.7 - intenta * 0.4,
         gesto: coge > 0.5 ? 'sonrie' : 'triste', giro: coge > 0 ? 0.5 * coge : Math.sin(lt * 0.8) * 0.4, mirada: { x: coge > 0 ? 1 : Math.sin(lt * 0.8), y: -0.6 },
         inclina: -0.05,
         manoI: (sx, sy, M) => ({ x: -26 + intenta * 4, y: 2 - intenta * 6, tipo: 'abierta' }),
         manoD: (sx, sy, M) => {
-          if (coge > 0) return { x: lerp(26, (manoNina[0] - xA) / kA, coge), y: lerp(2, (manoNina[1] - yA) / kA, coge), tipo: coge > 0.6 ? 'agarra' : 'abierta', codo: -1 };
+          if (coge > 0) return { x: lerp(26, (manoNina[0] - xA) / kA, coge), y: lerp(2, (manoNina[1] - yA) / kA, coge), tipo: coge > 0.6 ? 'agarra' : 'abierta', codo: 1 };
           return { x: lerp(26, 30, pide), y: lerp(2, sy - 30, pide), tipo: 'abierta', codo: -1 };
         },
       });

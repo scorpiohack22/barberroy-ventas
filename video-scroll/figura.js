@@ -119,33 +119,49 @@
   }
 
   // ---------- manos (coordenadas locales: x a lo largo de la mano desde la muñeca, y lateral; s = escala) ----------
-  function manoPath(tipo, s, pulgar) {
-    const p = new Path2D(), q = pulgar;
-    if (tipo === 'abierta') {
-      capsula(p, 0, 0, 3.6 * s, 6.5 * s, 0, 4.1 * s);
-      for (let k = 0; k < 4; k++) {
-        const y = (-2.9 + k * 1.95) * s * -q, a = (-0.2 + k * 0.13) * -q;
-        capsula(p, 7.5 * s, y, 1.15 * s, 7.5 * s + Math.cos(a) * (6.6 - Math.abs(k - 1.4) * 0.8) * s, y + Math.sin(a) * 6.6 * s, 0.95 * s);
-      }
-      capsula(p, 2.5 * s, 3.2 * s * q, 1.4 * s, 6.5 * s, 7.8 * s * q, 1.1 * s);
-    } else if (tipo === 'puno') {
-      capsula(p, 0.5 * s, 0, 3.7 * s, 6 * s, 0.3 * q * s, 4.4 * s);
-      capsula(p, 3 * s, 3.4 * s * q, 1.5 * s, 7 * s, 3.2 * s * q, 1.3 * s);
-    } else if (tipo === 'agarra') {
-      capsula(p, 0, 0, 3.6 * s, 6 * s, 0, 4 * s);
-      capsula(p, 6.5 * s, -0.5 * q * s, 3.3 * s, 9 * s, -1.6 * q * s, 2.6 * s);
-      capsula(p, 2.5 * s, 3.1 * s * q, 1.4 * s, 7.5 * s, 4.6 * s * q, 1.15 * s);
+  // Dedos: índice (junto al pulgar) → meñique. Medidas de una mano adulta en cm (s escala).
+  const DEDOS = [{ y: 2.75, L: 7.0 }, { y: 0.92, L: 7.8 }, { y: -0.92, L: 7.3 }, { y: -2.7, L: 5.9 }];
+  function palma(p, s, L, w0, w1) {
+    curva(p, [[0, -w0 * s], [L * 0.5 * s, -w1 * s], [L * s, -w1 * 0.95 * s], [(L + 0.7) * s, 0], [L * s, w1 * 0.95 * s], [L * 0.5 * s, w1 * s], [0, w0 * s]]);
+  }
+  function manoPath(tipo, s, q) {
+    const p = new Path2D();
+    if (tipo === 'puno' || tipo === 'agarra') {
+      palma(p, s, 7.6, 2.9, 4.0);
+      const abre = tipo === 'agarra' ? 1 : 0;
+      // dedos doblados: nudillos y falanges vistas de frente
+      for (const d of DEDOS) capsula(p, 7.6 * s, d.y * q * s, 1.2 * s, (9.6 + abre * 0.8) * s, d.y * q * 0.92 * s, 1.15 * s);
+      capsula(p, 2.2 * s, 3.2 * q * s, 1.35 * s, (7.4 + abre * 0.6) * s, (2.9 + abre * 0.6) * q * s, 1.05 * s); // pulgar por delante
     } else {
-      capsula(p, 0, 0, 3.5 * s, 6.5 * s, 0.3 * s, 3.9 * s);
-      capsula(p, 7.5 * s, 0.4 * s, 3.2 * s, 11 * s, -0.6 * q * s, 2.2 * s);
-      capsula(p, 2.5 * s, 3 * s * q, 1.35 * s, 7 * s, 4.8 * s * q, 1.05 * s);
+      const abierta = tipo === 'abierta';
+      palma(p, s, 8.2, 3.0, 4.15);
+      DEDOS.forEach((d, j) => {
+        const a = abierta ? [0.2, 0.06, -0.07, -0.21][j] * q : [0.05, 0.015, -0.02, -0.06][j] * q;
+        const L = d.L * (abierta ? 1 : 0.86), y0 = d.y * q * (abierta ? 1 : 0.94);
+        // dos falanges con una leve curva hacia la palma cuando la mano está relajada
+        const mx = 8.0 + Math.cos(a) * L * 0.55, my = y0 + Math.sin(a) * L * 0.55;
+        const b = abierta ? a : a - 0.22 * q;
+        capsula(p, 8.0 * s, y0 * s, 1.08 * s, mx * s, my * s, 0.98 * s);
+        capsula(p, mx * s, my * s, 0.98 * s, (mx + Math.cos(b) * L * 0.45) * s, (my + Math.sin(b) * L * 0.45) * s, 0.84 * s);
+      });
+      const ta = abierta ? 0.95 : 0.6;
+      capsula(p, 1.8 * s, 3.1 * q * s, 1.45 * s, (1.8 + Math.cos(ta) * 4) * s, (3.1 + Math.sin(ta) * 4) * q * s, 1.2 * s);
+      capsula(p, (1.8 + Math.cos(ta) * 4) * s, (3.1 + Math.sin(ta) * 4) * q * s, 1.2 * s, (1.8 + Math.cos(ta) * 4 + Math.cos(ta * 0.6) * 2.8) * s, (3.1 + Math.sin(ta) * 4 + Math.sin(ta * 0.6) * 2.8) * q * s, 1.0 * s);
     }
     return p;
   }
   function manoDetalle(ctx, tipo, s, q) {
-    if (tipo === 'abierta') return;
-    if (tipo === 'puno' || tipo === 'agarra') for (let k = 0; k < 3; k++) linea(ctx, [[7.2 * s, (-2.6 + k * 1.9) * s * q], [9.2 * s, (-2.4 + k * 1.9) * s * q]], 0.35, INK, 0.6);
-    else linea(ctx, [[8 * s, -1.6 * s * q], [10.5 * s, -0.8 * s * q], [11.5 * s, 0.9 * s * q]], 0.35, INK, 0.6);
+    ctx.save(); ctx.globalAlpha *= 0.7;
+    if (tipo === 'puno' || tipo === 'agarra') {
+      for (let j = 0; j < 3; j++) { const y = (DEDOS[j].y + DEDOS[j + 1].y) / 2 * q; linea(ctx, [[8.4 * s, y * s], [10.4 * s, y * 0.95 * s]], 0.32); }
+      linea(ctx, [[3.2 * s, 2.0 * q * s], [6.8 * s, 1.8 * q * s]], 0.3, INK, 0.6);
+    } else {
+      const abierta = tipo === 'abierta';
+      if (!abierta) for (let j = 0; j < 3; j++) { const y = (DEDOS[j].y + DEDOS[j + 1].y) / 2 * q * 0.94; linea(ctx, [[8.6 * s, y * s], [12.4 * s, (y - 0.25 * q) * s]], 0.3); }
+      for (const d of DEDOS) linea(ctx, [[7.4 * s, (d.y - 0.5) * q * s], [7.7 * s, d.y * q * s], [7.4 * s, (d.y + 0.5) * q * s]], 0.25, INK, 0.5); // nudillos
+      linea(ctx, [[3 * s, -1.6 * q * s], [5.5 * s, 0.2 * q * s], [6.5 * s, 2.2 * q * s]], 0.25, INK, 0.4); // pliegue de la palma
+    }
+    ctx.restore();
   }
 
   // ---------- cabeza ----------
@@ -271,7 +287,13 @@
       const b = new Path2D();
       curva(b, [[-hw * 0.49, hh * 0.1], [-hw * 0.45, hh * 0.3], [-hw * 0.3, hh * 0.47], [sx * 0.3, hh * 0.54], [hw * 0.3, hh * 0.47], [hw * 0.45, hh * 0.3], [hw * 0.49, hh * 0.1],
         [hw * 0.36, hh * 0.18], [hw * 0.16 + sx, hh * 0.26 + fy], [sx, hh * 0.24 + fy], [-hw * 0.16 + sx, hh * 0.26 + fy], [-hw * 0.36, hh * 0.18]]);
-      ctx.save(); ctx.globalAlpha *= clamp(barba); grupo(ctx, [{ path: b, fill: P.colorBarba || P.pelo, off: 0.5 }]); ctx.restore();
+      if (barba >= 0.6) grupo(ctx, [{ path: b, fill: P.colorBarba || P.pelo, off: 0.5 }]);
+      else {
+        // barba de pocos días: puntitos sobre la mandíbula
+        ctx.save(); ctx.clip(b); ctx.fillStyle = shade(P.colorBarba || P.pelo, -0.25); ctx.globalAlpha *= 0.35 + barba;
+        for (let i = 0; i < 160; i++) { const u = Math.sin(i * 12.9898) * 43758.5453, v = Math.sin(i * 78.233) * 12543.123; const px = (u - Math.floor(u) - 0.5) * hw, py = (v - Math.floor(v)) * hh * 0.6; ctx.fillRect(px, py, hh * 0.008, hh * 0.008); }
+        ctx.restore();
+      }
     }
     // boca
     const my2 = hh * 0.3 + fy, mw = hw * 0.15;
@@ -347,7 +369,7 @@
   // ---------- persona ----------
   function persona(ctx, x, y, k, P, O = {}) {
     const M = medidas(P), H = M.H;
-    const modo = O.modo || 'pie', fase = O.fase || 0, sentado = modo === 'sentado';
+    const modo = O.modo || 'pie', fase = O.fase || 0, sentado = modo === 'sentado', suelo = modo === 'suelo';
     LW = (O.grosor || 1.7) / k; OFF = 3.2 / k + H * 0.004;
     ctx.save(); ctx.translate(x, y); ctx.scale(k * (O.espejo ? -1 : 1), k);
 
@@ -356,7 +378,7 @@
     if (modo === 'camina') { dy = -Math.abs(Math.cos(fase)) * H * 0.008; sway = Math.sin(fase) * H * 0.006; }
     if (modo === 'salto') dy = -(O.altoSalto ?? H * 0.12);
     // en sentado, la cadera se coloca sobre el asiento (y = 0)
-    const baseY = sentado ? -M.entrepiernaY - H * 0.03 - (O.fondoAsiento ?? H * 0.06) : 0;
+    const baseY = sentado ? -M.entrepiernaY - H * 0.03 - (O.fondoAsiento ?? H * 0.06) : suelo ? -M.entrepiernaY - H * 0.03 : 0;
     const enc = O.encorvado || 0;
     const tY = v => v + baseY + dy; // y del tronco
     const hY = tY(M.hombroY) + enc * H * 0.02, cabY = tY(M.cabezaY) + enc * H * 0.035;
@@ -367,7 +389,13 @@
     for (const lado of [-1, 1]) {
       const hx = lado * M.caderaJ + sway, hy = tY(M.caderaJY);
       let kx, ky, ax, ay, pie = 'frente', alza = 0;
-      if (sentado) {
+      if (suelo) {
+        // f = 0 pierna estirada hacia la cámara (vemos la suela), f = 1 rodilla doblada con el pie apoyado
+        const f = (O.flex || [0.15, 0.75])[lado < 0 ? 0 : 1];
+        kx = lado * (M.caderaJ + H * (0.02 + 0.01 * f)); ky = lerp(H * 0.085, -H * 0.12, f);
+        ax = lado * (M.caderaJ + H * lerp(0.05, 0.025, f)); ay = lerp(H * 0.2, H * 0.075, f);
+        pie = f < 0.5 ? 'suela' : 'frente';
+      } else if (sentado) {
         const piesY = O.piesY ?? -M.rodillaY * 0.98 + H * 0.03;
         kx = lado * (M.caderaJ + H * 0.018 + (O.abreRodillas || 0)); ky = H * 0.012 + (O.rodillasY || 0);
         ax = lado * (M.caderaJ + H * 0.008 + (O.abrePies || 0)); ay = piesY - H * 0.035;
@@ -398,10 +426,10 @@
 
     // sombra en el suelo
     if (O.sombra !== false && !O.soloBrazo) {
-      const sy = sentado ? (O.piesY ?? -M.rodillaY) : 0;
+      const sy = sentado ? (O.piesY ?? -M.rodillaY) : suelo ? H * 0.06 : 0;
       const g = ctx.createRadialGradient(0, sy, 1, 0, sy, H * 0.22);
       g.addColorStop(0, `rgba(30,20,10,${0.32 + dy / H})`); g.addColorStop(1, 'rgba(30,20,10,0)');
-      ctx.save(); ctx.translate(0, sy); ctx.scale(1, 0.2); ctx.translate(0, -sy); ctx.fillStyle = g;
+      ctx.save(); ctx.translate(0, sy); ctx.scale(suelo ? 1.7 : 1, suelo ? 0.45 : 0.2); ctx.translate(0, -sy); ctx.fillStyle = g;
       ctx.beginPath(); ctx.arc(0, sy, H * 0.22, 0, Math.PI * 2); ctx.fill(); ctx.restore();
     }
 
@@ -433,15 +461,15 @@
       const corto = P.pantalonCorto;
       const rM = M.rMuslo * (P.pantalonAncho || 1.05), rR = M.rRodilla * 1.15, rT = M.rTobillo * (P.pantalonAncho ? 1.4 : 1.25);
       if (sentado) {
-        // espinilla primero (bajo el muslo)
-        const esp = new Path2D(); capsula(esp, kx, ky, rR, ax, ay, rT);
+        // espinilla primero (bajo el muslo); el bajo del pantalón deja ver el zapato
+        const esp = new Path2D(); capsula(esp, kx, ky, rR, ax, ay - rT * 0.9, rT);
         pzas.push({ path: esp, fill: shade(falda && falda.largo !== 'suelo' ? piel : pantalon, -0.06) });
       } else if (corto || (falda && falda.largo === 'rodilla')) {
         const muslo = new Path2D(); capsula(muslo, hx, hy, M.rMuslo, kx, ky, M.rRodilla);
         const esp = new Path2D(); capsula(esp, kx, ky, M.rRodilla, ax, ay - M.rTobillo * 0.5, M.rTobillo);
         pzas.push({ path: esp, fill: piel }, { path: muslo, fill: piel });
       } else {
-        capsula(pant, hx, hy, rM, kx, ky, rR); capsula(pant, kx, ky, rR, ax, ay - rT * 0.6, rT);
+        capsula(pant, hx, hy, rM, kx, ky, rR); capsula(pant, kx, ky, rR, ax, ay - rT * (pie === 'suela' ? 0.2 : 0.9), rT);
         pzas.push({ path: pant, fill: pantalon });
       }
       // zapato
@@ -450,13 +478,27 @@
       if (pie === 'lado') {
         const d = O.dir || 1;
         curva(zp, [[ax - 4 * s * d, ay - 2.5 * s], [ax + 3 * s * d, ay - 3.5 * s], [ax + 10 * s * d, ay - 0.5 * s], [ax + 11 * s * d, ay + 2.6 * s], [ax - 5 * s * d, ay + 2.6 * s]]);
+      } else if (pie === 'suela') {
+        // pie estirado hacia nosotros: vemos la suela con el tacón abajo y la punta arriba
+        curva(zp, [[ax - 4.3 * s, ay - 9.5 * s], [ax + lado * 0.6 * s, ay - 12.5 * s], [ax + 4.5 * s, ay - 9.5 * s], [ax + 4.4 * s, ay - 4.5 * s], [ax + 3.4 * s, ay + 1 * s], [ax - 3.4 * s, ay + 1 * s], [ax - 4.4 * s, ay - 4.5 * s]]);
       } else {
-        const w = 5.4 * s, hz = 6 * s + alza * 0.08;
-        curva(zp, [[ax - w, ay + 1.2 * s], [ax - w * 0.85, ay - hz * 0.5], [ax + lado * w * 0.2, ay - hz * 0.75], [ax + w * 0.9, ay - hz * 0.45], [ax + w * 1.05, ay + 1.3 * s], [ax, ay + hz * 0.7 + 1 * s]]);
+        // zapato de frente: puntera redonda, empeine con cordones y suela
+        const a = alza * 0.08;
+        curva(zp, [[ax - 3.8 * s, ay - 4.2 * s - a], [ax + 3.8 * s, ay - 4.2 * s - a], [ax + 5.3 * s, ay + 0.2 * s], [ax + (5.5 + lado * 0.5) * s, ay + 4 * s], [ax + lado * 0.7 * s, ay + 6.6 * s], [ax - (5.5 - lado * 0.5) * s, ay + 4 * s], [ax - 5.3 * s, ay + 0.2 * s]]);
       }
       pzas.unshift({ path: zp, fill: zap, off: 0.4 });
       return { pzas, det: () => {
-      if (pie !== 'lado') linea(ctx, [[ax - 4.6 * s, ay + 1.6 * s], [ax, ay + 3.2 * s], [ax + 4.8 * s, ay + 1.7 * s]], 0.45, shade(zap, 0.45), 0.9);
+      if (pie === 'frente') {
+        linea(ctx, [[ax - 5.3 * s, ay + 3.6 * s], [ax + lado * 0.6 * s, ay + 5.4 * s], [ax + 5.4 * s, ay + 3.6 * s]], 0.5, shade(zap, 0.5), 0.9); // canto de la suela
+        for (let i = 0; i < 3; i++) linea(ctx, [[ax - 1.6 * s, ay + (-2.6 + i * 1.3) * s], [ax + 1.6 * s, ay + (-2.2 + i * 1.3) * s]], 0.3, shade(zap, 0.6), 0.8); // cordones
+        linea(ctx, [[ax - 2.6 * s, ay + 2 * s], [ax - 1 * s, ay + 3.4 * s]], 0.5, 'rgba(255,255,255,0.5)', 1); // brillo
+      } else if (pie === 'suela') {
+        ctx.save(); ctx.fillStyle = shade(zap, -0.4);
+        const su = new Path2D(); curva(su, [[ax - 3.5 * s, ay - 8.8 * s], [ax + lado * 0.5 * s, ay - 11.3 * s], [ax + 3.7 * s, ay - 8.8 * s], [ax + 3.6 * s, ay - 4.6 * s], [ax + 2.7 * s, ay + 0.1 * s], [ax - 2.7 * s, ay + 0.1 * s], [ax - 3.6 * s, ay - 4.6 * s]]);
+        ctx.fill(su); ctx.restore();
+        linea(ctx, [[ax - 3.4 * s, ay - 3.2 * s], [ax + 3.4 * s, ay - 3.2 * s]], 0.4, INK, 0.8); // tacón
+        for (let i = 0; i < 3; i++) linea(ctx, [[ax - 2.6 * s, ay - (5 + i * 1.6) * s], [ax + 2.6 * s, ay - (5.2 + i * 1.6) * s]], 0.25, shade(zap, 0.2), 0.8);
+      }
       if (!sentado && !corto && !(falda && falda.largo === 'rodilla')) {
         linea(ctx, [[kx - lado * rR * 0.4, ky - rR * 0.6], [kx, ky - rR * 0.1], [kx + lado * rR * 0.5, ky - rR * 0.7]], 0.35, INK, 0.45); // pliegue de rodilla
         linea(ctx, [[ax - rT * 0.9, ay - rT * 1.6], [ax, ay - rT * 1.1], [ax + rT * 0.9, ay - rT * 1.7]], 0.35, INK, 0.4); // caída del pantalón
@@ -464,7 +506,7 @@
       } };
     };
     // Las dos piernas y la cadera forman una sola silueta (sin líneas internas).
-    const conPelvis = !falda && !sentado;
+    const conPelvis = !falda && !sentado && !suelo;
     const dibujaPiernas = () => {
       const ps = piernas.map(piezasPierna);
       const zapatos = ps.map(q => q.pzas[0]), resto = ps.flatMap(q => q.pzas.slice(1));
@@ -609,10 +651,15 @@
       } else {
         const manga = new Path2D(); capsula(manga, sx, sy, M.rBrazo, ex, ey, M.rCodo); capsula(manga, ex, ey, M.rCodo, tx - Math.cos(dir) * 1.2 * s, ty - Math.sin(dir) * 1.2 * s, M.rMuneca * 1.2);
         pz.push({ path: manga, fill: color });
-        const puno = new Path2D(); capsula(puno, tx - Math.cos(dir) * 2.2 * s, ty - Math.sin(dir) * 2.2 * s, M.rMuneca * 1.12, tx - Math.cos(dir) * 0.8 * s, ty - Math.sin(dir) * 0.8 * s, M.rMuneca * 1.1);
-        pz.push({ path: puno, fill: P.chaqueta ? shade(camisa, -0.08) : shade(color, 0.05), off: 0.3 });
+
       }
       grupo(ctx, pz);
+      if (!corto) {
+        // borde de la manga (y el puño de la camisa si lleva chaqueta)
+        const nx = -Math.sin(dir), ny = Math.cos(dir), r = M.rMuneca * 1.18, cx = tx - Math.cos(dir) * 1.6 * s, cy = ty - Math.sin(dir) * 1.6 * s;
+        if (P.chaqueta) linea(ctx, [[cx - nx * r * 0.9 + Math.cos(dir) * 0.6 * s, cy - ny * r * 0.9 + Math.sin(dir) * 0.6 * s], [cx + nx * r * 0.9 + Math.cos(dir) * 0.6 * s, cy + ny * r * 0.9 + Math.sin(dir) * 0.6 * s]], 0.9, camisa, 1);
+        linea(ctx, [[cx - nx * r, cy - ny * r], [cx + nx * r, cy + ny * r]], 0.45, INK, 0.8);
+      }
       ctx.save(); ctx.setTransform(ctx.getTransform().multiply(mt)); manoDetalle(ctx, tipo, s, b.m.pulgar ?? -lado); ctx.restore();
       linea(ctx, [[ex - M.rCodo * 0.8, ey - M.rCodo * 0.2], [ex, ey + M.rCodo * 0.3], [ex + M.rCodo * 0.6, ey - M.rCodo * 0.5]], 0.35, INK, 0.45);
       if (b.m.objeto === 'movil') movil(ctx, M, tx + Math.cos(dir) * 6 * s, ty + Math.sin(dir) * 6 * s - 2 * s, b.m.angMovil ?? 0, O.movilEncendido ?? 1);
@@ -629,13 +676,22 @@
     // solo un brazo (para dibujarlo por delante de un objeto que tapa el resto del cuerpo)
     if (O.soloBrazo) { brazos.filter(b => b.lado === O.soloBrazo).forEach(dibujaBrazo); ctx.restore(); return { M, brazos, piernas }; }
     // ---- orden de dibujo ----
+    const atras = b => !b.m.delante && b.ty > b.sy + H * 0.1 && Math.abs(b.tx) > M.cintura * 1.05 && Math.abs(b.ex) > M.cintura * 1.05 && Math.sign(b.tx) === b.lado;
     cabeza(ctx, M, P, O, cabX, cabY, 'atras');
-    dibujaPiernas();
-    dibujaTorso();
-    if (sentado) dibujaMuslos();
-    if (O.detrasCabeza) brazos.filter(b => O.detrasCabeza.includes(b.lado)).forEach(dibujaBrazo);
+    if (suelo) {
+      dibujaTorso();
+      brazos.filter(atras).forEach(dibujaBrazo);
+      dibujaPiernas();
+    } else {
+      dibujaPiernas();
+      if (!sentado) brazos.filter(atras).forEach(dibujaBrazo);
+      dibujaTorso();
+      if (sentado) dibujaMuslos();
+    }
+    const yaAtras = b => !sentado && atras(b);
+    if (O.detrasCabeza) brazos.filter(b => O.detrasCabeza.includes(b.lado) && !yaAtras(b)).forEach(dibujaBrazo);
     cabeza(ctx, M, P, { ...O, luzMovil: O.luzMovil ?? 0 }, cabX, cabY);
-    brazos.filter(b => !(O.detrasCabeza || []).includes(b.lado)).forEach(dibujaBrazo);
+    brazos.filter(b => !(O.detrasCabeza || []).includes(b.lado) && !yaAtras(b)).forEach(dibujaBrazo);
     ctx.restore();
     return { M, brazos, piernas };
   }
