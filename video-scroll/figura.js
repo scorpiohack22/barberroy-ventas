@@ -693,7 +693,7 @@
     cabeza(ctx, M, P, { ...O, luzMovil: O.luzMovil ?? 0 }, cabX, cabY);
     brazos.filter(b => !(O.detrasCabeza || []).includes(b.lado) && !yaAtras(b)).forEach(dibujaBrazo);
     ctx.restore();
-    return { M, brazos, piernas };
+    return { M, brazos, piernas, cabeza: { x: cabX, y: cabY, hh: M.hh, hw: M.hw, giro: O.giro || 0, inclina: O.inclina || 0 } };
   }
 
   window.FIG = { persona, medidas, capsula, curva, grupo, linea, shade, mix, ik, INK };

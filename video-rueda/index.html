@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La rueda</title>
+<style>
+  body { margin: 0; background: #111; color: #ccc; font-family: Inter, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px; }
+  canvas { height: min(80vh, 1920px); width: auto; max-width: 100%; background: #000; }
+  .barra { display: flex; gap: 12px; align-items: center; width: min(100%, 560px); }
+  input[type=range] { flex: 1; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="barra">
+  <button id="play">▶︎ Reproducir</button>
+  <input id="pos" type="range" min="0" max="30" step="0.01" value="0">
+  <span id="tiempo">0.0 s</span>
+</div>
+<audio id="musica" src="musica.wav" preload="auto"></audio>
+<script src="../video-felicidad/lib.js"></script>
+<script src="../video-scroll/figura.js"></script>
+<script src="escenas.js"></script>
+<script>
+  const ctx = document.getElementById('c').getContext('2d');
+  const pos = document.getElementById('pos'), tiempo = document.getElementById('tiempo');
+  const musica = document.getElementById('musica'), btn = document.getElementById('play');
+  // Usado por render.mjs para exportar cuadro a cuadro.
+  window.dibujar = t => FELICIDAD.renderFrame(ctx, t);
+  // Cuadro con desenfoque de movimiento: promedia varios subcuadros dentro del obturador (180°).
+  const acum = document.createElement('canvas'); acum.width = 1080; acum.height = 1920;
+  const actx = acum.getContext('2d');
+  window.cuadro = (t, fps, sub) => {
+    for (let k = 0; k < sub; k++) {
+      FELICIDAD.renderFrame(ctx, Math.min(59.999, t + (k / sub) * (0.5 / fps)));
+      actx.globalAlpha = 1 / (k + 1);
+      actx.drawImage(ctx.canvas, 0, 0);
+    }
+    actx.globalAlpha = 1;
+    ctx.drawImage(acum, 0, 0);
+  };
+  let reproduciendo = false, t0 = 0, base = 0;
+  function pintar(t) { FELICIDAD.renderFrame(ctx, t); pos.value = t; tiempo.textContent = t.toFixed(1) + ' s'; }
+  function bucle(now) {
+    if (!reproduciendo) return;
+    const t = base + (now - t0) / 1000;
+    if (t >= 60) { reproduciendo = false; btn.textContent = '▶︎ Reproducir'; pintar(59.99); return; }
+    pintar(t); requestAnimationFrame(bucle);
+  }
+  btn.onclick = () => {
+    reproduciendo = !reproduciendo;
+    btn.textContent = reproduciendo ? '❚❚ Pausa' : '▶︎ Reproducir';
+    if (reproduciendo) { base = +pos.value >= 59.9 ? 0 : +pos.value; t0 = performance.now(); musica.currentTime = base; musica.play().catch(() => {}); requestAnimationFrame(bucle); }
+    else musica.pause();
+  };
+  pos.oninput = () => { reproduciendo = false; musica.pause(); btn.textContent = '▶︎ Reproducir'; pintar(+pos.value); };
+  document.fonts.ready.then(() => pintar(0.8));
+</script>
+</body>
+</html>
