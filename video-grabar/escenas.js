@@ -74,14 +74,25 @@
     ctx.fillStyle = '#4c7a2e'; ctx.beginPath(); ctx.ellipse(r * 0.15, -r * 0.92, r * 0.35, r * 0.16, 0.4, 0, 7); ctx.fill();
     ctx.restore();
   }
-  function bolsa(ctx, x, y, k, rot = 0, llena = true) {
+  // Bolsa: con (x, y) en la muñeca de la mano que la lleva, cuelga de las asas por debajo del puño.
+  // Con o.suelo = true, (x, y) es el punto de apoyo en el suelo.
+  function bolsa(ctx, x, y, k, rot = 0, llena = true, o = {}) {
     ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(k, k);
-    if (llena) { naranja(ctx, -5, -22, 4.2); naranja(ctx, 4, -23, 4.2); ctx.fillStyle = '#e2b56a'; ctx.strokeStyle = INK; ctx.lineWidth = 0.5; rrect(ctx, 0, -32, 5, 18, 2); ctx.fill(); ctx.stroke(); }
-    ctx.fillStyle = '#c9a06a'; ctx.strokeStyle = INK; ctx.lineWidth = 0.55;
-    ctx.beginPath(); ctx.moveTo(-12, -20); ctx.lineTo(12, -20); ctx.lineTo(13, 6); ctx.lineTo(-13, 6); ctx.closePath(); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = 'rgba(40,30,20,0.4)'; ctx.beginPath(); ctx.moveTo(-12, -16); ctx.lineTo(12, -16); ctx.moveTo(-6, -20); ctx.lineTo(-7, 6); ctx.stroke();
+    if (o.suelo) ctx.translate(0, -38);
+    const tela = o.tela, top = 13, alto = 26, ancho = tela ? 20 : 24;
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    // asas que suben hasta el puño
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-ancho * 0.3, top + 1); ctx.quadraticCurveTo(-2, 5, 0, 7); ctx.quadraticCurveTo(2, 5, ancho * 0.3, top + 1); ctx.stroke();
+    ctx.strokeStyle = tela ? '#d9cfb8' : '#b88a52'; ctx.lineWidth = 0.8; ctx.stroke();
+    if (llena && !tela) { naranja(ctx, -5, top - 1, 4.2); naranja(ctx, 4.5, top - 2, 4.2); ctx.fillStyle = '#e2b56a'; ctx.strokeStyle = INK; ctx.lineWidth = 0.5; rrect(ctx, -1, top - 12, 5, 16, 2); ctx.fill(); ctx.stroke(); }
+    ctx.fillStyle = tela ? '#d9cfb8' : '#c9a06a'; ctx.strokeStyle = INK; ctx.lineWidth = 0.6;
+    ctx.beginPath(); ctx.moveTo(-ancho / 2, top); ctx.lineTo(ancho / 2, top); ctx.lineTo(ancho / 2 + 1, top + alto); ctx.lineTo(-ancho / 2 - 1, top + alto); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(40,30,20,0.4)'; ctx.lineWidth = 0.45; ctx.beginPath(); ctx.moveTo(-ancho / 2, top + 3); ctx.lineTo(ancho / 2, top + 3); ctx.moveTo(-ancho * 0.25, top); ctx.lineTo(-ancho * 0.3, top + alto); ctx.stroke();
+    ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fillRect(ancho * 0.15, top, ancho * 0.35, alto);
     ctx.restore();
   }
+  // brazo estirado hacia abajo sujetando algo pesado (balanceo opcional al caminar)
+  const conBolsa = (vaiven = 0) => (sx, sy, M) => ({ x: sx + M.H * 0.022 + vaiven * M.H * 0.03, y: sy + (M.brazo + M.antebrazo) * 0.985, tipo: 'agarra', pulgar: 1 });
   // iconos que flotan desde los móviles: corazón, ojo (vistas), pulgar
   function icono(ctx, tipo, x, y, s, a) {
     ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s); ctx.strokeStyle = INK; ctx.lineWidth = 3;
@@ -144,13 +155,11 @@
     const kE = escala(2.6, 1330, 1330 - 150 * 2.6);
     const y = 1345, k = kE(y);
     const anda = inv(1.2, 6, t), x = lerp(290, 1000, anda);
-    persona(ctx, x, y, k, ABUELO, {
+    const rA = persona(ctx, x, y, k, ABUELO, {
       modo: t > 1.2 ? 'camina' : 'pie', fase: t * 6.5, lateral: 1, dir: 1, giro: t > 1.2 ? 0.5 : 0, encorvado: 0.6, gesto: t < 1.2 ? 'sonrie' : 'neutral',
-      manoD: (sx, sy, M) => ({ x: sx + 4, y: sy + 52 + (t > 1.2 ? Math.sin(t * 6.5) * 2 : 0), tipo: 'agarra' }), parpadeo: t > 0.6 && t < 0.72,
+      manoD: conBolsa(t > 1.2 ? Math.sin(t * 6.5) * 0.4 : 0), parpadeo: t > 0.6 && t < 0.72,
     });
-    // bolsa de tela vacía colgando de la mano
-    { const M = FIG.medidas(ABUELO); ctx.save(); ctx.translate(x + (M.hombro - M.H * 0.036 + 4) * k * 1.02, y + (M.hombroY + M.H * 0.026 + 52 + 6) * k); ctx.rotate(Math.sin(t * 6.5) * 0.08 * (t > 1.2 ? 1 : 0));
-      ctx.fillStyle = '#d9cfb8'; ctx.strokeStyle = INK; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(-9 * k, 0); ctx.lineTo(9 * k, 0); ctx.lineTo(11 * k, 30 * k); ctx.lineTo(-11 * k, 30 * k); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); }
+    { const [hx, hy] = manoEn(rA, x, y, k, 1); bolsa(ctx, hx, hy, k, Math.sin(t * 6.5) * 0.06 * (t > 1.2 ? 1 : 0), false, { tela: true }); }
     ctx.restore();
   }
 
@@ -163,9 +172,9 @@
     const anda = ease(inv(0.6, 6, lt)), y = lerp(1236, 1700, anda), x = lerp(486, 610, anda), k = kE(y);
     const r = persona(ctx, x, y, k, ABUELO, {
       modo: anda > 0 && anda < 1 ? 'camina' : 'pie', fase: lt * 6.2, lateral: 0, encorvado: 0.6, gesto: 'sonrie', mirada: { x: 0.3, y: 0 },
-      manoD: (sx, sy, M) => ({ x: sx + 3, y: sy + 50, tipo: 'agarra' }), parpadeo: lt > 3 && lt < 3.12,
+      manoD: conBolsa(0), parpadeo: lt > 3 && lt < 3.12,
     });
-    const [hx, hy] = manoEn(r, x, y, k, 1); bolsa(ctx, hx + 2 * k, hy + 22 * k, k, Math.sin(lt * 6.2) * 0.05);
+    const [hx, hy] = manoEn(r, x, y, k, 1); bolsa(ctx, hx, hy, k, Math.sin(lt * 6.2) * 0.04);
     ctx.restore();
   }
 
@@ -208,8 +217,8 @@
     const y = 1072, k = kE(y);
     const xA = lerp(120, 470, clamp((Math.min(t, CAIDA) - 12) / 3));
     if (t < CAIDA) {
-      const r = persona(ctx, xA, y, k, ABUELO, { modo: 'camina', fase: t * 6.5, lateral: 1, dir: 1, giro: 0.5, encorvado: 0.6, gesto: 'sonrie', manoD: (sx, sy) => ({ x: sx + 3, y: sy + 50, tipo: 'agarra' }) });
-      const [hx, hy] = manoEn(r, xA, y, k, 1); bolsa(ctx, hx + 2 * k, hy + 22 * k, k);
+      const r = persona(ctx, xA, y, k, ABUELO, { modo: 'camina', fase: t * 6.5, lateral: 1, dir: 1, giro: 0.5, encorvado: 0.6, gesto: 'sonrie', manoD: conBolsa(Math.sin(t * 6.5) * 0.4) });
+      const [hx, hy] = manoEn(r, xA, y, k, 1); bolsa(ctx, hx, hy, k, Math.sin(t * 6.5) * 0.06);
     } else if (t < CAIDA + 0.35) {
       // tropieza: el cuerpo se va hacia delante
       const c = easeIn((t - CAIDA) / 0.35);
@@ -219,7 +228,7 @@
     } else {
       persona(ctx, xA + 25 * k, y + 2 * k, k, ABUELO, { modo: 'suelo', flex: [0.1, 0.7], gesto: 'triste', encorvado: 0.8, inclina: -0.12,
         manoI: (sx, sy, M) => ({ x: -26, y: 2, tipo: 'abierta' }), manoD: (sx, sy, M) => ({ x: 26, y: 2, tipo: 'abierta' }) });
-      bolsa(ctx, xA + 70 * k, y + 4 * k, k, 1.4, false);
+      bolsa(ctx, xA + 70 * k, y + 4 * k, k, 1.4, false, { suelo: true });
     }
     if (t > CAIDA) naranjasRodando(ctx, t, kE, xA + 40 * k, y);
     ctx.restore();
@@ -294,7 +303,7 @@
     if (levanta) {
       // ya de pie, de la mano de la niña; la gente sigue grabando (ahora a ella)
       persona(ctx, xA, yA, kA, ABUELO, { encorvado: 0.7, gesto: 'sonrie', giro: 0.5, mirada: { x: 1, y: 0.6 }, manoD: (sx, sy, M) => ({ x: (manoNina[0] - xA) / kA, y: (manoNina[1] - yA) / kA, tipo: 'agarra' }), manoI: colgando(-1) });
-      bolsa(ctx, xA - 40 * kA, yA, kA, 0.2);
+      bolsa(ctx, xA - 40 * kA, yA, kA, 0.15, true, { suelo: true });
     }
     ctx.restore();
     if (!enMovil) {
@@ -407,7 +416,7 @@
     persona(ctx, X, Y, k, ABUELO, { modo: 'sentado', piesY: 46, encorvado: 1, gesto: 'triste', baja: 0.3, giro: Math.sin(lt * 0.5) * 0.25, mirada: { x: 0.4, y: 0.3 }, parpadeo: (lt % 3.3) < 0.13,
       manoI: (sx, sy, M) => ({ x: -12, y: M.H * 0.05, tipo: 'relajada', escorzo: 0.75 }),
       manoD: (sx, sy, M) => ({ x: muerde ? 3 : 14, y: muerde ? sy - 14 : M.H * 0.04, tipo: 'agarra', escorzo: muerde ? 0.5 : 0.75, dibuja: (c, x, y, dir, s) => { c.fillStyle = '#e2b56a'; c.strokeStyle = INK; c.lineWidth = 0.5; c.beginPath(); c.ellipse(x, y - 4 * s, 6 * s, 3.6 * s, 0.3, 0, 7); c.fill(); c.stroke(); } }) });
-    bolsa(ctx, 800, 1700, 5.6, 0.05);
+    bolsa(ctx, 800, 1700, 5.6, 0.05, true, { suelo: true });
     ctx.restore();
     // noche: lámpara cálida y el resto en penumbra
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
