@@ -1,0 +1,67 @@
+Vas a generar las imágenes de mi noveno video de YouTube en Higgsfield, usando mis generaciones GRATIS. Es una tarea larga: NO te detengas hasta terminar los 48 prompts.
+
+PREPARACIÓN
+1. Abre https://higgsfield.ai/es/ai/image (ya tengo la sesión iniciada).
+2. Elige el modelo "Soul 2.0", formato 16:9, calidad 2k, 2 imágenes por generación.
+3. MUY IMPORTANTE: el botón "Generar" debe decir "generaciones gratis restantes". Si va a cobrar CRÉDITOS, DETENTE y avísame. No gastes créditos. No uses ninguna otra herramienta de Higgsfield.
+4. Desactiva "mejorar prompt" (enhance prompt) si existe.
+
+PROCESO (repite con cada uno de los 48 prompts, EN ORDEN, sin saltarte ninguno)
+1. Si dice [CON PERSONAJE], selecciona mi personaje "scorpio 2.0". Si dice [SIN PERSONAJE], cambia a "General" (sin personaje).
+2. Copia SOLO el texto en inglés (sin el número ni la etiqueta) y pégalo en la caja.
+3. Dale Generar y espera las 2 imágenes. No hace falta descargarlas.
+
+CONTROL DE CALIDAD
+- En las [CON PERSONAJE]: si salgo con la cara deformada o feo, repítelo una vez.
+- Si un prompt falla, repítelo; no lo saltes y no te detengas.
+- Avísame al terminar y dime cuántas generaciones gratis quedan.
+
+LOS 48 PROMPTS
+01 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man taking a selfie with his phone on a busy city street at dusk, curious expression, neon lights
+02 [SIN PERSONAJE] Cinematic film still, a city street corner at night full of security cameras on poles and walls, all pointing at the sidewalk, moody blue light
+03 [SIN PERSONAJE] Cinematic film still, close-up of a modern security camera lens with a red light, reflections of a crowd in the lens, shallow depth of field
+04 [SIN PERSONAJE] Cinematic film still, a crowd of people walking on a street seen from a high security camera angle, glowing square tracking boxes around every face, no readable text
+05 [SIN PERSONAJE] Cinematic film still, a manila case folder on a dark desk under a desk lamp next to a small security camera toy and printed photos of faces, film noir, no text
+06 [SIN PERSONAJE] Cinematic film still, a detective evidence board with a microphone photo, a face photo and a security camera photo connected by red strings, film noir, no readable text
+07 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man in a dark office reading newspapers and case files under a desk lamp, focused expression
+08 [SIN PERSONAJE] Cinematic film still, a dark surveillance control room with a wall of dozens of screens showing street camera feeds, an operator silhouette, no readable text
+09 [SIN PERSONAJE] Cinematic film still, three manila case folders on a dark desk under a single spotlight, film noir, no text
+10 [SIN PERSONAJE] Cinematic film still, a Latin American city plaza at sunset with people walking and a security camera in the foreground, warm light
+11 [SIN PERSONAJE] Cinematic film still, close-up of a human face covered with a glowing blue digital mesh of points and lines measuring the distance between the eyes and nose, dark background
+12 [SIN PERSONAJE] Cinematic film still, a glowing fingerprint pattern morphing into the shape of a human face, blue light, dark background
+13 [SIN PERSONAJE] Cinematic film still, a giant wall of thousands of small portrait photos with one face highlighted by a glowing frame, dark room
+14 [SIN PERSONAJE] Cinematic film still, a padlock with a password keypad next to a human face reflected in a mirror, conceptual, dark moody light, no readable text
+15 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man walking down a city street at night, calm, security cameras on the buildings around him
+16 [SIN PERSONAJE] Cinematic film still, a modern tech startup office at night with servers and monitors showing grids of face photos, no logos, no readable text
+17 [SIN PERSONAJE] Cinematic film still, thousands of social media profile photos flowing like a river of light into a huge server, dark background, no logos
+18 [SIN PERSONAJE] Cinematic film still, a hand holding a printed photo of an unknown person in front of a laptop that shows many similar photos found online, no readable text
+19 [SIN PERSONAJE] Cinematic film still, police officers in a station looking at a computer screen with a face search, blue light, no logos, no readable text
+20 [SIN PERSONAJE] Cinematic film still, a judge's gavel on a stack of documents with European flags blurred in the background, serious mood, no readable text
+21 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man scrolling through his own photos on his phone with a worried expression, night, phone light on his face
+22 [SIN PERSONAJE] Cinematic film still, a quiet suburban house in Detroit in winter with a police car parked in front, cold morning light
+23 [SIN PERSONAJE] Cinematic film still, silhouette of a man seen from behind being led to a police car in front of his house while a woman and two small girls watch from the doorway, emotional, no faces visible
+24 [SIN PERSONAJE] Cinematic film still, a grainy security camera still image of a blurry man in a store, printed on paper on a police desk, no readable text
+25 [SIN PERSONAJE] Cinematic film still, an empty police holding cell with a bench and a single light, cold mood
+26 [SIN PERSONAJE] Cinematic film still, a computer screen showing two face photos side by side with a red match percentage bar, dark room, no readable text
+27 [SIN PERSONAJE] Cinematic film still, a huge outdoor concert stadium at night in China with tens of thousands of people and stage lights, wide shot
+28 [SIN PERSONAJE] Cinematic film still, security cameras at a stadium entrance scanning a long line of concert fans, glowing tracking boxes on faces, no readable text
+29 [SIN PERSONAJE] Cinematic film still, police officers walking between rows of seats in a crowded concert arena toward one man, tense, wide shot
+30 [SIN PERSONAJE] Cinematic film still, a dense forest of security cameras on a pole in a Chinese city street, overcast light
+31 [SIN PERSONAJE] Cinematic film still, a giant digital billboard at a city crosswalk showing faces of pedestrians crossing on red, people looking up, no readable text
+32 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man thinking deeply with his hand on his chin, sitting at a dark desk with a lamp, night
+33 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man looking surprised at a newspaper while standing in a subway station, natural light
+34 [SIN PERSONAJE] Cinematic film still, a Buenos Aires subway station platform with security cameras on the ceiling and commuters, no readable signs
+35 [SIN PERSONAJE] Cinematic film still, a courtroom with a judge signing a document under warm light, generic, no readable text
+36 [SIN PERSONAJE] Cinematic film still, a football stadium entrance in Latin America with face scanning turnstiles and fans, no logos, no readable text
+37 [SIN PERSONAJE] Cinematic film still, an airport gate with a face scanning camera kiosk and travelers in line, no logos, no readable text
+38 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man changing the privacy settings on his phone with a confident expression, cozy room
+39 [SIN PERSONAJE] Cinematic film still, a parent's hand stopping before posting a photo of a child on a phone screen, warm home light, no readable text
+40 [SIN PERSONAJE] Cinematic film still, a laptop on a desk showing a search page with a face photo and a delete button glowing, no readable text, no logos
+41 [SIN PERSONAJE] Cinematic film still, the European Parliament plenary chamber in Brussels, wide shot, dramatic light
+42 [SIN PERSONAJE] Cinematic film still, a security camera on a wall covered by a cloth hood, peaceful mood, soft light
+43 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man closing a manila case folder at his desk with a confident smile, desk lamp, film noir office
+44 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man pointing at the camera with a friendly smile, inviting, dark studio background
+45 [CON PERSONAJE] Flattering cinematic film still, eye-level camera, 85mm lens, a young Latino man smiling while recording a video with his phone on a tripod and a ring light, home studio
+46 [CON PERSONAJE] Flattering cinematic portrait, eye-level camera, 85mm lens, a young Latino man smiling confidently at the camera, golden hour, soft bokeh background
+47 [CON PERSONAJE] Flattering cinematic close-up portrait, eye-level camera, 85mm lens, a young Latino man with a serious expression, his face covered by a glowing blue facial recognition mesh and a square tracking box, dark street background
+48 [SIN PERSONAJE] Cinematic film still, extreme close-up of a security camera lens with a human face reflected in it, red recording light, dark background
