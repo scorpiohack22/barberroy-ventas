@@ -92,19 +92,19 @@
   }
 
   // ======================= 0–4.5 s: el rebaño gris va al trabajo =======================
+  // Metro: el andén transitable empieza en y = 1360 (antes está la línea amarilla y las vías). Horizonte y≈686.
+  const kMetro = y => (y - 686) / 160;
   function escena1(ctx, t) {
-    ctx.save(); camara(ctx, lerp(1.0, 1.05, t / 4.5), 543, 980);
+    ctx.save(); camara(ctx, lerp(1.0, 1.04, t / 4.5), 543, 980);
     fondo(ctx, 'metro');
-    const kE = escala(6, 1500, 600);
-    const filas = [{ y: 1235, n: 6, v: 70 }, { y: 1320, n: 5, v: 82 }, { y: 1430, n: 4, v: 95 }];
+    const filas = [{ y: 1440, n: 5, v: 1.0 }, { y: 1560, n: 4, v: 1.08 }, { y: 1700, n: 3, v: 1.16 }];
     let id = 1;
     for (const f of filas) {
-      const k = kE(f.y);
+      const k = kMetro(f.y), paso = 34 * k * f.v;
       for (let i = 0; i < f.n; i++, id++) {
-        const sep = 1400 / f.n, x = ((i * sep + (f.y % 7) * 40 + 1400 - t * f.v * k / 4) % 1400 + 1400) % 1400 - 160;
-        const esProta = f.y === 1430 && i === 1;
-        const P = esProta ? prota(0) : GRIS(id);
-        persona(ctx, esProta ? 560 - t * 6 : x, f.y, k, P, { modo: 'camina', fase: t * 7.2, lateral: 1, dir: -1, giro: -0.45, manoD: movilD, baja: 0.85, gesto: 'cansado', luzMovil: 0.7, encorvado: 0.4 });
+        const sep = 1500 / f.n, x = ((i * sep + (f.y % 9) * 37 - t * paso) % 1500 + 1500) % 1500 - 200;
+        const esProta = f.y === 1700 && i === 1;
+        persona(ctx, esProta ? 560 - t * paso * 0.25 : x, f.y, k, esProta ? prota(0) : GRIS(id), { modo: 'camina', fase: t * 7.2, lateral: 1, dir: -1, giro: -0.45, manoD: movilD, baja: 0.85, gesto: 'cansado', luzMovil: 0.7, encorvado: 0.4 });
       }
     }
     ctx.restore();
@@ -115,12 +115,17 @@
     const lt = t - 4.5;
     ctx.save(); camara(ctx, lerp(1.0, 1.06, lt / 6.5));
     fondo(ctx, 'oficina_soul');
-    const kE = escala(4, 1280, 480);
-    // compañeros que cruzan al fondo cargando papeles
-    for (let i = 0; i < 3; i++) {
-      const y = 1080 + i * 70, k = kE(y), x = ((i * 420 + lt * (60 + i * 14) * k / 2.5) % 1500) - 200;
-      persona(ctx, x, y, k, GRIS(10 + i), { modo: 'camina', fase: t * 7 + i, lateral: 1, dir: 1, giro: 0.45, gesto: 'cansado', manoI: (sx, sy) => ({ x: -10, y: sy + 30, tipo: 'agarra', escorzo: 0.6 }), manoD: (sx, sy) => ({ x: 10, y: sy + 30, tipo: 'agarra', escorzo: 0.6 }) });
-      ctx.fillStyle = '#fbfaf5'; ctx.strokeStyle = INK; ctx.lineWidth = 2; for (let j = 0; j < 4; j++) { ctx.fillRect(x - 16 * k, y - 112 * k - j * 5 * k, 32 * k, 5 * k); ctx.strokeRect(x - 16 * k, y - 112 * k - j * 5 * k, 32 * k, 5 * k); }
+    // pasillo central: centro x≈560, se estrecha hacia el punto de fuga (y≈630); k desde las mamparas (150 cm)
+    const kO = y => 0.00494 * (y - 630), anchoPasillo = y => (y - 630) * 0.33;
+    const van = [
+      { y0: 1180, y1: 900, lado: 0.45, d: 0 },
+      { y0: 880, y1: 1120, lado: -0.45, d: 1 },
+    ].map(v => ({ ...v, y: lerp(v.y0, v.y1, clamp(lt / 6.5)) })).sort((a, b) => a.y - b.y);
+    for (const v of van) {
+      const k = kO(v.y), x = 560 + v.lado * anchoPasillo(v.y);
+      persona(ctx, x, v.y, k, GRIS(10 + v.d), { modo: 'camina', fase: t * 7 + v.d, lateral: 0, giro: 0, gesto: 'cansado', encorvado: 0.4,
+        manoI: (sx, sy) => ({ x: -10, y: sy + 30, tipo: 'agarra', escorzo: 0.6 }), manoD: (sx, sy) => ({ x: 10, y: sy + 30, tipo: 'agarra', escorzo: 0.6 }) });
+      ctx.fillStyle = '#fbfaf5'; ctx.strokeStyle = INK; ctx.lineWidth = 2; for (let j = 0; j < 5; j++) { ctx.fillRect(x - 16 * k, v.y - 106 * k - j * 5 * k, 32 * k, 5 * k); ctx.strokeRect(x - 16 * k, v.y - 106 * k - j * 5 * k, 32 * k, 5 * k); }
     }
     // él, sentado frente a su portátil
     const k = 6.2, X = 540, Y = 1500;
@@ -162,20 +167,24 @@
   // ======================= 11–16.5 s: la publicidad hipnotiza; cada compra es un grillete =======================
   function escena3(ctx, t) {
     const lt = t - 11;
-    ctx.save(); camara(ctx, lerp(1.12, 1.25, lt / 5.5), lerp(560, 600, lt / 5.5), 1050);
+    ctx.save(); camara(ctx, lerp(1.0, 1.1, lt / 5.5), lerp(543, 560, lt / 5.5), 1000);
     fondo(ctx, 'ciudad_ilustracion');
     // los anuncios parpadean
     if (Math.floor(t * 6) % 2) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = 'rgba(255,220,120,0.08)'; ctx.fillRect(0, 0, 1086, 1300); ctx.restore(); }
-    const kE = escala(6.1, 1500, 580);
-    // gente que arrastra sus bolas por la acera
-    for (let i = 0; i < 5; i++) {
-      const y = 1180 + i * 40, k = kE(y), x = ((i * 300 + lt * 60 * k / 3 + 2000) % 1400) - 200;
-      const r = persona(ctx, x, y, k, GRIS(20 + i), { modo: 'camina', fase: t * 6 + i, lateral: 1, dir: 1, giro: 0.45, gesto: 'cansado', manoD: movilD, baja: 0.8, luzMovil: 0.6, encorvado: 0.5 });
-      espirales(ctx, r, x, y, k, t, i % 2 ? 1 : 0);
-      const [tx, ty] = tobillo(r, x, y, k, -1); grillete(ctx, tx, ty, k / 2.2, 1, 1 + (i % 3), t);
+    const kE = y => (y - 1347) / 65;
+    const bordeIzq = y => Math.max(0, 495 * (1490 - y) / 143), bordillo = y => Math.min(1086, 495 + (y - 1347) * 2.19);
+    const gente = [0, 1, 2, 3, 4].map(i => {
+      const y = 1395 + ((i * 47 + lt * 9) % 240), u = [0.25, 0.7, 0.45, 0.15, 0.8][i];
+      return { i, y, x: lerp(bordeIzq(y) + 25, bordillo(y) - 25, u) };
+    }).sort((a, b) => a.y - b.y);
+    for (const g of gente) {
+      const k = kE(g.y);
+      const r = persona(ctx, g.x, g.y, k, GRIS(20 + g.i), { modo: 'camina', fase: t * 6 + g.i, lateral: 0, giro: 0.1, gesto: 'cansado', manoD: movilD, baja: 0.8, luzMovil: 0.6, encorvado: 0.5 });
+      espirales(ctx, r, g.x, g.y, k, t, g.i % 2 ? 1 : 0);
+      const [tx, ty] = tobillo(r, g.x, g.y, k, -1); grillete(ctx, tx, ty - 2 * k, k / 2.2, 1, 1 + (g.i % 3), t);
     }
     // él: mira los anuncios, se le van los ojos, paga con tarjeta y ¡clac! grillete
-    const y = 1640, k = kE(y), X = lerp(380, 520, ease(inv(3.4, 5.5, lt)));
+    const y = 1745, k = kE(y), X = lerp(400, 500, ease(inv(3.4, 5.5, lt)));
     const hipno = ease(inv(0.8, 1.4, lt)), compra = lt > 2.4, clac = lt > 3.1;
     const tarjeta = (sx, sy, M) => ({ x: lerp(sx + 3, 22, ease(inv(1.8, 2.4, lt))), y: lerp(sy + 52, sy + 14, ease(inv(1.8, 2.4, lt))), tipo: 'agarra', codo: -1 });
     const r = persona(ctx, X, y, k, prota(0.12), {
@@ -187,7 +196,7 @@
     // la mano gigante del vendedor ofrece un móvil brillante
     if (lt > 1.0 && lt < 3.6) {
       const e = ease(inv(1.0, 1.6, lt)) * (1 - ease(inv(3.0, 3.6, lt)));
-      ctx.save(); ctx.translate(lerp(1350, 820, e), 1280);
+      ctx.save(); ctx.translate(lerp(1400, 880, e), 1060);
       ctx.fillStyle = '#2a2c31'; ctx.strokeStyle = INK; ctx.lineWidth = 5; ctx.fillRect(40, -40, 400, 90); ctx.strokeRect(40, -40, 400, 90);
       ctx.fillStyle = '#f0c9a5'; ctx.beginPath(); ctx.ellipse(10, 0, 60, 48, 0, 0, 7); ctx.fill(); ctx.stroke();
       ctx.fillStyle = '#16171a'; rrect(ctx, -70, -110, 70, 130, 10); ctx.fill(); ctx.stroke();
@@ -227,11 +236,15 @@
     ctx.save(); fondo(ctx, 'ciudad'); ctx.fillStyle = 'rgba(10,12,20,0.66)'; ctx.fillRect(-500, -500, 2100, 2900); ctx.restore();
     // la torre dorada del millonario arriba, y el tubo de monedas desde el eje
     ctx.fillStyle = '#c99a2e'; ctx.strokeStyle = INK; ctx.lineWidth = 5;
-    ctx.beginPath(); ctx.moveTo(360, 560); ctx.lineTo(720, 560); ctx.lineTo(680, -300); ctx.lineTo(400, -300); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(330, 1730); ctx.lineTo(750, 1730); ctx.lineTo(680, -300); ctx.lineTo(400, -300); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fillRect(300, 1715, 480, 20);
     ctx.fillStyle = '#fbe9a8'; for (let i = 0; i < 4; i++) for (let j = 0; j < 7; j++) ctx.fillRect(430 + i * 60, -260 + j * 70, 26, 38);
     ctx.fillStyle = '#e8c45a'; ctx.fillRect(320, 530, 440, 40); ctx.strokeRect(320, 530, 440, 40);
     ctx.fillStyle = '#b8892a'; ctx.fillRect(520, 570, 40, cy - 570); ctx.strokeRect(520, 570, 40, cy - 570);
     for (let i = 0; i < 7; i++) { const u = ((lt * vel * 0.9 + i / 7) % 1); moneda(ctx, 540, lerp(cy - 60, 560, u), 16, lt * 6 + i); }
+    ctx.strokeStyle = INK; ctx.lineCap = 'round';
+    for (const [x0, x1] of [[cx, cx - 470], [cx, cx + 470]]) { ctx.lineWidth = 34; ctx.beginPath(); ctx.moveTo(x0, cy); ctx.lineTo(x1, 1880); ctx.stroke(); ctx.lineWidth = 24; ctx.strokeStyle = '#4a4d54'; ctx.stroke(); ctx.strokeStyle = INK; }
+    ctx.fillStyle = '#3a3c42'; ctx.lineWidth = 4; for (const x1 of [cx - 470, cx + 470]) { ctx.fillRect(x1 - 60, 1872, 120, 26); ctx.strokeRect(x1 - 60, 1872, 120, 26); }
     rueda(ctx, t, cx, cy, R, ang);
     // los que corren dentro de la rueda (abajo, sobre el arco interior)
     const corredores = [-0.75, -0.53, -0.32, -0.11, 0.1, 0.31, 0.52, 0.73];
