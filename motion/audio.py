@@ -525,9 +525,6 @@ def build(events_path, out_path):
     for st in m.get('stingers', []):
         e = dict(st)
         music.add(e['t'], FX[e['type']](e), FX_GAIN.get(e['type'], 1) * e.get('vol', 1))
-    # gancho del título: barrido + golpe suave al aparecer
-    sfx.add(0.0, fx_whoosh(0.45), 0.8)
-    sfx.add(0.3, fx_impact(), 0.35)
     for e in data['events']:
         f = FX.get(e['type'])
         if f is None:

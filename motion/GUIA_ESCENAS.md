@@ -2,7 +2,7 @@
 
 Cada video es **un archivo** `motion/scenes/<id>.js` que define `window.SCENE`. El motor
 (`motion/engine/engine.js`, objeto global `E`) dibuja figuras pictograma blancas con brillo
-sobre fondo negro, reflejo en el piso, foco de luz, polvo, viñeta, grano, título animado y
+sobre fondo negro, reflejo en el piso, foco de luz, polvo, viñeta, grano y
 fundidos. El audio (`motion/audio.py`) arma música + efectos a partir de lo que la escena declara.
 
 **Referencia obligatoria:** lee `motion/scenes/01-el-ciclo.js` (escena completa y aprobada) y la
@@ -29,10 +29,10 @@ reflejo, polvo, viñeta y grano. Opciones extra de la escena: `beam: {x, a, w}` 
   "los que fallan" en gris (`E.STYLE.gray`), lejanos/fantasmas `E.STYLE.dim`.
 - **Un solo color de acento: rojo** (`#ff3b36`): sol, celular, corazones, objetos que importan. Úsalo con significado.
   Excepciones permitidas cuando la historia lo pide: dorado de monedas/trofeo (`E.coin`), luz cálida de vela/puerta/casa.
-- Sin texto en pantalla aparte del título (lo pone el motor). Puedes usar íconos/símbolos (corazón, globo de pensamiento con icono).
+- **CERO texto en pantalla** (el cliente lo exige). El campo `title` se usa solo para la publicación; el motor ya no lo dibuja.
+  Puedes usar íconos/símbolos (corazón, globo de pensamiento con icono), nunca letras ni números.
 - Las figuras deben verse **grandes**: zoom de cámara entre ~1.5 y 2.3. El piso (`E.FLOOR` = 900 en el mundo)
-  debe quedar en la mitad inferior de la pantalla. **La franja superior de la pantalla (y < 260 px en pantalla) es del
-  título**: no pongas acción importante ahí.
+  debe quedar en la mitad inferior de la pantalla. Toda la pantalla es tuya (ya no hay título), pero mantén la acción principal en el centro/abajo.
   Conversión: `pantallaY = 640 + (mundoY - cam.y) * cam.zoom`. Con `cam.y = FLOOR-190` y zoom 1.9 → piso en y≈1000. Bien.
 
 ## Narrativa (lo que hace que se comparta)
@@ -92,7 +92,7 @@ window.SCENE = {
 - Efectos (`events[].type`): step, cane, scuff, thud, clatter, whoosh, impact, boom, tick, clock{dur}, heartbeat, bell{note},
   chime, pop, coin, rain{dur}, wind{dur}, splash, knock, buzz{dur}, notify, crowd{dur}, crack, snap, rumble{dur}, fire{dur},
   door, sparkle, riser{dur}, swell{dur}, cheer{dur}, kiss, bark, slide. Campo opcional `vol` (0..1+) y `pan` (-1..1).
-- El motor ya pone un whoosh+golpe con el título al inicio. Sincroniza pasos con `E.footsteps`.
+- No hay título ni sonido automático al inicio: abre con tu propio gancho visual y sonoro. Sincroniza pasos con `E.footsteps`.
 
 ## Proceso de trabajo
 1. Escribe la escena siguiendo la historia del catálogo (`motion/catalogo/catalogo.json`, campo `historia`;
@@ -100,7 +100,7 @@ window.SCENE = {
 2. Revisa cuadros (vista rápida sin desenfoque): `node motion/tools/stills.js <id> /tmp/<id>.png` (10 cuadros) o tiempos concretos:
    `node motion/tools/stills.js <id> /tmp/x.png 3.2,5.5,8 ` y a tamaño completo con `--full` al final.
    **Mira las imágenes** (herramienta Read) y corrige: extremidades rotas, figuras encimadas sin querer, cosas fuera
-   de cuadro, acción tapada por el título, poses que no se entienden, escenas vacías o aburridas.
+   de cuadro, poses que no se entienden, escenas vacías o aburridas.
    Itera hasta que cada momento clave se entienda solo con la imagen.
 3. Construye el final: `bash motion/build.sh <id>` → `motion/out/<id>.mp4` (~2 min por video). Revisa el MP4 final
    con una cuadrícula: `ffmpeg -v error -y -i motion/out/<id>.mp4 -vf "fps=1,scale=180:-1,tile=6x4" -frames:v 1 /tmp/<id>_f.png`.

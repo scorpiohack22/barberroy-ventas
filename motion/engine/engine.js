@@ -787,7 +787,8 @@ function render(t, samples = 1) {
   for (const b of S.blackouts || []) black = Math.max(black, .6 * pulse(t, b, .1));
   if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
 
-  drawTitle(S.title, t, 1 - smooth(prog(t, D - 1.1, D - .4)));
+  // sin texto en pantalla: el título solo se usa para la publicación (activar con SCENE.showTitle = true)
+  if (S.showTitle) drawTitle(S.title, t, 1 - smooth(prog(t, D - 1.1, D - .4)));
 
   const fade = Math.max(1 - smooth(prog(t, 0, .35)), smooth(prog(t, D - 1, D)), black);
   if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade})`; ctx.fillRect(0, 0, W, H); }
