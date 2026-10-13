@@ -188,7 +188,7 @@ window.SCENE = {
     return ev.concat([
       { t: 0, type: 'rain', dur: 12.6, vol: 1 }, { t: 0, type: 'rain', dur: 12.6, vol: .6 }, { t: .1, type: 'boom', vol: 1 }, { t: .12, type: 'crack', vol: .8 },
       { t: CUE.doubt + .1, type: 'rumble', dur: 2, vol: .8 }, { t: CUE.doubt + .4, type: 'heartbeat', vol: .5 }, { t: CUE.turn - .1, type: 'heartbeat', vol: .6 },
-      { t: CUE.turn + .1, type: 'whoosh', vol: .4 }, { t: CUE.cover, type: 'whoosh', vol: .6 }, { t: CUE.cover + .15, type: 'splash', vol: .5 },
+      { t: CUE.turn + .1, type: 'whoosh', vol: .4 }, { t: CUE.cover, type: 'whoosh', vol: .6 }, { t: CUE.cover + .15, type: 'thud', vol: .3 },
       { t: CUE.take, type: 'chime', vol: .6 }, { t: CUE.ease, type: 'wind', dur: 2, vol: .3 },
       { t: CUE.sun + .4, type: 'swell', dur: 2 }, { t: CUE.sun + .5, type: 'sparkle' }, { t: CUE.close, type: 'slide', dur: .4 }, { t: CUE.closed, type: 'pop', vol: .6 },
     ]);
