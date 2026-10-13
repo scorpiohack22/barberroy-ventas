@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Escalera — motion</title>
+<style>
+  html, body { margin: 0; background: #000; height: 100%; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: 100vh; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="720" height="1280"></canvas>
+<script>
+// ─────────────────────────────────────────────────────────────
+//  Motor: todo se dibuja con render(t) — t en segundos.
+//  Es determinista: el mismo t produce siempre el mismo frame,
+//  así se puede exportar frame a frame a MP4 (ver render.js).
+// ─────────────────────────────────────────────────────────────
+const W = 720, H = 1280, DURATION = 12, FPS = 30;
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+
+// ---------- utilidades de animación ----------
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const prog = (t, t0, t1) => clamp((t - t0) / (t1 - t0));
+const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIn = p => p * p * p;
+const smooth = p => p * p * (3 - 2 * p);
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+
+// ---------- escena ----------
+const FLOOR = 980;
+const SX = 262, RUN = 62, RISE = 80, STEPS = 6;
+const stepX = k => k === 0 ? SX - 34 : SX + (k - .5) * RUN;
+const stepY = k => FLOOR - k * RISE;
+
+// Calendario de la subida: [inicio, duración] de cada escalón (se va cansando)
+const CLIMB = [[1.4, .85], [2.35, .85], [3.3, .95], [4.45, 1.15], [5.85, .95], [6.9, .8]];
+const ARRIVE = CLIMB[STEPS - 1][0] + CLIMB[STEPS - 1][1];
+const SUN = { x: 430, y: 235 };
+
+// ---------- rig de la figura ----------
+const RIG = { headR: 23, neck: 8, torso: 76, thigh: 50, shin: 50, upper: 40, fore: 38, w: 20 };
+
+function ik(a, b, l1, l2, bendDir) {
+  // Cinemática inversa de 2 huesos: devuelve la articulación media (rodilla / codo)
+  const dx = b.x - a.x, dy = b.y - a.y;
+  let d = Math.hypot(dx, dy);
+  d = clamp(d, Math.abs(l1 - l2) + .01, l1 + l2 - .01);
+  const base = Math.atan2(dy, dx);
+  const off = Math.acos((l1 * l1 + d * d - l2 * l2) / (2 * l1 * d));
+  const c1 = { x: a.x + Math.cos(base + off) * l1, y: a.y + Math.sin(base + off) * l1 };
+  const c2 = { x: a.x + Math.cos(base - off) * l1, y: a.y + Math.sin(base - off) * l1 };
+  return bendDir(c1) > bendDir(c2) ? c1 : c2;
+}
+function reach(a, b, len) { // si el objetivo está fuera de alcance, se queda en el límite
+  const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
+  return d <= len ? b : { x: a.x + dx / d * len, y: a.y + dy / d * len };
+}
+function armByAngle(sh, ang, bend, dir) {
+  const e = { x: sh.x + dir * Math.sin(ang) * RIG.upper, y: sh.y + Math.cos(ang) * RIG.upper };
+  const a2 = ang + bend;
+  return [e, { x: e.x + dir * Math.sin(a2) * RIG.fore, y: e.y + Math.cos(a2) * RIG.fore }];
+}
+
+// pose = { hip, lean, tilt, dir, feet:[near, far], arms:[near, far] }
+// arms: {ang, bend} o {target}
+function solve(p) {
+  const { hip, lean, tilt, dir } = p;
+  const sh = { x: hip.x + dir * Math.sin(lean) * RIG.torso, y: hip.y - Math.cos(lean) * RIG.torso };
+  const ha = lean + tilt;
+  const head = { x: sh.x + dir * Math.sin(ha) * (RIG.neck + RIG.headR), y: sh.y - Math.cos(ha) * (RIG.neck + RIG.headR) };
+  const legs = p.feet.map(f => {
+    const foot = reach(hip, f, RIG.thigh + RIG.shin - .5);
+    const knee = ik(hip, foot, RIG.thigh, RIG.shin, k => dir * k.x);
+    return [hip, knee, foot];
+  });
+  const arms = p.arms.map(a => {
+    if (a.target) {
+      const hand = reach(sh, a.target, RIG.upper + RIG.fore - .5);
+      return [sh, ik(sh, hand, RIG.upper, RIG.fore, e => e.y - dir * e.x * .3), hand];
+    }
+    const [e, h] = armByAngle(sh, a.ang, a.bend, dir);
+    return [sh, e, h];
+  });
+  return { hip, sh, head, legs, arms };
+}
+
+function limb(pts, color) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = RIG.w;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+  ctx.stroke();
+}
+function drawFigure(p, tone, glow) {
+  const s = solve(p);
+  const near = tone.near, far = tone.far;
+  ctx.save();
+  ctx.shadowColor = `rgba(255,255,255,${glow})`;
+  ctx.shadowBlur = 22;
+  limb(s.legs[1], far); limb(s.arms[1], far);         // lado lejano (sombreado)
+  limb([s.hip, s.sh], near);                          // torso
+  ctx.lineWidth = RIG.w + 3; limb([s.hip, s.sh], near);
+  ctx.fillStyle = near;                               // cabeza
+  ctx.beginPath(); ctx.arc(s.head.x, s.head.y, RIG.headR, 0, Math.PI * 2); ctx.fill();
+  limb(s.legs[0], near); limb(s.arms[0], near);       // lado cercano
+  ctx.restore();
+  // sombreado interno sutil en la cabeza (look "pictograma 3D")
+  const g = ctx.createRadialGradient(s.head.x - 7, s.head.y - 8, 2, s.head.x, s.head.y, RIG.headR);
+  g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,.18)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.head.x, s.head.y, RIG.headR, 0, Math.PI * 2); ctx.fill();
+  return s;
+}
+
+// ---------- personaje 1: el que sube ----------
+function climberPose(t) {
+  let k = 0, u = -1;
+  for (let i = 0; i < STEPS; i++) {
+    const [t0, d] = CLIMB[i];
+    if (t >= t0 + d) k = i + 1;
+    else if (t >= t0) { k = i; u = (t - t0) / d; break; }
+  }
+  const STAND = 94;
+  const breathe = Math.sin(t * 3.2) * 1.5;
+  let pose;
+  if (u < 0) { // de pie en el escalón k
+    const x = stepX(k), y = stepY(k);
+    const tired = k >= 3 && k < STEPS ? .12 : 0;
+    let lean = .06 + tired, tilt = -.05;
+    if (k === 0) tilt = lerp(-.55, .05, smooth(prog(t, .6, 1.3))); // mira hacia arriba antes de empezar
+    pose = {
+      hip: { x: x - 2, y: y - STAND + breathe }, lean, tilt, dir: 1,
+      feet: [{ x: x + 7, y }, { x: x - 9, y }],
+      arms: [{ ang: .12, bend: .35 }, { ang: -.08, bend: .3 }],
+    };
+    if (k === STEPS) { // llegada: se endereza y mira el sol, brazos se abren
+      const r = smooth(prog(t, ARRIVE + .3, ARRIVE + 1.4));
+      pose.lean = lerp(.1, 0, r);
+      pose.tilt = lerp(0, -.5, r);
+      pose.hip.y -= r * 2;
+      pose.arms = [{ ang: lerp(.12, .02, r), bend: lerp(.35, .12, r) }, { ang: lerp(-.08, -.04, r), bend: lerp(.3, .1, r) }];
+    }
+    return pose;
+  }
+  // subiendo de k a k+1 con IK de piernas
+  const x0 = stepX(k), y0 = stepY(k), x1 = stepX(k + 1), y1 = stepY(k + 1);
+  const leadNear = k % 2 === 0;
+  const fatigue = k >= 3 ? .18 : 0;
+  const pl = easeInOut(prog(u, .02, .42)), plY = easeOut(prog(u, 0, .28));
+  const lead = { x: lerp(x0, x1, pl) + 7, y: lerp(y0, y1, plY) - Math.sin(Math.PI * pl) * 20 };
+  const pt = easeInOut(prog(u, .52, .97)), ptY = easeOut(prog(u, .5, .75));
+  const trail = { x: lerp(x0, x1, pt) - 9, y: lerp(y0, y1, ptY) - Math.sin(Math.PI * pt) * 26 };
+  const ph = easeInOut(prog(u, .22, .9));
+  const hip = { x: lerp(x0, x1, ph) - 2 + Math.sin(Math.PI * ph) * 6, y: lerp(y0, y1, ph) - STAND + Math.sin(Math.PI * ph) * RISE * .5 };
+  const push = Math.sin(Math.PI * prog(u, .08, .92));
+  const sw = Math.sin(Math.PI * 2 * u) * .55;
+  return {
+    hip, lean: .1 + (.32 + fatigue) * push, tilt: -.08 + .12 * push, dir: 1,
+    feet: leadNear ? [lead, trail] : [trail, lead],
+    arms: leadNear ? [{ ang: -sw * .7 + .1, bend: .55 }, { ang: sw + .1, bend: .6 }]
+                   : [{ ang: sw + .1, bend: .6 }, { ang: -sw * .7 + .1, bend: .55 }],
+  };
+}
+
+// ---------- personaje 2: el que se queda en el celular ----------
+const SIT = { x: 112 };
+function sitterPose(t) {
+  const look = smooth(prog(t, 8.9, 9.9));         // levanta la mirada
+  const hip = { x: SIT.x, y: FLOOR - 24 };
+  const scroll = Math.sin(t * 9) * 1.5 * (1 - look);
+  const phone = { x: SIT.x + 58 - look * 10, y: FLOOR - 78 + look * 22 + scroll };
+  return {
+    pose: {
+      hip, lean: lerp(.5, .2, look), tilt: lerp(.55, -.62, look), dir: 1,
+      feet: [{ x: SIT.x + 78, y: FLOOR }, { x: SIT.x + 66, y: FLOOR }],
+      arms: [{ target: phone }, { target: { x: phone.x - 6, y: phone.y + 4 } }],
+    },
+    phone, look,
+  };
+}
+
+// ---------- ladrillos ----------
+function brickColumn(i, lit) {
+  const x0 = SX + (i - 1) * RUN, x1 = i === STEPS ? W + 40 : SX + i * RUN, top = stepY(i);
+  const dark = [34, 33, 32], light = [214, 206, 194];
+  const c = dark.map((d, j) => Math.round(lerp(d, light[j], lit)));
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x0, top, x1 - x0, FLOOR - top); ctx.clip();
+  const bh = 20, bw = 31;
+  for (let r = 0; top + r * bh < FLOOR; r++) {
+    const y = top + r * bh, off = (r + i) % 2 ? bw / 2 : 0;
+    for (let x = x0 - bw + off; x < x1; x += bw) {
+      const shade = 1 - r * .025 - ((x * 7 + r * 13) % 5) * .012;
+      ctx.fillStyle = `rgb(${c.map(v => Math.round(v * shade)).join(',')})`;
+      ctx.fillRect(x + 1, y + 1, bw - 2, bh - 2);
+      ctx.fillStyle = `rgba(0,0,0,${.18 + .1 * lit})`; ctx.fillRect(x + 1, y + bh - 4, bw - 2, 3);
+    }
+  }
+  ctx.restore();
+  // cara superior (profundidad)
+  ctx.fillStyle = `rgb(${c.map(v => Math.min(255, Math.round(v * 1.12 + 6))).join(',')})`;
+  ctx.fillRect(x0, top - 6, x1 - x0, 6);
+}
+function columnLit(i, t) {
+  const land = CLIMB[i - 1][0] + CLIMB[i - 1][1] * .55;
+  return .12 + .88 * smooth(prog(t, land, land + .45));
+}
+
+// ---------- capas del mundo ----------
+function drawWorld(t, forReflection) {
+  for (let i = 1; i <= STEPS; i++) brickColumn(i, columnLit(i, t));
+  const sp = sitterPose(t);
+  const sitterTone = { near: '#8e8e8e', far: '#5e5e5e' };
+  const ss = drawFigure(sp.pose, sitterTone, .05);
+  // celular con brillo rojo
+  const screenOn = 1 - smooth(prog(t, 9.9, 10.2)) * (Math.sin(t * 90) > -.2 ? 1 : .6);
+  ctx.save();
+  ctx.translate(sp.phone.x + 4, sp.phone.y - 6); ctx.rotate(-.5 + sp.look * .9);
+  ctx.fillStyle = '#111'; ctx.fillRect(-8, -13, 16, 26);
+  ctx.shadowColor = '#ff2a2a'; ctx.shadowBlur = 30 * screenOn;
+  ctx.fillStyle = `rgba(255,42,42,${.95 * screenOn})`; ctx.fillRect(-6, -11, 12, 22);
+  ctx.restore();
+  if (!forReflection && screenOn > 0) { // luz roja en la cara
+    const g = ctx.createRadialGradient(ss.head.x + 10, ss.head.y + 10, 0, ss.head.x + 10, ss.head.y + 10, 110);
+    g.addColorStop(0, `rgba(255,30,30,${.28 * screenOn})`); g.addColorStop(1, 'rgba(255,30,30,0)');
+    ctx.fillStyle = g; ctx.fillRect(ss.head.x - 100, ss.head.y - 100, 220, 220);
+  }
+  drawFigure(climberPose(t), { near: '#ffffff', far: '#c9c9c9' }, .35);
+}
+
+// ---------- fondo / atmósfera ----------
+const dust = (() => { const r = rng(7); return Array.from({ length: 70 }, () => ({ x: r() * W, y: r() * H, s: .6 + r() * 1.8, v: 6 + r() * 14, ph: r() * 6 })); })();
+
+function camera(t) {
+  // sigue al que sube y al final abre el plano
+  const c = climberPose(t);
+  const followY = clamp(c.hip.y + 40, 560, 860);
+  const wide = smooth(prog(t, ARRIVE + .2, ARRIVE + 2.4));
+  return {
+    zoom: lerp(lerp(1.3, 1.15, prog(t, 0, ARRIVE)), 1.05, wide),
+    x: lerp(lerp(300, 395, smooth(prog(t, 1, ARRIVE))), 380, wide),
+    y: lerp(lerp(840, followY, smooth(prog(t, .8, 2.2))), 660, wide),
+  };
+}
+
+function render(t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+
+  const cam = camera(t);
+  ctx.save();
+  ctx.translate(W / 2, H / 2); ctx.scale(cam.zoom, cam.zoom); ctx.translate(-cam.x, -cam.y);
+
+  // sol rojo
+  const ign = easeOut(prog(t, ARRIVE - .15, ARRIVE + .9));
+  const pulse = 1 + Math.sin(t * 2.4) * .03;
+  const pre = .12 + .1 * Math.sin(t * 1.3) ** 2; // brasa tenue antes de encenderse
+  {
+    const r = lerp(14, 54, ign) * pulse, a = lerp(pre, 1, ign);
+    const g = ctx.createRadialGradient(SUN.x, SUN.y, r * .4, SUN.x, SUN.y, r * 4.2);
+    g.addColorStop(0, `rgba(255,40,40,${.55 * a})`); g.addColorStop(.3, `rgba(200,20,20,${.18 * a})`); g.addColorStop(1, 'rgba(120,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(SUN.x - r * 5, SUN.y - r * 5, r * 10, r * 10);
+    ctx.shadowColor = `rgba(255,40,40,${a})`; ctx.shadowBlur = 40;
+    ctx.fillStyle = `rgba(255,${Math.round(lerp(60, 52, ign))},${Math.round(lerp(60, 48, ign))},${a})`;
+    ctx.beginPath(); ctx.arc(SUN.x, SUN.y, r, 0, Math.PI * 2); ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // foco de luz en el suelo
+  {
+    const g = ctx.createRadialGradient(330, FLOOR, 10, 330, FLOOR, 420);
+    g.addColorStop(0, 'rgba(255,255,255,.10)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(-200, FLOOR - 400, W + 400, 800);
+  }
+
+  // reflejo (mundo invertido bajo el suelo)
+  ctx.save();
+  ctx.translate(0, FLOOR * 2); ctx.scale(1, -1);
+  ctx.globalAlpha = .2;
+  drawWorld(t, true);
+  ctx.restore();
+  {
+    const g = ctx.createLinearGradient(0, FLOOR, 0, FLOOR + 320);
+    g.addColorStop(0, 'rgba(0,0,0,.15)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+    ctx.fillStyle = g; ctx.fillRect(-400, FLOOR, W + 800, 700);
+  }
+  // línea de suelo tenue
+  const fl = ctx.createLinearGradient(-100, 0, W + 100, 0);
+  fl.addColorStop(0, 'rgba(255,255,255,0)'); fl.addColorStop(.4, 'rgba(255,255,255,.12)'); fl.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = fl; ctx.fillRect(-100, FLOOR, W + 200, 1.5);
+
+  drawWorld(t, false);
+
+  // tinte rojo del sol sobre la escena al llegar
+  if (ign > 0) {
+    const g = ctx.createRadialGradient(SUN.x, SUN.y, 0, SUN.x, SUN.y, 520);
+    g.addColorStop(0, `rgba(255,40,40,${.12 * ign})`); g.addColorStop(1, 'rgba(255,40,40,0)');
+    ctx.fillStyle = g; ctx.fillRect(SUN.x - 520, SUN.y - 520, 1040, 1040);
+  }
+  ctx.restore();
+
+  // polvo flotante (en pantalla)
+  for (const d of dust) {
+    const y = ((d.y - t * d.v) % H + H) % H, x = d.x + Math.sin(t * .7 + d.ph) * 8;
+    ctx.fillStyle = `rgba(255,255,255,${.06 + .06 * Math.sin(t * 2 + d.ph) ** 2})`;
+    ctx.beginPath(); ctx.arc(x, y, d.s, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // viñeta
+  const v = ctx.createRadialGradient(W / 2, H * .55, H * .22, W / 2, H * .55, H * .78);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.85)');
+  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+
+  // grano de película
+  const gr = rng(1 + Math.floor(t * FPS));
+  ctx.fillStyle = 'rgba(255,255,255,.035)';
+  for (let i = 0; i < 900; i++) ctx.fillRect(gr() * W, gr() * H, 1.5, 1.5);
+
+  // fundido de entrada / salida
+  const fade = Math.max(1 - smooth(prog(t, 0, .8)), smooth(prog(t, DURATION - .9, DURATION)));
+  if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade})`; ctx.fillRect(0, 0, W, H); }
+}
+
+window.render = render;
+window.DURATION = DURATION; window.FPS = FPS;
+
+// Vista previa en vivo (en bucle). ?t=5 congela un frame.
+const q = new URLSearchParams(location.search);
+if (q.has('t')) render(parseFloat(q.get('t')));
+else if (!q.has('export')) {
+  const start = performance.now();
+  (function loop(now) { render(((now - start) / 1000) % DURATION); requestAnimationFrame(loop); })(start);
+}
+</script>
+</body>
+</html>
