@@ -280,7 +280,7 @@ window.SCENE = {
       t > CUE.walk && t < CUE.arrive ? { phi: famC(t).phi || 0, size: 1, vol: .8 } : null,
     ]);
     return ev.concat([
-      { t: 0.45, type: 'notify', vol: .35, pan: -.4 }, { t: 1.35, type: 'notify', vol: .3, pan: .3 },
+      { t: 0.0, type: 'whoosh', dur: .5, vol: .7 }, { t: 0.12, type: 'notify', vol: .5, pan: -.4 }, { t: 0.45, type: 'notify', vol: .35, pan: -.4 }, { t: 1.35, type: 'notify', vol: .3, pan: .3 },
       { t: CUE.place, type: 'knock', vol: .45 }, { t: CUE.sit + .3, type: 'thud', vol: .35 },
       { t: CUE.touch, type: 'tick', vol: .7 }, { t: CUE.touch + .24, type: 'tick', vol: .7 },
       { t: CUE.shrug + .2, type: 'whoosh', dur: .3, vol: .5 }, { t: CUE.shrug + .45, type: 'notify', vol: .5 },

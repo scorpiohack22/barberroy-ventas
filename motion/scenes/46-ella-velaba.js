@@ -5,7 +5,7 @@
 const { FLOOR, clamp, lerp, prog, smooth, easeOut, easeIn, easeInOut, keyed, solve, figure, mixStyle, STYLE, stand, walk, sit, lie, mix, poseAt, heart, burst, ring, glowCircle, moon, sun, chair, ctx } = E;
 const D = 19.5;
 const CX = 485, CW = 112, MAT = FLOOR - 58, RAIL = FLOOR - 132;   // cuna
-const CHX = 375;                                                  // silla
+const CHX = 375, CH3 = 345;                                                  // silla
 const BED_L = [150, 345], BED_R = [448, 700];
 const CUE = { cry1: .2, wake1: .5, up1: 1.15, atCrib1: 2.2, tuck1: 2.9, calm1: 3.2, sit1: 4.0, jump1: 4.75,
   cry2: 4.95, wake2: 5.1, up2: 5.45, sit2: 7.0, jump2: 7.55, cry3: 7.7, up3: 7.85, lapse: 8.9, lapseEnd: 11.25,
@@ -72,6 +72,7 @@ function waves(x, y, t, a, dir = -1) {
 // ── luna en la ventana ──
 function sky(t) {
   const { x0, x1, y0, y1 } = WIN;
+  ctx.save(); ctx.translate(t >= CUE.act3 - .2 ? 250 : 0, 0);
   ctx.save();
   ctx.fillStyle = '#05070c'; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
   ctx.beginPath(); ctx.rect(x0, y0, x1 - x0, y1 - y0); ctx.clip();
@@ -98,6 +99,7 @@ function sky(t) {
   const g = ctx.createLinearGradient(0, y1, 0, FLOOR);
   g.addColorStop(0, 'rgba(190,200,230,.07)'); g.addColorStop(1, 'rgba(190,200,230,0)');
   ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x0, y1); ctx.lineTo(x1, y1); ctx.lineTo(x1 + 170, FLOOR); ctx.lineTo(x0 + 120, FLOOR); ctx.fill();
+  ctx.restore();
 }
 
 // ── ACTO 1: la madre ──
@@ -164,10 +166,10 @@ function babyPose(t) {
 
 // ── ACTO 3: el hijo ──
 function son(t) {
-  const chairS = (o = {}) => sit(CHX, { dir: 1, lean: .12 + (o.lean || 0), tilt: .25 + (o.tilt || 0) });
+  const chairS = (o = {}) => sit(CH3, { dir: 1, lean: .12 + (o.lean || 0), tilt: .25 + (o.tilt || 0) });
   const sleep = chairS({ tilt: .45, lean: .15 });
   const jolt = chairS({ tilt: -.25, lean: -.08 });
-  const standS = stand(CHX + 30, { dir: 1, lean: .2, tilt: .4 });
+  const standS = stand(CH3 + 30, { dir: 1, lean: .2, tilt: .4 });
   const tuck = stand(530, { dir: 1, lean: .55, tilt: .55, t }); tuck.feet = [{ x: 542, y: FLOOR }, { x: 516, y: FLOOR }];
   const tuck2 = stand(600, { dir: 1, lean: .6, tilt: .6, t }); tuck2.feet = [{ x: 610, y: FLOOR }, { x: 586, y: FLOOR }];
   const back = chairS({ lean: .3, tilt: .35 });
@@ -176,7 +178,7 @@ function son(t) {
   if (t < CUE.cough + .2) { p = { ...sleep }; p.tilt = .45 + Math.sin(t * 2) * .03; }
   return p;
 }
-const LIE_O = () => { const p = lie(582, { dir: -1, y: FLOOR - 64, s: .93 }); p.tilt = 0; return p; };
+const LIE_O = () => { const p = lie(582, { dir: -1, y: FLOOR - 64, s: .93 }); p.tilt = 0; p.feet = [{ x: 582 + 96, y: FLOOR - 70 }, { x: 582 + 94, y: FLOOR - 73 }]; return p; };
 function oldMom(t) {
   const p = LIE_O();
   const c = E.bump(t, CUE.cough, CUE.cough + 1.0);
@@ -204,7 +206,7 @@ function act3(t, refl) {
   } else s.arms = [{ ang: .5, bend: .6 }, { ang: .4, bend: .6 }];
   const shake = E.bump(t, CUE.wake3, CUE.wake3 + .25);
   bed(BED_R[0], BED_R[1], 1, true);
-  chair(CHX, 1);
+  chair(CH3, 1);
   const msl = figure(m, mixStyle(STYLE.hero, STYLE.gray, .7));
   blanket(bx, 682, FLOOR - 68, 13);
   const ssl = figure(s, STYLE.hero);

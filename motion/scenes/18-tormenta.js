@@ -30,42 +30,38 @@ function manPose(t) {
   }
   return p;
 }
-// ── el amigo ──
-const F0 = 2.0;
-const fdist = E.distance([[0, 125], [C.f_stop - .45, 125], [C.f_stop, 0], [C.f_enter, 0], [C.f_enter + .15, 60], [C.f_sit - .1, 60], [C.f_sit, 0], [30, 0]], 30);
-// camina de derecha a izquierda; se detiene fuera de la lluvia; entra; se sienta
-const friendX = t => 840 - (fdist(t) - fdist(F0));
-const FX = friendX(C.f_sit) - 6; // donde se sienta
+// ── el amigo: llega por la izquierda, se detiene al borde de la lluvia, entra y se sienta detrás de él ──
+const F0 = 2.4;
+const fdist = E.distance([[0, 125], [C.f_stop - .45, 125], [C.f_stop, 0], [C.f_enter, 0], [C.f_enter + .15, 90], [C.f_sit - .1, 90], [C.f_sit, 0], [30, 0]], 30);
+const friendX = t => -130 + Math.max(0, fdist(t) - fdist(F0));
+const FX = MX - 62; // donde se sienta
 function friendPose(t) {
   const x = friendX(t), d = fdist(t);
-  const walking = walk(x, d, { dir: -1, lean: .08 });
-  const stopped = stand(x, { t, dir: -1, lean: .02, tilt: .1 });
-  const looking = stand(x, { t, dir: -1, lean: .12, tilt: .45 });
-  const hand = { ...looking, arms: [{ ang: 1.25, bend: .2 }, { ang: .1, bend: .3 }], tilt: -.25, lean: -.02 };
-  const sitP = (() => {
-    const p = { hip: { x: FX, y: FLOOR - 12 }, s: 1, dir: -1, lean: .32, tilt: .3, feet: [{ x: FX - 34, y: FLOOR }, { x: FX - 26, y: FLOOR }] };
-    const msh = E.shoulderOf(manPose(Math.max(t, C.lean + .3)));
-    p.arms = [{ target: { x: msh.x - 22, y: msh.y + 6 }, elbowUp: true }, { ang: .9, bend: .5 }];
-    return p;
-  })();
+  const walking = walk(x, d, { dir: 1, lean: .08 });
+  const stopped = stand(x, { t, dir: 1, lean: .02, tilt: .1 });
+  const looking = stand(x, { t, dir: 1, lean: .12, tilt: .45 });
+  const hand = { ...looking, arms: [{ ang: 1.3, bend: .15 }, { ang: .1, bend: .3 }], tilt: -.25, lean: -.02 };
+  const msh = E.shoulderOf(manPose(Math.max(t, C.lean + .3)));
+  const sitP = { hip: { x: FX, y: FLOOR - 12 }, s: 1, dir: 1, lean: .42, tilt: .35, feet: [{ x: FX + 40, y: FLOOR }, { x: FX + 32, y: FLOOR }],
+    arms: [{ target: { x: msh.x + 6, y: msh.y - 4 }, elbowUp: true }, { target: { x: msh.x - 6, y: msh.y + 18 } }] };
   const sitNoArm = { ...sitP, arms: [{ ang: .8, bend: .6 }, { ang: .9, bend: .5 }] };
-  const crouchDown = { ...E.crouch(FX + 4, { dir: -1, amt: .8, tilt: .3 }) };
-  const up = stand(FX + 10, { t, dir: -1, lean: .25, tilt: .3 });
+  const crouchDown = E.crouch(FX + 4, { dir: 1, amt: .8, tilt: .3 });
+  const up = stand(FX - 6, { t, dir: 1, lean: .25, tilt: .3 });
   const giveHand = { ...up, arms: [{ target: friendHand(t) }, { ang: .1, bend: .3 }] };
-  const sideBy = stand(MX + 52, { t, dir: 1, lean: 0, tilt: -.2 });
-  const msh = E.shoulderOf(stand(MX + 6, { t, lean: 0 }));
-  sideBy.arms = [{ ang: .1, bend: .3 }, { target: { x: msh.x + 4, y: msh.y + 2 }, elbowUp: true }];
+  const sideBy = stand(MX - 60, { t, dir: 1, lean: 0, tilt: -.2 });
+  const msh2 = E.shoulderOf(stand(MX + 6, { t, lean: 0 }));
+  sideBy.arms = [{ target: { x: msh2.x + 2, y: msh2.y - 2 }, elbowUp: true }, { ang: .1, bend: .3 }];
   if (t < C.f_stop) return walking;
   return poseAt(t, [
     [C.f_stop, walking], [C.f_stop + .3, stopped], [C.f_look, stopped], [C.f_look + .3, looking], [C.f_hand, looking], [C.f_hand + .3, hand],
-    [C.f_enter, hand], [C.f_enter + .3, t > C.f_enter && t < C.f_sit ? walk(x, d, { dir: -1, lean: .1 }) : looking],
-    [C.f_sit, walk(x, d, { dir: -1, lean: .1, freeze: 1 })], [C.f_sit + .4, crouchDown], [C.f_sat, sitNoArm], [C.hug, sitNoArm], [C.hug + .4, sitP],
-    [C.f_up - .1, sitP], [C.f_up + .3, crouchDown], [C.give - .1, up], [C.give + .2, giveHand], [C.stood - .1, giveHand], [C.stood + .4, stand(MX + 56, { t, dir: 1, lean: 0, tilt: -.15 })], [C.walk, sideBy],
+    [C.f_enter, hand], [C.f_enter + .3, t > C.f_enter && t < C.f_sit ? walk(x, d, { dir: 1, lean: .1 }) : looking],
+    [C.f_sit, walk(x, d, { dir: 1, lean: .1, freeze: 1 })], [C.f_sit + .4, crouchDown], [C.f_sat, sitNoArm], [C.hug, sitNoArm], [C.hug + .4, sitP],
+    [C.f_up - .1, sitP], [C.f_up + .3, crouchDown], [C.give - .1, up], [C.give + .2, giveHand], [C.stood - .1, giveHand], [C.stood + .4, stand(MX - 60, { t, dir: 1, lean: 0, tilt: -.15 })], [C.walk, sideBy],
   ]);
 }
 function friendHand(t) {
   const lift = smooth(prog(t, C.m_up, C.stood));
-  return { x: MX + 38, y: lerp(FLOOR - 98, FLOOR - 120, lift) };
+  return { x: MX - 22, y: lerp(FLOOR - 92, FLOOR - 118, lift) };
 }
 
 // pasantes (grises): no miran
@@ -87,14 +83,14 @@ const sunY = t => lerp(FLOOR + 60, FLOOR - 230, easeOut(prog(t, C.sun, C.sun + 3
 
 window.SCENE = {
   id: '18-tormenta', title: 'No dejes a nadie *solo* en su tormenta', duration: D,
-  spot: t => ({ x: keyed([[0, MX], [C.f_hand, MX + 60], [D, MX + 40]], t), r: 380, a: lerp(.06, .14, smooth(prog(t, C.sun, C.sun + 2))) }),
+  spot: t => ({ x: keyed([[0, MX], [C.f_hand, MX - 50], [C.hug, MX - 20], [D, MX + 40]], t), r: 380, a: lerp(.06, .14, smooth(prog(t, C.sun, C.sun + 2))) }),
   beam: t => ({ x: CLX, a: lerp(.025, .07, smooth(prog(t, C.sun, C.sun + 2))), w: 160 }),
   sky: t => .9 * smooth(prog(t, C.sun, C.sun + 2.5)),
   flashes: [C.bolt, C.gone],
   blackouts: [],
   camera: t => {
     const zoom = keyed([[0, 2.45], [1.0, 2.1], [2.6, 1.7], [C.f_stop, 1.8], [C.f_hand, 2.05], [C.f_sat, 1.95], [C.lean, 2.45], [C.shrink, 2.35], [C.gone, 1.8], [C.look + 1, 1.7], [C.stood, 1.85], [D, 1.65]], t);
-    const x = keyed([[0, MX + 10], [2.6, MX + 50], [C.f_stop, MX + 70], [C.f_hand, MX + 60], [C.f_sat, MX + 35], [C.lean, MX + 30], [C.gone, MX + 40], [C.stood, MX + 40], [D, MX + 40]], t);
+    const x = keyed([[0, MX + 10], [2.6, MX + 10], [C.f_stop, MX - 50], [C.f_hand, MX - 45], [C.f_sat, MX - 10], [C.lean, MX - 5], [C.gone, MX + 30], [C.stood, MX + 20], [D, MX + 40]], t);
     const y = keyed([[0, FLOOR - 190], [2.6, FLOOR - 210], [C.f_sat, FLOOR - 170], [C.lean, FLOOR - 120], [C.shrink, FLOOR - 140], [C.gone, FLOOR - 240], [C.look + 1, FLOOR - 250], [C.stood, FLOOR - 220], [D, FLOOR - 240]], t);
     return { x, y, zoom, shake: .3 * pulse(t, C.bolt + .05, .35) };
   },
@@ -109,7 +105,7 @@ window.SCENE = {
     // pasantes del fondo
     for (const q of passers(t).filter(q => q.back)) figure(q.p, q.st);
     const f = friendPose(t), m = manPose(t);
-    const friendFront = t > C.f_sit; // al sentarse queda delante, abrazándolo
+    const friendFront = t > C.f_sit; // al sentarse queda delante: su brazo pasa sobre la espalda del otro
     if (!friendFront) figure(f, STYLE.hero);
     const msl = figure(m, E.mixStyle(STYLE.gray, STYLE.hero, .35 + .65 * smooth(prog(t, C.shrink, C.sun + 1.5))));
     if (friendFront) figure(f, STYLE.hero);
@@ -125,13 +121,13 @@ window.SCENE = {
       }
       // calor del abrazo
       const warm = smooth(prog(t, C.hug + .3, C.hug + 1.2)) * (1 - smooth(prog(t, C.gone, C.gone + 1)));
-      if (warm > 0) { E.glowCircle(MX + 30, FLOOR - 70, 140, '255,60,50', .22 * warm); }
-      E.ring(MX + 30, FLOOR - 80, t, C.hug + .4, { r: 140, life: 1.1, color: '255,90,80' });
+      if (warm > 0) { E.glowCircle(MX - 10, FLOOR - 70, 140, '255,60,50', .22 * warm); }
+      E.ring(MX - 10, FLOOR - 80, t, C.hug + .4, { r: 140, life: 1.1, color: '255,90,80' });
       // corazón entre los dos
       const hp = prog(t, C.lean + .2, C.lean + 2.6);
-      if (hp > 0 && hp < 1) E.heart(MX + 36, FLOOR - 150 - 90 * hp, 18 + 8 * Math.sin(Math.PI * hp), '#ff3b36', Math.sin(Math.PI * hp));
+      if (hp > 0 && hp < 1) E.heart(MX + 10, FLOOR - 160 - 90 * hp, 18 + 8 * Math.sin(Math.PI * hp), '#ff3b36', Math.sin(Math.PI * hp));
       if (t > C.stood) {
-        E.burst(MX + 30, FLOOR - 200, t, C.stood, { n: 30, speed: 220, color: '255,80,60', gravity: .3, life: 1.4 });
+        E.burst(MX - 20, FLOOR - 260, t, C.stood, { n: 30, speed: 220, color: '255,225,190', gravity: .3, life: 1.4 });
       }
     }
   },
@@ -174,7 +170,7 @@ window.SCENE = {
       { t: C.bolt, type: 'crack', vol: .9 }, { t: C.bolt + .05, type: 'rumble', dur: 2.5, vol: .9 },
       { t: 4.6, type: 'rumble', dur: 1.5, vol: .5 },
       { t: 1.6, type: 'notify', vol: .3, pan: -.4 },
-      { t: C.f_hand + .2, type: 'splash', vol: .5 },
+      { t: C.f_hand + .2, type: 'scuff', vol: .4 },
       { t: C.f_sat, type: 'thud', vol: .5 },
       { t: C.hug + .4, type: 'heartbeat', vol: .7 }, { t: C.hug + 1.2, type: 'heartbeat', vol: .55 }, { t: C.hug + 2.0, type: 'heartbeat', vol: .4 },
       { t: C.shrink, type: 'riser', dur: C.gone - C.shrink },

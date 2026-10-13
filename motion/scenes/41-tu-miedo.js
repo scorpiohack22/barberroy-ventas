@@ -197,7 +197,7 @@ window.SCENE = {
     // corazón al acariciarlo y al cargarlo
     for (const [t0, x, y, s] of [[CUE.heart, 470, FLOOR - 70, 22], [CUE.held + .2, 0, 0, 30]]) {
       const k = prog(t, t0, t0 + 2.2); if (k <= 0 || k >= 1) continue;
-      let hx = x, hy = y; if (!x) { const hp = heldPoint(t0); hx = hp.x; hy = hp.y - 40; }
+      let hx = x, hy = y; if (!x) { const hp = heldPoint(t0); hx = hp.x + 6; hy = hp.y - 85; }
       heart(hx + 8 * Math.sin(k * 7), hy - 90 * easeOut(k), s * E.backOut(clamp(k * 3)), '#ff3b36', 1 - smooth(prog(k, .6, 1)));
     }
     burst(470, FLOOR - 80, t, CUE.heart, { n: 18, speed: 120, size: 2.5, life: 1, gravity: -.3, seed: 4 });

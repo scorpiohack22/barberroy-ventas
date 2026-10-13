@@ -158,7 +158,7 @@ window.SCENE = {
       { t: 8.1, type: 'rumble', dur: 1.6, vol: .5 },
       { t: C.shame1, type: 'scuff', vol: .4 }, { t: C.shame3, type: 'scuff', vol: .4 },
       ...[0, 1, 2, 3, 4, 5].map(k => ({ t: C.walk + .35 + k * .3, type: 'step', size: 1, vol: .6 })),
-      { t: C.cover, type: 'splash', vol: .5 }, { t: C.cover + .1, type: 'sparkle' },
+      { t: C.cover, type: 'scuff', vol: .5 }, { t: C.cover, type: 'rain', dur: .6, vol: .4 }, { t: C.cover + .1, type: 'sparkle' },
     ];
   },
   music: {

@@ -10,8 +10,8 @@ const CUE = { start: .9, top: 6.2, cheer: 6.5, cheerEnd: 7.9, turn: 8.1, look: 8
 const rampY = x => FLOOR - SH * clamp((x - SX) / SW + .5, 0, N);
 const stepIdx = x => x < SX ? -1 : Math.min(N - 1, Math.floor((x - SX) / SW));
 const stepY = x => x < SX ? FLOOR : FLOOR - SH * (stepIdx(x) + 1);
-const heroX = t => keyed([[0, 246], [CUE.start, 246], [CUE.top, 600], [CUE.turn, 610], [CUE.down, 606], [CUE.kneel - .1, 392], [CUE.climb, 392], [CUE.arrive, 650], [D, 650]], t, p => p);
-const friendX = t => keyed([[0, 205], [CUE.fUp, 205], [CUE.grip - .3, 282], [CUE.climb, 282], [CUE.arrive, 594], [D, 594]], t, p => p);
+const heroX = t => keyed([[0, 276], [CUE.start, 276], [CUE.top, 600], [CUE.turn, 610], [CUE.down, 606], [CUE.kneel - .1, 392], [CUE.climb, 392], [CUE.arrive, 650], [D, 650]], t, p => p);
+const friendX = t => keyed([[0, 182], [CUE.fUp, 182], [CUE.grip - .3, 282], [CUE.climb, 282], [CUE.arrive, 594], [D, 594]], t, p => p);
 const sunK = t => smooth(prog(t, CUE.top - .1, CUE.top + 1));
 const together = t => smooth(prog(t, CUE.arrive - .3, CUE.arrive + 1.2));
 
@@ -39,8 +39,8 @@ const standOn = (x, o = {}) => stand(x, { ...o, y: stepY(x) });
 function cast(t) {
   const o = {}, hx = heroX(t), fx = friendX(t);
   // ── héroe
-  const look0 = standOn(246, { t, tilt: -.45, lean: -.04 });
-  const glance = standOn(246, { t, tilt: .25 });
+  const look0 = standOn(276, { t, tilt: -.45, lean: -.04 });
+  const glance = standOn(276, { t, tilt: .25 });
   const up = climber(hx, hx * 1.0, { lean: .2, tilt: -.15 });
   const cheerP = cheer(610, { t, y: stepY(610) });
   cheerP.arms = [{ ang: Math.PI - .4 + Math.sin(t * 6) * .1, bend: .1 }, { ang: Math.PI - .2 - Math.sin(t * 6) * .1, bend: .1 }];
@@ -59,13 +59,13 @@ function cast(t) {
     [CUE.kneel, kn], [CUE.offer + .3, knOffer], [CUE.rise, knOffer], [CUE.climb - .1, riseP], [CUE.climb + .3, () => upT], [CUE.arrive - .1, () => upT], [CUE.arrive + .3, topP], [D, topP]]);
   if (t > CUE.offer && t < CUE.climb + .1) o.hero.arms = [{ target: hand }, o.hero.arms[1]];
   // ── amigo (abajo, en gris)
-  const sitP = sit(205, { ground: true, dir: 1, lean: .62, tilt: .7 });
-  sitP.feet = [{ x: 262, y: FLOOR }, { x: 254, y: FLOOR }];
+  const sitP = sit(182, { ground: true, dir: 1, lean: .62, tilt: .7 });
+  sitP.feet = [{ x: 239, y: FLOOR }, { x: 231, y: FLOOR }];
   const sh0 = shoulderOf(sitP);
-  sitP.arms = [{ target: { x: 252, y: FLOOR - 52 } }, { target: { x: 246, y: FLOOR - 48 } }];
+  sitP.arms = [{ target: { x: 229, y: FLOOR - 52 } }, { target: { x: 223, y: FLOOR - 48 } }];
   sitP.hip.y += Math.sin(t * 2) * 1;
   const peek = { ...sitP, lean: .28, tilt: -.55 };
-  const hope = { ...sitP, lean: .2, tilt: -.6, arms: [{ target: { x: 262, y: FLOOR - 120 } }, { target: { x: 246, y: FLOOR - 48 } }] };
+  const hope = { ...sitP, lean: .2, tilt: -.6, arms: [{ target: { x: 240, y: FLOOR - 120 } }, { target: { x: 223, y: FLOOR - 48 } }] };
   const fStand = stand(282, { t, tilt: -.5, lean: .05 });
   fStand.arms = [{ target: hand }, { ang: .1, bend: .3 }];
   const fWalk = walk(fx, fx, { lean: .1, tilt: -.4 });
@@ -97,7 +97,7 @@ function stairs(t, refl) {
   for (let i = 0; i < N; i++) {
     const x0 = SX + i * SW, x1 = i === N - 1 ? TOPX : x0 + SW;
     const l1 = smooth(prog(t, litAt[i], litAt[i] + .3)), l2 = smooth(prog(t, litAt2[i], litAt2[i] + .3));
-    const lit = .12 + .5 * l1 + .3 * l2 + .08 * smooth(prog(t, CUE.top, CUE.top + 1));
+    const lit = .1 + .32 * l1 + .2 * l2 + .05 * smooth(prog(t, CUE.top, CUE.top + 1));
     const rows = (i + 1) * 2;
     for (let r = 0; r < rows; r++) {
       const off = r % 2 ? 12 : 0, y = FLOOR - (r + 1) * 22;
@@ -117,8 +117,8 @@ function stairs(t, refl) {
 }
 
 const camKeys = {
-  zoom: [[0, 2.15], [CUE.start, 2.0], [3.5, 1.85], [CUE.top, 1.9], [CUE.cheer + .3, 2.05], [CUE.cheerEnd, 1.9], [CUE.look + .2, 1.5], [CUE.down + .6, 1.55], [CUE.offer, 1.9], [CUE.grip, 2.15], [CUE.climb + .5, 1.8], [CUE.arrive, 1.7], [CUE.win + 1, 1.85], [D, 1.6]],
-  x: [[0, 252], [CUE.start, 270], [3.5, 420], [CUE.top, 560], [CUE.cheerEnd, 580], [CUE.look + .2, 450], [CUE.down + .6, 430], [CUE.offer, 340], [CUE.grip, 320], [CUE.climb + .5, 420], [CUE.arrive, 590], [D, 590]],
+  zoom: [[0, 2.15], [CUE.start, 2.0], [3.5, 1.85], [CUE.top, 1.9], [CUE.cheer + .3, 2.05], [CUE.cheerEnd, 1.9], [CUE.look + .2, 1.45], [CUE.down + .6, 1.5], [CUE.offer, 1.9], [CUE.grip, 2.15], [CUE.climb + .5, 1.8], [CUE.arrive, 1.7], [CUE.win + 1, 1.85], [D, 1.6]],
+  x: [[0, 240], [CUE.start, 262], [3.5, 420], [CUE.top, 560], [CUE.cheerEnd, 580], [CUE.look + .2, 425], [CUE.down + .6, 410], [CUE.offer, 340], [CUE.grip, 320], [CUE.climb + .5, 420], [CUE.arrive, 590], [D, 590]],
   y: [[0, FLOOR - 165], [CUE.start, FLOOR - 170], [3.5, FLOOR - 270], [CUE.top, FLOOR - 390], [CUE.cheerEnd, FLOOR - 400], [CUE.look + .2, FLOOR - 280], [CUE.down + .6, FLOOR - 250],
     [CUE.offer, FLOOR - 170], [CUE.grip, FLOOR - 170], [CUE.climb + .5, FLOOR - 250], [CUE.arrive, FLOOR - 400], [D, FLOOR - 420]],
 };

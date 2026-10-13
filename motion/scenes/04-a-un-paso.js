@@ -204,7 +204,7 @@ function cracks(t) {
 }
 
 const SHOTS = [
-  [0, { x: F0 - 30, y: FLOOR - 150, z: 2.65 }, { x: F0 - 20, y: FLOOR - 150, z: 2.5 }],
+  [0, { x: F0 - 55, y: FLOOR - 160, z: 2.5 }, { x: F0 - 30, y: FLOOR - 155, z: 2.4 }],
   [FR(1.25), { x: F0 - 10, y: FLOOR - 170, z: 2.0 }, { x: F0 + 40, y: FLOOR - 170, z: 2.05 }],
   [FR(3.0), { x: F0 + 20, y: FLOOR - 175, z: 2.55 }, { x: F0 + 35, y: FLOOR - 175, z: 2.65 }],
   [FR(4.15), { x: F0 + 70, y: FLOOR - 170, z: 2.05 }, { x: F0 + 80, y: FLOOR - 170, z: 2.1 }],
