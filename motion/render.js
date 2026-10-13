@@ -23,6 +23,9 @@ const path = require('path');
   }
   ff.stdin.end();
   await new Promise(r => ff.on('close', r));
+  // si la animación define eventos de sonido, se guardan para el script de audio
+  const audio = await page.evaluate(() => window.audioEvents ? { cue: window.CUE, events: window.audioEvents(), duration: window.DURATION } : null);
+  if (audio) require('fs').writeFileSync(out.replace(/\.mp4$/, '.events.json'), JSON.stringify(audio));
   await browser.close();
   console.log('listo →', out);
 })();

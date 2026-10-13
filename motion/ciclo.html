@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>El Ciclo — motion</title>
+<style>
+  html, body { margin: 0; background: #000; height: 100%; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: 100vh; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="720" height="1280"></canvas>
+<script>
+// ─────────────────────────────────────────────────────────────
+//  "EL CICLO" — un padre levanta a su hijo cuando tropieza.
+//  Pasan los años. El hijo sostiene al padre. Y llega un niño nuevo.
+//  render(t) es determinista; audioEvents() da los golpes de sonido
+//  sincronizados (pasos, bastón, etc.) para el script de audio.
+// ─────────────────────────────────────────────────────────────
+const W = 720, H = 1280, DURATION = 18, FPS = 30;
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+
+// ---------- utilidades ----------
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const prog = (t, t0, t1) => clamp((t - t0) / (t1 - t0));
+const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const smooth = p => p * p * (3 - 2 * p);
+const mixCol = (a, b, p) => `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], p))).join(',')})`;
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+function keyed(keys, t) { // interpolación suave entre [t, valor]
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) if (t <= keys[i][0]) {
+    const [t0, v0] = keys[i - 1], [t1, v1] = keys[i];
+    return lerp(v0, v1, smooth((t - t0) / (t1 - t0)));
+  }
+  return keys[keys.length - 1][1];
+}
+
+// ---------- guion (tiempos clave, también los lee el audio) ----------
+const CUE = {
+  kidTrip: 2.62, kidLift: 3.25, kidOk: 3.8,
+  timeStart: 4.7, timeEnd: 8.5,
+  oldTrip: 10.55, caneHit: 10.95, catchT: 11.0, steady: 12.0,
+  newKid: 13.1, grab: 14.55, end: 18,
+};
+window.CUE = CUE;
+
+// velocidad del grupo (px/s del suelo) — se frena en los tropiezos
+const SPEED = [[0, 64], [2.55, 64], [2.75, 0], [3.7, 0], [4.1, 64], [4.8, 64], [5.4, 190], [7.9, 190], [8.6, 44],
+               [10.45, 44], [10.7, 0], [12.3, 0], [13.0, 40], [18, 40]];
+const DT = 1 / 240;
+const DIST = (() => { const a = [0]; for (let i = 1; i <= DURATION / DT + 2; i++) a.push(a[i - 1] + keyed(SPEED, i * DT) * DT); return a; })();
+const dist = t => { const i = clamp(t / DT, 0, DIST.length - 2), f = Math.floor(i); return lerp(DIST[f], DIST[f + 1], i - f); };
+
+// ---------- escena ----------
+const FLOOR = 900;
+const age = t => smooth(prog(t, CUE.timeStart + .3, CUE.timeEnd - .3));      // 0 joven → 1 viejo
+
+// ---------- rig ----------
+const BASE = { headR: 23, neck: 8, torso: 76, thigh: 50, shin: 50, upper: 40, fore: 38, w: 20 };
+function ik(a, b, l1, l2, bendDir) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const d = clamp(Math.hypot(dx, dy), Math.abs(l1 - l2) + .01, l1 + l2 - .01);
+  const base = Math.atan2(dy, dx), off = Math.acos((l1 * l1 + d * d - l2 * l2) / (2 * l1 * d));
+  const c1 = { x: a.x + Math.cos(base + off) * l1, y: a.y + Math.sin(base + off) * l1 };
+  const c2 = { x: a.x + Math.cos(base - off) * l1, y: a.y + Math.sin(base - off) * l1 };
+  return bendDir(c1) > bendDir(c2) ? c1 : c2;
+}
+function reach(a, b, len) {
+  const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
+  return d <= len ? b : { x: a.x + dx / d * len, y: a.y + dy / d * len };
+}
+function solve(p) {
+  const s = p.s, R = { headR: BASE.headR * s, neck: BASE.neck * s, torso: BASE.torso * s, thigh: BASE.thigh * s, shin: BASE.shin * s, upper: BASE.upper * s, fore: BASE.fore * s };
+  const { hip, lean, tilt } = p;
+  const sh = { x: hip.x + Math.sin(lean) * R.torso, y: hip.y - Math.cos(lean) * R.torso };
+  const ha = lean + tilt;
+  const head = { x: sh.x + Math.sin(ha) * (R.neck + R.headR), y: sh.y - Math.cos(ha) * (R.neck + R.headR) };
+  const legs = p.feet.map(f => {
+    const foot = reach(hip, f, R.thigh + R.shin - .5);
+    return [hip, ik(hip, foot, R.thigh, R.shin, k => k.x), foot];
+  });
+  const arms = p.arms.map(a => {
+    let target = a.target;
+    if (!target) {
+      const e = { x: sh.x + Math.sin(a.ang) * R.upper, y: sh.y + Math.cos(a.ang) * R.upper };
+      return [sh, e, { x: e.x + Math.sin(a.ang + a.bend) * R.fore, y: e.y + Math.cos(a.ang + a.bend) * R.fore }];
+    }
+    const hand = reach(sh, target, R.upper + R.fore - .5);
+    return [sh, ik(sh, hand, R.upper, R.fore, e => e.y - (a.elbowBack ? 1.2 : -.3) * e.x * .3), hand];
+  });
+  return { hip, sh, head, legs, arms, R };
+}
+function limb(pts, color, w) {
+  ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+  ctx.stroke();
+}
+function drawFigure(sol, near, far, glow) {
+  const w = BASE.w * Math.pow(sol.R.torso / BASE.torso, .75);
+  ctx.save();
+  ctx.shadowColor = `rgba(255,255,255,${glow})`; ctx.shadowBlur = 22;
+  limb(sol.legs[1], far, w); limb(sol.arms[1], far, w);
+  limb([sol.hip, sol.sh], near, w + 3);
+  ctx.fillStyle = near; ctx.beginPath(); ctx.arc(sol.head.x, sol.head.y, sol.R.headR, 0, Math.PI * 2); ctx.fill();
+  limb(sol.legs[0], near, w); limb(sol.arms[0], near, w);
+  ctx.restore();
+  const g = ctx.createRadialGradient(sol.head.x - 7, sol.head.y - 8, 2, sol.head.x, sol.head.y, sol.R.headR);
+  g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,.2)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sol.head.x, sol.head.y, sol.R.headR, 0, Math.PI * 2); ctx.fill();
+}
+
+// ciclo de caminata: φ avanza con la distancia recorrida
+function walk(x, s, d, strideK, stand, lean, freeze = 0) {
+  const L = 22 * s * strideK, phi = d / (4 * L);
+  const foot = ph => {
+    const q = ((ph % 1) + 1) % 1;
+    if (q < .5) return { x: x + lerp(L, -L, q / .5), y: FLOOR };
+    const r = (q - .5) / .5;
+    return { x: x + lerp(-L, L, easeInOut(r)), y: FLOOR - Math.sin(Math.PI * r) * 13 * s * (1 - freeze) };
+  };
+  const bob = -Math.cos(4 * Math.PI * phi) * 2.6 * s;
+  const swing = Math.sin(2 * Math.PI * phi) * .42;
+  return {
+    phi, s, lean, tilt: 0,
+    hip: { x, y: FLOOR - stand * s + bob * (1 - freeze) },
+    feet: [foot(phi), foot(phi + .5)],
+    swing,
+  };
+}
+
+// punto donde se toman de la mano (lo más bajo posible y al alcance de ambos)
+function holdPoint(a, ra, b, rb) {
+  const w = ra / (ra + rb);
+  let p = { x: lerp(a.x, b.x, w), y: lerp(a.y, b.y, w) };
+  for (let drop = 80; drop >= 0; drop -= 2) {
+    const q = { x: p.x, y: p.y + drop };
+    if (Math.hypot(q.x - a.x, q.y - a.y) < ra * .96 && Math.hypot(q.x - b.x, q.y - b.y) < rb * .96) return q;
+  }
+  return p;
+}
+
+// ---------- personajes ----------
+// HIJO (izquierda) y PADRE (derecha) caminan a la derecha tomados de la mano.
+function scene(t) {
+  const d = dist(t), a = age(t);
+  const out = {};
+
+  // --- HIJO: crece ---
+  const kS = lerp(.55, 1.02, a);
+  const kTrip = smooth(prog(t, CUE.kidTrip, CUE.kidTrip + .2)) * (1 - easeInOut(prog(t, CUE.kidLift, CUE.kidOk)));
+  const catchIn = smooth(prog(t, CUE.oldTrip + .2, CUE.catchT + .25));
+  const settle = smooth(prog(t, CUE.steady, CUE.steady + .9));
+  const kX = lerp(lerp(lerp(318, 300, a), 386, catchIn), 362, settle);
+  const brace = catchIn * (1 - settle);
+  const kid = walk(kX, kS, d + 40, 1, 94, .06 + .82 * kTrip + .45 * brace, Math.max(kTrip, brace));
+  kid.hip.y += 20 * kS * kTrip; kid.hip.x += 4 * kTrip;
+  kid.tilt = .1 * kTrip - .45 * smooth(prog(t, CUE.kidOk - .2, CUE.kidOk + .2)) * (1 - smooth(prog(t, 4.5, 5)));
+  if (kTrip > 0 || brace > 0) kid.feet.forEach(f => f.y = lerp(f.y, FLOOR, Math.max(kTrip, brace)));
+  if (brace > 0) { kid.feet[0].x += 18 * brace; kid.feet[1].x -= 14 * brace; kid.hip.y += 8 * brace; }
+
+  // --- PADRE: envejece ---
+  const pS = lerp(1, .93, a);
+  const pTrip = smooth(prog(t, CUE.oldTrip, CUE.oldTrip + .35)) * (1 - easeInOut(prog(t, CUE.catchT + .25, CUE.steady)));
+  const pX = 418 + 6 * pTrip;
+  const par = walk(pX, pS, d, lerp(1, .62, a), lerp(94, 89, a), lerp(.05, .34, a) + .4 * pTrip, Math.max(pTrip, smooth(prog(t, CUE.oldTrip, CUE.oldTrip + .2)) * (1 - smooth(prog(t, CUE.steady + .1, CUE.steady + .6)))));
+  par.hip.y += 14 * pTrip; par.hip.x += 6 * pTrip;
+  par.tilt = lerp(0, .18, a) + .25 * smooth(prog(t, CUE.kidTrip, CUE.kidTrip + .3)) * (1 - smooth(prog(t, CUE.kidOk, CUE.kidOk + .5))) - .3 * pTrip;
+  par.lean -= .12 * smooth(prog(t, CUE.kidLift - .1, CUE.kidLift + .2)) * (1 - smooth(prog(t, CUE.kidOk, CUE.kidOk + .4)));
+  if (pTrip > 0) par.feet.forEach(f => f.y = lerp(f.y, FLOOR, pTrip));
+
+  // --- NIÑO NUEVO (entra por la izquierda) ---
+  const nIn = easeOut(prog(t, CUE.newKid, CUE.grab));
+  const nX = lerp(-70, 236, nIn);
+  const nk = walk(nX, .55, d * 1.0 + nX * 1.0 + 15, 1, 94, .1, 0);
+
+  // resolver esqueletos con brazos
+  const kidArmLen = (BASE.upper + BASE.fore) * kS, parArmLen = (BASE.upper + BASE.fore) * pS;
+  const kidSol0 = solve({ ...kid, s: kS, arms: [{ ang: 0, bend: 0 }, { ang: 0, bend: 0 }] });
+  const parSol0 = solve({ ...par, s: pS, arms: [{ ang: 0, bend: 0 }, { ang: 0, bend: 0 }] });
+  let hold = holdPoint(kidSol0.sh, kidArmLen, parSol0.sh, parArmLen);
+  hold.y -= 26 * smooth(prog(t, CUE.kidTrip + .1, CUE.kidLift + .2)) * (1 - smooth(prog(t, CUE.kidOk, CUE.kidOk + .4)));
+
+  // agarre: las manos se sueltan cuando el padre tropieza; el hijo lo sostiene
+  const held = 1 - smooth(prog(t, CUE.oldTrip, CUE.oldTrip + .12));
+  const support = smooth(prog(t, CUE.oldTrip + .1, CUE.catchT + .1));
+  const kidArms = [], parArms = [];
+  if (held > .5) {
+    kidArms.push({ target: hold });
+  } else {
+    // brazo cercano del hijo: al pecho/espalda del padre
+    kidArms.push({ target: { x: parSol0.sh.x + 14 * pTrip - 18 * settle, y: parSol0.sh.y + 20 * pS } });
+  }
+  // brazo lejano del hijo: libre, ataja con la otra mano, y luego toma la del niño nuevo
+  let kidFar;
+  if (support > 0 && t < CUE.steady + .3) kidFar = { target: { x: parSol0.sh.x - 26, y: parSol0.sh.y + 4 } };
+  else kidFar = { ang: -kid.swing * .8 + .08, bend: .3 };
+  const nkSol0 = solve({ ...nk, s: .55, arms: [{ ang: 0, bend: 0 }, { ang: 0, bend: 0 }] });
+  const grab = smooth(prog(t, CUE.grab - .25, CUE.grab + .1));
+  let nkHold = null;
+  if (grab > 0) {
+    nkHold = holdPoint(nkSol0.sh, (BASE.upper + BASE.fore) * .55, kidSol0.sh, kidArmLen);
+    kidFar = { target: nkHold, elbowBack: true };
+  }
+  kidArms.push(kidFar);
+
+  // padre: brazo lejano toma la mano del hijo; brazo cercano lleva el bastón
+  const caneOn = smooth(prog(t, CUE.timeStart + 1.6, CUE.timeEnd - .6));
+  if (held > .5) parArms.push({ target: hold, elbowBack: true });
+  else parArms.push({ ang: .55 + .4 * pTrip, bend: .2 });
+  let caneHand = null;
+  if (caneOn > 0 && t < CUE.oldTrip + .05) {
+    caneHand = { x: par.hip.x + 30 * pS + 6 * Math.sin(2 * Math.PI * par.phi), y: FLOOR - 82 * pS };
+    parArms.unshift({ target: caneHand });
+  } else {
+    parArms.unshift({ ang: lerp(-par.swing * .9 + .1, .9, pTrip), bend: lerp(.35, .1, pTrip) });
+  }
+  // orden: [cercano, lejano]
+  out.kid = solve({ ...kid, s: kS, arms: kidArms });
+  out.par = solve({ ...par, s: pS, arms: [parArms[0], parArms[1]] });
+  out.nk = solve({ ...nk, s: .55, arms: [nkHold ? { target: nkHold } : { ang: nk.swing + .1, bend: .4 }, { ang: -nk.swing + .1, bend: .4 }] });
+  out.nkIn = nIn;
+  out.a = a; out.pS = pS; out.caneOn = caneOn; out.caneHand = caneHand; out.par0 = par; out.kid0 = kid; out.nk0 = nk;
+  return out;
+}
+
+// ---------- bastón ----------
+function caneState(t, sc) {
+  // devuelve [arriba, punta] del bastón
+  if (sc.caneHand) {
+    const top = { x: sc.caneHand.x, y: sc.caneHand.y - 6 };
+    return [top, { x: top.x + 12, y: FLOOR }];
+  }
+  if (t < CUE.oldTrip || sc.caneOn <= 0) return null;
+  // cae: pivota sobre la punta y queda en el suelo, luego se queda atrás
+  const fall = easeOut(prog(t, CUE.oldTrip + .05, CUE.caneHit));
+  const bounce = Math.abs(Math.sin(prog(t, CUE.caneHit, CUE.caneHit + .35) * Math.PI)) * 10 * (1 - prog(t, CUE.caneHit, CUE.caneHit + .35));
+  const slide = dist(t) - dist(CUE.oldTrip);
+  const tip = { x: 486 + 30 * fall - slide, y: FLOOR - 1 };
+  const len = 82 * sc.pS, ang = lerp(.12, Math.PI / 2 - .04, fall);
+  return [{ x: tip.x + Math.sin(ang) * len, y: tip.y - Math.cos(ang) * len - bounce }, tip];
+}
+
+// ---------- sol / cielo (el tiempo pasa) ----------
+function sunTheta(t) {
+  // ángulo del sol en su arco: en "timelapse" da varias vueltas
+  const base = 2.25, end = .5;
+  const spin = easeInOut(prog(t, CUE.timeStart, CUE.timeEnd)) * (Math.PI * 2 * 3 + (end - base));
+  return base + spin - .05 * prog(t, CUE.timeEnd, DURATION);
+}
+function sunPos(t) {
+  const th = sunTheta(t);
+  return { x: 365 - Math.cos(th) * 215, y: FLOOR - 40 - Math.sin(th) * 330, h: Math.sin(th) };
+}
+
+// ---------- escenario ----------
+const marks = (() => { const r = rng(11); return Array.from({ length: 46 }, () => ({ x: r() * 1400, z: r(), w: 6 + r() * 30 })); })();
+const dust = (() => { const r = rng(5); return Array.from({ length: 60 }, () => ({ x: r() * W, y: r() * H, s: .6 + r() * 1.6, v: 5 + r() * 12, ph: r() * 6 })); })();
+
+function drawPeople(t, sc, refl) {
+  const pCol = mixCol([255, 255, 255], [150, 150, 150], sc.a), pFar = mixCol([200, 200, 200], [100, 100, 100], sc.a);
+  const cane = caneState(t, sc);
+  drawFigure(sc.par, pCol, pFar, lerp(.32, .1, sc.a));
+  if (cane) limb(cane, '#e6e6e6', 6);
+  drawFigure(sc.kid, '#ffffff', '#c8c8c8', .35);
+  if (sc.nkIn > 0) drawFigure(sc.nk, '#ffffff', '#c8c8c8', .35);
+}
+
+function camera(t) {
+  return {
+    zoom: keyed([[0, 1.9], [4.4, 2.05], [5.2, 1.7], [8.4, 1.75], [10.4, 1.9], [11.2, 2.2], [12.6, 2.15], [14.2, 1.8], [18, 1.68]], t),
+    x: keyed([[0, 372], [11, 385], [11.3, 410], [12.6, 400], [14.2, 352], [18, 358]], t),
+    y: keyed([[0, FLOOR - 170], [5, FLOOR - 200], [8.5, FLOOR - 185], [11.2, FLOOR - 150], [14, FLOOR - 170], [18, FLOOR - 200]], t),
+  };
+}
+
+function render(t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+  const sc = scene(t), cam = camera(t), sun = sunPos(t), d = dist(t);
+
+  // cielo: se ilumina cuando el sol está arriba (días pasando)
+  const day = clamp(sun.h * 1.4 + .2);
+  {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, `rgba(20,4,4,${.25 * day})`); g.addColorStop(.62, `rgba(55,10,9,${.32 * day})`); g.addColorStop(.72, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+
+  ctx.save();
+  ctx.translate(W / 2, H / 2); ctx.scale(cam.zoom, cam.zoom); ctx.translate(-cam.x, -cam.y);
+
+  // sol
+  {
+    const r = 34 + 8 * smooth(prog(t, 14, 18));
+    const g = ctx.createRadialGradient(sun.x, sun.y, r * .4, sun.x, sun.y, r * 5);
+    g.addColorStop(0, 'rgba(255,40,40,.5)'); g.addColorStop(.35, 'rgba(190,20,20,.14)'); g.addColorStop(1, 'rgba(120,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(sun.x - r * 6, sun.y - r * 6, r * 12, r * 12);
+    ctx.save(); ctx.shadowColor = '#ff2a2a'; ctx.shadowBlur = 45;
+    ctx.fillStyle = '#ff3a34'; ctx.beginPath(); ctx.arc(sun.x, sun.y, r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  }
+  // tapa del horizonte (el sol se oculta bajo el suelo)
+  ctx.fillStyle = '#000'; ctx.fillRect(-600, FLOOR, W + 1200, 900);
+  // reflejo del sol en el suelo
+  if (sun.h > -.1) {
+    const ry = FLOOR + (FLOOR - sun.y) * .35;
+    const g = ctx.createRadialGradient(sun.x, ry, 0, sun.x, ry, 120);
+    g.addColorStop(0, `rgba(255,40,40,${.22 * clamp(sun.h * 3)})`); g.addColorStop(1, 'rgba(255,40,40,0)');
+    ctx.save(); ctx.translate(sun.x, ry); ctx.scale(1, .25); ctx.translate(-sun.x, -ry);
+    ctx.fillStyle = g; ctx.fillRect(sun.x - 140, ry - 140, 280, 280); ctx.restore();
+  }
+
+  // foco de luz en el piso
+  {
+    const g = ctx.createRadialGradient(370, FLOOR, 10, 370, FLOOR, 380);
+    g.addColorStop(0, 'rgba(255,255,255,.11)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.save(); ctx.translate(370, FLOOR); ctx.scale(1, .35); ctx.translate(-370, -FLOOR);
+    ctx.fillStyle = g; ctx.fillRect(-100, FLOOR - 400, W + 200, 800); ctx.restore();
+  }
+  // marcas del piso con paralaje (sensación de avanzar)
+  for (const m of marks) {
+    const y = FLOOR + 6 + m.z * m.z * 260, k = .4 + m.z * 1.4;
+    const x = ((m.x - d * k) % 1400 + 1400) % 1400 - 340;
+    ctx.fillStyle = `rgba(255,255,255,${.05 + .07 * (1 - m.z)})`;
+    ctx.fillRect(x, y, m.w * k, 1.4 + m.z * 1.5);
+  }
+
+  // reflejo de las personas
+  ctx.save(); ctx.translate(0, FLOOR * 2); ctx.scale(1, -1); ctx.globalAlpha = .18;
+  drawPeople(t, sc, true); ctx.restore();
+  {
+    const g = ctx.createLinearGradient(0, FLOOR, 0, FLOOR + 300);
+    g.addColorStop(0, 'rgba(0,0,0,.1)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+    ctx.fillStyle = g; ctx.fillRect(-600, FLOOR, W + 1200, 900);
+  }
+  const fl = ctx.createLinearGradient(-100, 0, W + 100, 0);
+  fl.addColorStop(0, 'rgba(255,255,255,0)'); fl.addColorStop(.5, 'rgba(255,255,255,.13)'); fl.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = fl; ctx.fillRect(-100, FLOOR, W + 200, 1.5);
+
+  drawPeople(t, sc, false);
+
+  // luz roja cálida sobre la escena según el sol
+  {
+    const g = ctx.createRadialGradient(sun.x, sun.y, 0, sun.x, sun.y, 560);
+    g.addColorStop(0, `rgba(255,40,40,${.1 * clamp(sun.h + .3)})`); g.addColorStop(1, 'rgba(255,40,40,0)');
+    ctx.fillStyle = g; ctx.fillRect(sun.x - 560, sun.y - 560, 1120, 1120);
+  }
+  ctx.restore();
+
+  // destellos durante el paso del tiempo
+  const tl = prog(t, CUE.timeStart, CUE.timeEnd);
+  if (tl > 0 && tl < 1) {
+    ctx.fillStyle = `rgba(255,255,255,${.035 * Math.sin(tl * Math.PI)})`;
+    for (let i = 0; i < 6; i++) { const x = ((i * 173 + t * 900) % (W + 200)) - 100; ctx.fillRect(x, 0, 2, H); }
+  }
+
+  // polvo
+  for (const p of dust) {
+    const y = ((p.y - t * p.v) % H + H) % H, x = ((p.x - d * .15 + Math.sin(t * .7 + p.ph) * 8) % W + W) % W;
+    ctx.fillStyle = `rgba(255,255,255,${.05 + .06 * Math.sin(t * 2 + p.ph) ** 2})`;
+    ctx.beginPath(); ctx.arc(x, y, p.s, 0, Math.PI * 2); ctx.fill();
+  }
+  // viñeta
+  const v = ctx.createRadialGradient(W / 2, H * .55, H * .2, W / 2, H * .55, H * .78);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.88)');
+  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  // grano
+  const gr = rng(1 + Math.floor(t * FPS));
+  ctx.fillStyle = 'rgba(255,255,255,.035)';
+  for (let i = 0; i < 900; i++) ctx.fillRect(gr() * W, gr() * H, 1.5, 1.5);
+  // fundidos (+ un "parpadeo" negro en el tropiezo del padre: golpe dramático)
+  const blink = .55 * Math.max(0, 1 - Math.abs(t - (CUE.caneHit + .03)) / .09);
+  const fade = Math.max(1 - smooth(prog(t, 0, .7)), smooth(prog(t, DURATION - 1.2, DURATION)), blink);
+  if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${fade})`; ctx.fillRect(0, 0, W, H); }
+}
+
+// ---------- eventos de sonido sincronizados ----------
+function audioEvents() {
+  const ev = [], step = 1 / 240;
+  let prev = null;
+  for (let t = 0; t < DURATION; t += step) {
+    const sc = scene(t), v = keyed(SPEED, t);
+    const cur = { k: sc.kid0.phi, p: sc.par0.phi, n: sc.nk0.phi };
+    if (prev && v > 4) {
+      for (const [key, s] of [['k', sc.kid.R.torso / BASE.torso], ['p', sc.par.R.torso / BASE.torso]]) {
+        if (Math.floor(cur[key] * 2) !== Math.floor(prev[key] * 2)) {
+          ev.push({ t, type: 'step', size: s, vol: clamp(v / 64, .3, 1) * (t > CUE.timeStart && t < CUE.timeEnd ? .35 : 1) });
+          if (key === 'p' && sc.caneHand && Math.floor(cur.p) !== Math.floor(prev.p)) ev.push({ t: t + .05, type: 'cane', vol: .8 });
+        }
+      }
+    }
+    if (prev && sc.nkIn > 0 && sc.nkIn < 1 && Math.floor(cur.n * 2) !== Math.floor(prev.n * 2)) ev.push({ t, type: 'step', size: .55, vol: .8 });
+    prev = cur;
+  }
+  ev.push({ t: CUE.kidTrip + .05, type: 'scuff', vol: 1 }, { t: CUE.kidTrip + .2, type: 'thud', vol: .6 },
+          { t: CUE.kidLift, type: 'whoosh', vol: .6 }, { t: CUE.oldTrip + .02, type: 'scuff', vol: 1 },
+          { t: CUE.caneHit, type: 'clatter', vol: 1 }, { t: CUE.catchT, type: 'thud', vol: .9 },
+          { t: CUE.steady - .3, type: 'whoosh', vol: .5 });
+  return ev.sort((a, b) => a.t - b.t);
+}
+
+window.render = render; window.audioEvents = audioEvents;
+window.DURATION = DURATION; window.FPS = FPS;
+
+const q = new URLSearchParams(location.search);
+if (q.has('t')) render(parseFloat(q.get('t')));
+else if (!q.has('export')) {
+  const start = performance.now();
+  (function loop(now) { render(((now - start) / 1000) % DURATION); requestAnimationFrame(loop); })(start);
+}
+</script>
+</body>
+</html>
