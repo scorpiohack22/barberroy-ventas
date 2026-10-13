@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Motion player</title>
+<style>
+  @font-face { font-family: Montserrat; src: url(engine/fonts/Montserrat.ttf); font-weight: 100 900; }
+  html, body { margin: 0; background: #000; height: 100%; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: 100vh; aspect-ratio: 9 / 16; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="720" height="1280"></canvas>
+<!-- Uso: player.html?scene=01-el-ciclo   (&t=5 congela un frame, &export para exportar) -->
+<script src="engine/engine.js"></script>
+<script>
+  const q = new URLSearchParams(location.search);
+  const s = document.createElement('script');
+  s.src = 'scenes/' + q.get('scene') + '.js';
+  s.onload = async () => {
+    await document.fonts.load('900 50px Montserrat');
+    window.render = E.render;
+    window.DURATION = SCENE.duration; window.FPS = E.FPS;
+    window.audioEvents = () => (SCENE.events ? SCENE.events() : []).sort((a, b) => a.t - b.t);
+    window.CUE = SCENE.cue || {};
+    window.MUSIC = SCENE.music || null;
+    window.TITLE = SCENE.title;
+    window.READY = true;
+    if (q.has('t')) E.render(parseFloat(q.get('t')));
+    else if (!q.has('export')) {
+      const start = performance.now();
+      (function loop(now) { E.render(((now - start) / 1000) % SCENE.duration); requestAnimationFrame(loop); })(start);
+    }
+  };
+  document.body.appendChild(s);
+</script>
+</body>
+</html>
