@@ -266,11 +266,11 @@ def build():
                       'archivo': f'motion/out/{vid}.mp4'})
     json.dump(items, open(os.path.join(here, 'catalogo.json'), 'w'), ensure_ascii=False, indent=1)
     md = ['# Publicaciones listas para Facebook', '',
-          'Cada video está en `motion/out/<id>.mp4` (vertical 9:16, 720×1280, con música y efectos).',
+          'Cada video está en `motion/out/<id>.mp4` (Reel vertical 9:16, Full HD 1080×1920, 17–22 s, sin texto en pantalla, con música y efectos originales).',
           'Copia el **título** y la **descripción** tal cual al publicar el Reel.', '']
     for i, it in enumerate(items, 1):
         md += [f'## {i:02d}. {it["titulo_facebook"]}', '', f'**Archivo:** `{it["archivo"]}`  ',
-               f'**Título en el video:** {it["titulo_video"].replace("*", "")}', '', '**Descripción:**', '', '```',
+               '', '**Descripción:**', '', '```',
                it['descripcion'], '', it['hashtags'], '```', '']
     open(os.path.join(here, 'PUBLICACIONES.md'), 'w').write('\n'.join(md))
     print(len(items), 'videos en el catálogo')

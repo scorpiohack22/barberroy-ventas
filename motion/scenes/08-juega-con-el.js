@@ -72,7 +72,7 @@ function asker(t, s, T, o = {}) {
   hold.ball = { x: sh2.x + 16 * s, y: sh2.y + 54 * s };
   const tapB = stand(XK + step, { s, lean: .3 - .1 * old, tilt: -.1 + .3 * old, t }); const sh4 = shoulderOf(tapB);
   const tap = { ...tapB, arms: [{ target: { x: XC - 44 - 4 * old, y: FLOOR - 94 + 10 * old } }, { target: { x: sh4.x + 6 * s, y: sh4.y + 44 * s } }], ball: { x: sh4.x + 10 * s, y: sh4.y + 54 * s } };
-  const drop = sad(XK, { s, lean: .25 + .1 * old, tilt: .75, t }); const sh3 = shoulderOf(drop);
+  const drop = sad(XK, { s, lean: .25 - .12 * old, tilt: .75 + .1 * old, t }); const sh3 = shoulderOf(drop);
   drop.arms = [{ target: { x: sh3.x + 10 * s, y: sh3.y + 52 * s } }, { target: { x: sh3.x + 4 * s, y: sh3.y + 56 * s } }];
   drop.ball = { x: sh3.x + 14 * s, y: sh3.y + 64 * s };
   return { offer, hold, tap, drop };
