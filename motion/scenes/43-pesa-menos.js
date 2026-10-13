@@ -121,7 +121,6 @@ function gravel(t) {
 }
 
 window.SCENE = {
-  _dbg: { heroA: t => heroA(t), heroB: t => heroB(t), rockC, rockU, back },
   id: '43-pesa-menos', title: 'Con ayuda pesa *menos*', duration: D, cue: CUE,
   reflection: false,
   sky: t => .45 * smooth(prog(t, CUE.slip, CUE.slip + .3)) * (1 - smooth(prog(t, CUE.arrive, CUE.together))) + .9 * smooth(prog(t, CUE.sunUp, CUE.sunUp + 2)),

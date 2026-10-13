@@ -222,8 +222,7 @@ const STYLE = {
 };
 // interpolar estilo (ej. envejecer: hero → gray)
 function mixStyle(a, b, p) {
-  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-  return { near: mixCol(hex(a.near), hex(b.near), p), far: mixCol(hex(a.far), hex(b.far), p), glow: lerp(a.glow, b.glow, p), glowColor: p < .5 ? a.glowColor : b.glowColor };
+  return { near: mixCol(rgbOf(a.near), rgbOf(b.near), p), far: mixCol(rgbOf(a.far), rgbOf(b.far), p), glow: lerp(a.glow, b.glow, p), glowColor: p < .5 ? a.glowColor : b.glowColor };
 }
 
 function limb(pts, color, w) {
@@ -234,7 +233,7 @@ function limb(pts, color, w) {
 }
 // ── color helpers para el sombreado ──
 function rgbOf(c) {
-  if (c[0] === '#') return [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+  if (c[0] === '#') return c.length === 4 ? [1, 2, 3].map(i => parseInt(c[i] + c[i], 16)) : [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
   const m = c.match(/[\d.]+/g); return m.slice(0, 3).map(Number);
 }
 const shade = (c, k) => { const v = rgbOf(c); return `rgb(${v.map(x => Math.round(clamp(x * k, 0, 255))).join(',')})`; };
