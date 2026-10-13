@@ -8,6 +8,22 @@ fundidos. El audio (`motion/audio.py`) arma música + efectos a partir de lo que
 **Referencia obligatoria:** lee `motion/scenes/01-el-ciclo.js` (escena completa y aprobada) y la
 sección de API al inicio de cada función de `motion/engine/engine.js`.
 
+## Calidad del motor (ya incluido, no tienes que hacer nada)
+Salida Full HD 1080×1920, desenfoque de movimiento real (4 sub-cuadros por frame), figuras con volumen 3D
+(sombreado cilíndrico, cabeza esférica, sombra de contacto), bloom, haz de luz cenital (`beam`), textura de piso,
+reflejo, polvo, viñeta y grano. Opciones extra de la escena: `beam: {x, a, w}` | función | `false`.
+`E.figure(pose, style, {noShadow:true})` si la figura no toca el piso (en el aire, cayendo a un hoyo).
+
+## Nivel cinematográfico (lo que diferencia un video viral de uno amateur)
+- **Actuación**: anticipación antes de cada acción (agacharse antes de saltar, echarse atrás antes de empujar),
+  seguimiento y asentamiento al terminar, respiración en reposo (`stand(x,{t})`), cabezas que miran a lo importante
+  (`tilt`), pausas dramáticas de 0.5–1 s antes del giro. Nada de figuras quietas como estatuas.
+- **Cámara lenta** en el momento clave: remapea el tiempo de tu acción (ej. `const ta = t < 9 ? t : 9 + (t-9)*.35`).
+- **Composición**: regla de tercios, el protagonista nunca cortado, profundidad (figuras de fondo en `STYLE.dim`).
+- **Ritmo**: un cambio visual cada 1–2 s (corte de cámara con `keyed`, zoom, efecto, nuevo personaje).
+- **Significado**: el final debe dejar una enseñanza clara y emotiva que haga pensar en alguien real
+  (padres, pareja, amigo, uno mismo). Si la historia del catálogo no se entiende bien, mejórala.
+
 ## Estilo visual (no negociable)
 - 720×1280 vertical, 30 fps. Fondo negro. Figuras: protagonista blanco (`E.STYLE.hero`), secundarios/
   "los que fallan" en gris (`E.STYLE.gray`), lejanos/fantasmas `E.STYLE.dim`.
@@ -81,11 +97,12 @@ window.SCENE = {
 ## Proceso de trabajo
 1. Escribe la escena siguiendo la historia del catálogo (`motion/catalogo/catalogo.json`, campo `historia`;
    usa `titulo_video` como `title`). Puedes mejorar la coreografía si la idea se entiende mejor.
-2. Revisa cuadros: `node motion/tools/stills.js <id> /tmp/<id>.png` (10 cuadros) o tiempos concretos:
+2. Revisa cuadros (vista rápida sin desenfoque): `node motion/tools/stills.js <id> /tmp/<id>.png` (10 cuadros) o tiempos concretos:
    `node motion/tools/stills.js <id> /tmp/x.png 3.2,5.5,8 ` y a tamaño completo con `--full` al final.
    **Mira las imágenes** (herramienta Read) y corrige: extremidades rotas, figuras encimadas sin querer, cosas fuera
    de cuadro, acción tapada por el título, poses que no se entienden, escenas vacías o aburridas.
    Itera hasta que cada momento clave se entienda solo con la imagen.
-3. Construye el final: `bash motion/build.sh <id>` → `motion/out/<id>.mp4` (~35 s por video).
+3. Construye el final: `bash motion/build.sh <id>` → `motion/out/<id>.mp4` (~2 min por video). Revisa el MP4 final
+   con una cuadrícula: `ffmpeg -v error -y -i motion/out/<id>.mp4 -vf "fps=1,scale=180:-1,tile=6x4" -frames:v 1 /tmp/<id>_f.png`.
 4. **No edites** `engine.js`, `audio.py`, `render.js`, `build.sh`, `player.html` ni escenas de otros. **No hagas commit.**
    Si encuentras un bug del motor que te bloquea, rodéalo en tu escena y repórtalo.

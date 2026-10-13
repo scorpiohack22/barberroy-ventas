@@ -1,4 +1,4 @@
-// Exporta una animación a MP4 vertical 720x1280.
+// Exporta una animación a MP4 vertical (escenas: 1080x1920 con desenfoque de movimiento).
 //   node motion/render.js <escena-id | archivo.html> <salida.mp4>
 // Con un id (ej. 01-el-ciclo) usa motion/player.html?scene=<id>.
 // Si la animación define eventos/música, también escribe <salida>.events.json para el audio.
@@ -21,11 +21,11 @@ const fs = require('fs');
   const frames = Math.round(duration * fps);
 
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
-    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '17', '-preset', 'medium', '-movflags', '+faststart', out],
+    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '19', '-preset', 'medium', '-movflags', '+faststart', out],
     { stdio: ['pipe', 'inherit', 'inherit'] });
 
   for (let f = 0; f < frames; f++) {
-    const b64 = await page.evaluate(t => { window.render(t); return document.getElementById('c').toDataURL('image/png').slice(22); }, f / fps);
+    const b64 = await page.evaluate(t => { window.render(t, window.READY ? 4 : 1); return document.getElementById('c').toDataURL('image/jpeg', .95).slice(23); }, f / fps);
     if (!ff.stdin.write(Buffer.from(b64, 'base64'))) await new Promise(r => ff.stdin.once('drain', r));
     if (f % 90 === 0) process.stdout.write(`frame ${f}/${frames}\n`);
   }

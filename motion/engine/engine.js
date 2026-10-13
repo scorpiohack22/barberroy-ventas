@@ -7,7 +7,10 @@
 // ═════════════════════════════════════════════════════════════════════
 (function () {
 const W = 720, H = 1280, FPS = 30, FLOOR = 900;
+// escala de salida: el mundo se describe en 720x1280 y se dibuja a 1080x1920
+const SC = 1.5;
 const cv = document.getElementById('c');
+cv.width = W * SC; cv.height = H * SC;
 const ctx = cv.getContext('2d');
 
 // ───────────── utilidades ─────────────
@@ -212,7 +215,7 @@ const headOf = p => solve({ ...p, arms: [] }).head;
 
 // ───────────── estilos de figura ─────────────
 const STYLE = {
-  hero: { near: '#ffffff', far: '#c9c9c9', glow: .35 },
+  hero: { near: '#f4f4f4', far: '#bdbdbd', glow: .28 },
   gray: { near: '#8e8e8e', far: '#5f5f5f', glow: .05 },
   dim: { near: '#4a4a4a', far: '#333333', glow: 0 },
   red: { near: '#ff3b36', far: '#b8221f', glow: .5, glowColor: '255,50,40' },
@@ -229,22 +232,52 @@ function limb(pts, color, w) {
   for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
   ctx.stroke();
 }
-// dibuja una figura. opts: { alpha, blindfold:true, headColor, hat }
+// ── color helpers para el sombreado ──
+function rgbOf(c) {
+  if (c[0] === '#') return [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+  const m = c.match(/[\d.]+/g); return m.slice(0, 3).map(Number);
+}
+const shade = (c, k) => { const v = rgbOf(c); return `rgb(${v.map(x => Math.round(clamp(x * k, 0, 255))).join(',')})`; };
+const tint = (c, k) => { const v = rgbOf(c); return `rgb(${v.map(x => Math.round(x + (255 - x) * k)).join(',')})`; };
+// extremidad con volumen: borde oscuro, cuerpo, brillo hacia la luz (arriba-izquierda)
+function limb3d(pts, color, w, glow) {
+  const o = w * .1, h = w * .16;
+  if (glow) { ctx.save(); ctx.shadowColor = glow; ctx.shadowBlur = 24; limb(pts, shade(color, .5), w); ctx.restore(); }
+  else limb(pts, shade(color, .5), w);
+  ctx.save(); ctx.translate(-o, -o); limb(pts, color, w * .76); ctx.restore();
+  ctx.save(); ctx.translate(-h, -h); ctx.globalAlpha *= .45; limb(pts, tint(color, .8), w * .3); ctx.restore();
+}
+// sombra de contacto suave en el piso bajo un punto
+function contactShadow(x, y, r, a = .55) {
+  ctx.save(); ctx.translate(x, y + 2); ctx.scale(1, .22);
+  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r);
+  g.addColorStop(0, `rgba(0,0,0,${a})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = g; ctx.fillRect(-r, -r, r * 2, r * 2); ctx.restore();
+}
+// dibuja una figura. opts: { alpha, blindfold:true, headColor, noShadow }
 function figure(pose, style = STYLE.hero, opts = {}) {
   const sl = pose.legs ? pose : solve(pose);
   const w = BASE.w * Math.pow(sl.s, .75);
   ctx.save();
   if (opts.alpha !== undefined) ctx.globalAlpha *= opts.alpha;
-  ctx.shadowColor = `rgba(${style.glowColor || '255,255,255'},${style.glow})`; ctx.shadowBlur = 22;
-  limb(sl.legs[1], style.far, w); limb(sl.arms[1], style.far, w);
-  limb([sl.hip, sl.sh], style.near, w + 3 * sl.s);
-  ctx.fillStyle = opts.headColor || style.near;
-  ctx.beginPath(); ctx.arc(sl.head.x, sl.head.y, sl.R.headR, 0, Math.PI * 2); ctx.fill();
-  limb(sl.legs[0], style.near, w); limb(sl.arms[0], style.near, w);
-  ctx.shadowBlur = 0;
-  const g = ctx.createRadialGradient(sl.head.x - 7 * sl.dir, sl.head.y - 8, 2, sl.head.x, sl.head.y, sl.R.headR);
-  g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,.2)');
-  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sl.head.x, sl.head.y, sl.R.headR, 0, Math.PI * 2); ctx.fill();
+  if (!opts.noShadow) {
+    for (const l of sl.legs) contactShadow(l[2].x, l[2].y, 26 * sl.s, .6);
+    if (Math.abs(sl.hip.y - sl.legs[0][2].y) < 30 * sl.s) contactShadow(sl.hip.x, sl.legs[0][2].y, 60 * sl.s, .5);
+  }
+  const glow = style.glow > 0 ? `rgba(${style.glowColor || '255,255,255'},${style.glow})` : null;
+  limb3d(sl.legs[1], style.far, w, glow); limb3d(sl.arms[1], style.far, w, glow);
+  // torso: cápsula más ancha en el pecho
+  const tw = w * 1.45, chest = lerpP(sl.hip, sl.sh, .72);
+  limb3d([sl.hip, chest, sl.sh], style.near, tw, glow);
+  // cabeza: esfera con luz
+  const r = sl.R.headR, hc = opts.headColor || style.near;
+  ctx.save();
+  if (glow) { ctx.shadowColor = glow; ctx.shadowBlur = 26; }
+  const g = ctx.createRadialGradient(sl.head.x - r * .38, sl.head.y - r * .42, r * .1, sl.head.x, sl.head.y, r * 1.02);
+  g.addColorStop(0, tint(hc, .7)); g.addColorStop(.45, hc); g.addColorStop(1, shade(hc, .58));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sl.head.x, sl.head.y, r, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+  limb3d(sl.legs[0], style.near, w, glow); limb3d(sl.arms[0], style.near, w, glow);
   if (opts.blindfold) {
     const a = Math.atan2(sl.head.y - sl.sh.y, sl.head.x - sl.sh.x) + Math.PI / 2;
     ctx.save(); ctx.translate(sl.head.x, sl.head.y); ctx.rotate(a);
@@ -632,9 +665,24 @@ function drawTitle(text, t, a) {
      spot      → {x, r} foco de luz en el piso [opcional]
      flashes: [t...] destellos blancos, blackouts: [t...] parpadeos negros [opcional]
      events() → [{t, type, ...}] sonidos sincronizados; music: {...} (ver audio.py) }  */
-function render(t) {
-  const S = window.SCENE, D = S.duration;
-  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+// textura de piso (asfalto/grietas sutiles), generada una vez
+const floorTex = (() => {
+  const c = document.createElement('canvas'); c.width = 1600; c.height = 420;
+  const g = c.getContext('2d'), r = rng(21);
+  for (let i = 0; i < 9000; i++) { const v = r(); g.fillStyle = v > .5 ? `rgba(255,255,255,${.03 * r()})` : `rgba(0,0,0,${.25 * r()})`; g.fillRect(r() * 1600, r() * 420, 1 + r() * 2.5, 1 + r() * 1.2); }
+  g.strokeStyle = 'rgba(0,0,0,.45)'; g.lineWidth = 1.2;
+  for (let k = 0; k < 26; k++) {
+    let x = r() * 1600, y = r() * 420; g.beginPath(); g.moveTo(x, y);
+    for (let j = 0; j < 8; j++) { x += (r() - .5) * 90; y += (r() - .3) * 26; g.lineTo(x, y); }
+    g.stroke();
+  }
+  return c;
+})();
+
+// dibuja el mundo (sin post-proceso) en el instante t — coordenadas lógicas 720x1280
+function drawScene(t) {
+  const S = window.SCENE;
+  ctx.setTransform(SC, 0, 0, SC, 0, 0); ctx.globalAlpha = 1;
   ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
   const skyA = S.sky ? S.sky(t) : 0;
   if (skyA > 0) {
@@ -651,12 +699,6 @@ function render(t) {
   if (S.backdrop) S.backdrop(t);
   ctx.fillStyle = '#000'; ctx.fillRect(-2000, FLOOR, 4720, 2000);
   const spot = S.spot ? (typeof S.spot === 'function' ? S.spot(t) : S.spot) : { x: 360, r: 380 };
-  {
-    const g = ctx.createRadialGradient(spot.x, FLOOR, 10, spot.x, FLOOR, spot.r);
-    g.addColorStop(0, `rgba(255,255,255,${spot.a ?? .11})`); g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.save(); ctx.translate(spot.x, FLOOR); ctx.scale(1, .35); ctx.translate(-spot.x, -FLOOR);
-    ctx.fillStyle = g; ctx.fillRect(spot.x - spot.r, FLOOR - spot.r, spot.r * 2, spot.r * 2); ctx.restore();
-  }
   if (S.scroll) {
     const d = S.scroll(t);
     for (const m of marks) {
@@ -666,33 +708,80 @@ function render(t) {
     }
   }
   if (S.reflection !== false) {
-    ctx.save(); ctx.translate(0, FLOOR * 2); ctx.scale(1, -1); ctx.globalAlpha = .18;
+    ctx.save(); ctx.translate(0, FLOOR * 2); ctx.scale(1, -1); ctx.globalAlpha = .2;
     S.world(t, true); ctx.restore();
-    const g = ctx.createLinearGradient(0, FLOOR, 0, FLOOR + 300);
-    g.addColorStop(0, 'rgba(0,0,0,.1)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+    const g = ctx.createLinearGradient(0, FLOOR, 0, FLOOR + 320);
+    g.addColorStop(0, 'rgba(0,0,0,.05)'); g.addColorStop(1, 'rgba(0,0,0,1)');
     ctx.fillStyle = g; ctx.fillRect(-2000, FLOOR, 4720, 2000);
   }
+  // piso con textura que se desvanece con la distancia al foco
+  {
+    const off = S.scroll ? ((S.scroll(t) % 800) + 800) % 800 : 0;
+    ctx.save(); ctx.beginPath(); ctx.rect(-2000, FLOOR, 4720, 420); ctx.clip();
+    ctx.globalAlpha = .7; ctx.drawImage(floorTex, spot.x - 800 - off, FLOOR); ctx.drawImage(floorTex, spot.x + 800 - off, FLOOR);
+    ctx.restore();
+    const g = ctx.createRadialGradient(spot.x, FLOOR, 10, spot.x, FLOOR, spot.r * 1.25);
+    g.addColorStop(0, `rgba(42,42,44,${spot.a !== undefined ? spot.a * 4 : .45})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.translate(spot.x, FLOOR); ctx.scale(1, .32); ctx.translate(-spot.x, -FLOOR);
+    ctx.fillStyle = g; ctx.fillRect(spot.x - spot.r * 1.3, FLOOR - spot.r * 1.3, spot.r * 2.6, spot.r * 2.6); ctx.restore();
+  }
   const fl = ctx.createLinearGradient(-400, 0, W + 400, 0);
-  fl.addColorStop(0, 'rgba(255,255,255,0)'); fl.addColorStop(.5, 'rgba(255,255,255,.13)'); fl.addColorStop(1, 'rgba(255,255,255,0)');
+  fl.addColorStop(0, 'rgba(255,255,255,0)'); fl.addColorStop(.5, 'rgba(255,255,255,.14)'); fl.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = fl; ctx.fillRect(-400, FLOOR, W + 800, 1.5);
+  // haz de luz cenital (teatral)
+  const beam = S.beam === false ? null : (typeof S.beam === 'function' ? S.beam(t) : (S.beam || { x: spot.x, a: .05, w: 150 }));
+  if (beam && beam.a > 0) {
+    const top = FLOOR - 1300, bw = beam.w || 200;
+    const g = ctx.createLinearGradient(0, top, 0, FLOOR);
+    g.addColorStop(0, `rgba(255,255,255,${beam.a * .2})`); g.addColorStop(1, `rgba(255,255,255,${beam.a})`);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g;
+    ctx.beginPath(); ctx.moveTo(beam.x - bw * .3, top); ctx.lineTo(beam.x + bw * .3, top); ctx.lineTo(beam.x + bw, FLOOR); ctx.lineTo(beam.x - bw, FLOOR); ctx.fill();
+    ctx.restore();
+  }
   ctx.globalAlpha = 1;
   S.world(t, false);
   if (S.front) S.front(t);
   ctx.restore();
+}
 
+// canvases auxiliares: acumulación (desenfoque de movimiento) y bloom
+const acc = document.createElement('canvas'); acc.width = cv.width; acc.height = cv.height;
+const actx = acc.getContext('2d');
+const blm = document.createElement('canvas'); blm.width = cv.width / 4; blm.height = cv.height / 4;
+const bctx = blm.getContext('2d');
+
+// render final: samples = sub-cuadros para desenfoque de movimiento (1 en vista previa)
+function render(t, samples = 1) {
+  const S = window.SCENE, D = S.duration;
+  if (samples > 1) {
+    const shutter = .5 / FPS; // obturador de 180°
+    for (let i = 0; i < samples; i++) {
+      drawScene(t + (i / (samples - 1) - .5) * shutter);
+      actx.globalAlpha = 1 / (i + 1); actx.drawImage(cv, 0, 0);
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.drawImage(acc, 0, 0);
+  } else drawScene(t);
+
+  // bloom: copia reducida y desenfocada sumada encima
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  bctx.filter = 'brightness(.75) contrast(2.4) blur(7px)'; bctx.globalAlpha = 1; bctx.clearRect(0, 0, blm.width, blm.height);
+  bctx.drawImage(cv, 0, 0, blm.width, blm.height); bctx.filter = 'none';
+  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .3; ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(blm, 0, 0, cv.width, cv.height); ctx.restore();
+
+  ctx.setTransform(SC, 0, 0, SC, 0, 0);
   for (const p of dust) {
     const y = ((p.y - t * p.v) % H + H) % H, x = ((p.x + Math.sin(t * .7 + p.ph) * 8) % W + W) % W;
-    ctx.fillStyle = `rgba(255,255,255,${.05 + .06 * Math.sin(t * 2 + p.ph) ** 2})`;
+    ctx.fillStyle = `rgba(255,255,255,${.05 + .07 * Math.sin(t * 2 + p.ph) ** 2})`;
     ctx.beginPath(); ctx.arc(x, y, p.s, 0, Math.PI * 2); ctx.fill();
   }
-  const v = ctx.createRadialGradient(W / 2, H * .55, H * .2, W / 2, H * .55, H * .78);
-  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.88)');
+  const v = ctx.createRadialGradient(W / 2, H * .55, H * .2, W / 2, H * .55, H * .8);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.9)');
   ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
   const gr = rng(1 + Math.floor(t * FPS));
-  ctx.fillStyle = 'rgba(255,255,255,.035)';
-  for (let i = 0; i < 900; i++) ctx.fillRect(gr() * W, gr() * H, 1.5, 1.5);
+  ctx.fillStyle = 'rgba(255,255,255,.03)';
+  for (let i = 0; i < 1400; i++) ctx.fillRect(gr() * W, gr() * H, 1.2, 1.2);
 
-  // destellos y parpadeos
   let flash = 0, black = 0;
   for (const f of S.flashes || []) flash = Math.max(flash, .7 * pulse(t, f, .12));
   for (const b of S.blackouts || []) black = Math.max(black, .6 * pulse(t, b, .1));
