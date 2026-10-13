@@ -305,7 +305,9 @@ def fx_wind(dur=4.0):
 
 def fx_splash():
     t = tt(0.8)
-    return bp(noise(0.8), 400, 6000) * np.exp(-t / 0.18) * 0.5 + fx_thud(.5)[:len(t)] * 0.5
+    th = np.zeros_like(t)
+    th[:len(fx_thud(.5))] = fx_thud(.5)[:len(t)]
+    return bp(noise(0.8), 400, 6000) * np.exp(-t / 0.18) * 0.5 + th * 0.5
 
 
 def fx_knock():
