@@ -1,0 +1,115 @@
+Vas a generar las imágenes de mi documental de YouTube en Higgsfield, usando mis generaciones GRATIS. Es una tarea larga: NO te detengas hasta terminar los 96 prompts.
+
+PREPARACIÓN
+1. Abre https://higgsfield.ai/es/ai/image (ya tengo la sesión iniciada).
+2. Elige el modelo "Soul 2.0", formato 16:9, calidad 2k, 2 imágenes por generación.
+3. MUY IMPORTANTE: el botón "Generar" debe decir "generaciones gratis restantes". Si va a cobrar CRÉDITOS, DETENTE y avísame. No gastes créditos. No uses ninguna otra herramienta de Higgsfield.
+4. Desactiva "mejorar prompt" (enhance prompt) si existe.
+
+PROCESO (repite con cada uno de los 96 prompts, EN ORDEN, sin saltarte ninguno)
+1. Si dice [CON PERSONAJE], selecciona mi personaje "scorpio 2.0". Si dice [SIN PERSONAJE], cambia a "General" (sin personaje).
+2. Copia SOLO el texto en inglés (sin el número ni la etiqueta) y pégalo en la caja.
+3. Dale Generar y espera las 2 imágenes. No hace falta descargarlas.
+
+CONTROL DE CALIDAD
+- En las [CON PERSONAJE]: si salgo con la cara deformada o feo, repítelo una vez.
+- Si un prompt falla, repítelo; no lo saltes y no te detengas.
+- Avísame al terminar y dime cuántas generaciones gratis quedan.
+
+LOS 96 PROMPTS
+01 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an elderly man seen from behind sitting alone in a dim living room watching a laptop screen, soft lamp light, no readable text
+02 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, close-up of wrinkled elderly hands holding a smartphone showing a blurred video of a man in a suit, no readable text
+03 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a retirement savings passbook and reading glasses on a wooden kitchen table at night, melancholic mood, no readable text
+04 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a laptop screen with a rising green investment chart glowing in a dark room, eerie, no readable text, no logos
+05 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an elderly man's hand typing a bank transfer on a laptop, close-up, tense mood, no readable text
+06 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an empty armchair next to a window at dusk, a cold cup of coffee, loneliness, quiet mood
+07 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an audio waveform glowing over a blurred video interview, digital manipulation concept, dark background, no readable text
+08 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a theater mask made of glass reflecting a crowd, metaphor for borrowed trust, dramatic light
+09 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a hand passing a glowing key to another hand in the dark, metaphor for trust, dramatic rim light
+10 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man sitting in a dark editing room in front of two monitors, looking at the camera with a serious honest expression, blue screen light
+11 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a professional microphone in a dark studio with a glowing audio waveform behind it, no readable text
+12 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a computer screen showing two identical audio waveforms side by side, cloned voice concept, no readable text
+13 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man reviewing printed documents and news clippings spread on a large table, focused, desk lamp, night
+14 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a wall covered with printed screenshots of online ads connected by red strings, investigation board, no readable text
+15 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man typing notes on a laptop late at night, reflection of screen in his eyes, determined
+16 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a stack of legal documents and court files on a desk with a gavel, serious mood, no readable text
+17 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a smartphone in a dark room showing an endless feed of blurred video ads, no readable text, no logos
+18 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man standing in a dark room lit only by the glow of a large screen full of ads, contemplative
+19 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a smartphone held vertically showing a blurred social media video ad with a giveaway of phones, no readable text, no logos
+20 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a pile of brand new smartphones in boxes under a spotlight, too good to be true, no logos, no readable text
+21 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, silhouette of a famous young content creator on a stage with lights, unrecognizable, backlit, no face visible
+22 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a face made of digital pixels peeling off like a mask, deepfake concept, dark background
+23 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, Bogotá Colombia city skyline at dusk with mountains, wide shot
+24 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an elegant elderly businessman silhouette in a suit seen from behind in a modern office, unrecognizable
+25 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a laptop showing a newsroom fact-checking page with a red FALSE stamp concept, no readable text
+26 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a counter of views spinning upward on a glowing screen, millions, no readable words
+27 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, Mexico City skyline at night with lights, wide shot
+28 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a news anchor desk in an empty TV studio with lights off, silhouette of a female journalist from behind, unrecognizable
+29 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, glowing cryptocurrency coins falling into a dark void, scam concept, no logos
+30 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a familiar face reflected in a shattered mirror, broken trust metaphor, unrecognizable face, dramatic light
+31 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a man sleeping in bed while a laptop on the nightstand shows money symbols, ironic, no readable text
+32 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a glowing robot hand holding a bundle of dollar bills out of a computer screen, lure concept, no readable text
+33 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a fishing hook with a golden coin as bait in dark water, metaphor for scam
+34 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, the exterior of a federal government building in Washington with columns, overcast sky, no readable text
+35 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a courtroom with empty wooden benches and a judge's bench, cold light, no readable text
+36 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an empty online store warehouse with bare shelves, abandoned boxes, no logos
+37 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a person counting losses on a calculator with a pile of unpaid bills, stress, no readable text
+38 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a luxury seminar stage with a speaker silhouette promising wealth to a crowd, backlit, no readable text
+39 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a stack of hundred dollar bills disappearing into smoke, dark background
+40 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an empty server room with all the lights off, the technology does not exist concept
+41 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a computer screen showing a fake dashboard with flashing numbers, deceptive, no readable words
+42 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a door with a broken padlock in a dark corridor, fraud uncovered
+43 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a sleek unbranded skincare cream jar on a marble kitchen counter, product shot, no text, no logo
+44 [SIN PERSONAJE] Photorealistic smartphone video still, vertical framing, a friendly middle-aged woman in her kitchen holding a skincare cream jar and talking to the camera, natural light, no text, no logo
+45 [SIN PERSONAJE] Photorealistic close-up of a smiling middle-aged woman applying cream to her face in a bright bathroom, natural light, no text
+46 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a computer screen showing an AI face generator creating a woman's face from a grid of faces, no readable text
+47 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a stopwatch and a few coins on a desk next to a laptop, time and cost concept
+48 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man looking at a laptop with a surprised and worried expression, the screen glow on his face, night
+49 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a smiling woman's portrait dissolving into digital dust, she does not exist concept, dark background
+50 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a red "do not publish" folder closed on a desk, concept, no readable text
+51 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a wall of glowing five-star review cards floating in darkness, fake reviews concept, no readable text
+52 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a puppet on strings smiling in front of a camera, fake testimonial metaphor, dramatic light
+53 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a row of identical smiling customer photos on a screen, uncanny, no readable text
+54 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a judge's gavel striking next to a printed online review, no readable text
+55 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a typewriter-like machine printing endless paper reviews, satire, warm light, no readable text
+56 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a stamp marked with a red X over a smiling face printout, no readable text
+57 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a dollar sign shaped fine notice on a desk, legal penalty concept, no readable text
+58 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a modern tech company headquarters glass building at night, generic, no logos
+59 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a confidential document folder with internal reports on a dark desk under a lamp, leaked documents concept, no readable text
+60 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a journalist silhouette reading documents in a newsroom at night, unrecognizable
+61 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a giant scale with a pile of money on one side and a smartphone with ads on the other, dark background
+62 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a river of glowing ad cards flowing through a dark data center, fifteen billion concept
+63 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a percentage pie chart glowing with one red slice, ten percent concept, no readable words
+64 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a person scrolling a phone in bed at night, endless ads, blue light, no readable text, no logos
+65 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an empty guard chair at a security desk with monitors, nobody watching concept
+66 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a corporate spokesperson silhouette at a podium, backlit, unrecognizable, no readable text
+67 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a hand putting a coin into a slot machine made of a smartphone, metaphor, dramatic light
+68 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man looking out a window at the city at night, thoughtful, hand on chin
+69 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a huge pile of paper bills being swept away by wind in an empty street at night
+70 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a large digital counter showing a huge number in a dark room, record losses concept, no readable words
+71 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an elderly woman seen from behind looking at a phone in a bus stop at dusk
+72 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, two elderly hands holding each other next to a phone on a table, emotional
+73 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an FBI style evidence room with boxes and files, generic, no logos, no readable text
+74 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an empty retirement savings jar on a windowsill, rain outside
+75 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an elderly man seen from behind walking alone in a park at sunset, reflective
+76 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a cheerful small neighborhood bakery owner filming a video of fresh bread with a smartphone on a tripod, warm morning light
+77 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a small business owner editing a video ad on a laptop with AI tools, warm light, no readable text
+78 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a professional looking ad for fresh bread displayed on a phone, vibrant, no readable text, no logos
+79 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man teaching a small group of people how to create videos with AI on laptops, everyone smiling, bright room
+80 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a magnifying glass over a smartphone ad, inspecting for fakes, no readable text
+81 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a close-up of a mouth on a screen slightly out of sync with an audio waveform, deepfake sign, no readable text
+82 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, an hourglass with sand running fast next to a phone showing a countdown, urgency, no readable text
+83 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a person typing a search on a laptop at a desk, checking a company, warm lamp, no readable text
+84 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a red warning sign glowing over a stack of guaranteed profit flyers, no readable text
+85 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a person closing a laptop and smiling with relief, safe decision, warm light
+86 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, the same elderly man from the beginning seen from behind, now sitting with his family at a table, warm light, hopeful
+87 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a grandson showing his grandmother how to check something on a phone, warm living room, tender
+88 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, two hands shaking in warm sunlight, real trust, close-up
+89 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man smiling warmly at the camera, golden hour, soft bokeh background
+90 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man recording a video with a smartphone on a tripod and a ring light, home studio, smiling
+91 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man pointing at the camera with a friendly smile, inviting, dark studio background
+92 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a family video call on a laptop with grandparents smiling, warm home, no readable text, no logos
+93 [SIN PERSONAJE] Cinematic documentary film still, muted teal and amber color grade, a sunrise over a Latin American city, hopeful, wide shot
+94 [CON PERSONAJE] Flattering cinematic documentary film still, eye-level camera, 85mm lens, a young Latino man closing a laptop and looking at the camera with a calm confident expression, desk lamp, night
+95 [CON PERSONAJE] Flattering cinematic close-up portrait, eye-level camera, 85mm lens, a young Latino man with a serious expression, half of his face glitching into digital pixels like a deepfake mask, dark background, dramatic red and teal light
+96 [SIN PERSONAJE] Cinematic film still, a smartphone in a dark room showing a smiling face that is cracking like a mask, scam ad concept, red warning light, no readable text, no logos
