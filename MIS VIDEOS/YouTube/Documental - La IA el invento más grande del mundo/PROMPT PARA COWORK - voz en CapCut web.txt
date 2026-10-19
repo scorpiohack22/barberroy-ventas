@@ -1,0 +1,27 @@
+Vas a crear la narración de mi documental con la función "Texto a voz" de CapCut en el navegador. Es una tarea larga: hazla completa, parte por parte.
+
+PREPARACIÓN
+1. Abre https://www.capcut.com y entra al editor online ("Crear nuevo" / "New video"), formato 16:9. Ya tengo la sesión iniciada; si pide iniciar sesión, avísame y espera.
+2. Abre el archivo "TEXTO PARA CAPCUT - 12 partes.txt" que te paso (o te pego el texto). Tiene 12 partes: PARTE 00, 01, 02, 03, 04, 05, 06, 06B, 07, 08, 09, 10.
+
+ELEGIR LA VOZ (solo una vez)
+3. Agrega un texto de prueba con el primer párrafo de la PARTE 00 y abre "Texto a voz" (Text to speech).
+4. Busca voces en ESPAÑOL de HOMBRE JOVEN, con tono de narrador/documental, enérgico pero serio. Escucha 3 o 4.
+5. Elige la más natural y vibrante y ANOTA SU NOMBRE EXACTO. Usa ESA MISMA VOZ en las 12 partes, sin cambiarla nunca.
+6. Si las voces buenas piden CapCut Pro o cobran, NO pagues nada: avísame qué voces gratis hay.
+
+GENERAR CADA PARTE (repite de la 00 a la 10, en orden)
+7. Crea un proyecto nuevo (o limpia la línea de tiempo) para cada parte.
+8. Agrega un texto y pega el texto de esa PARTE. Si CapCut no acepta tanto texto en un solo cuadro, pégalo PÁRRAFO POR PÁRRAFO en textos seguidos, uno detrás del otro, sin huecos.
+9. Aplica "Texto a voz" con la voz elegida. Velocidad 1.0x (o 1.1x si suena lenta). Usa la misma velocidad en todas las partes.
+10. Borra o deja ocultas las capas de texto visibles: solo me interesa el audio.
+11. Escucha el inicio y el final: si se cortó alguna frase o pronunció muy mal un nombre, vuelve a generar ese párrafo (puedes escribir el nombre como suena, por ejemplo "Bléchli Park", "Reyevski", "Yéopardi").
+12. Exporta: si hay opción de exportar solo AUDIO (MP3/WAV), úsala. Si no, exporta VIDEO 720p o 1080p (fondo negro está bien).
+13. Nombra el archivo: parte00, parte01, parte02, parte03, parte04, parte05, parte06, parte06B, parte07, parte08, parte09, parte10.
+14. Guárdalos todos en una carpeta llamada "Voces documental IA" (en Descargas o en mi Google Drive).
+
+REGLAS
+- No pagues nada ni actives pruebas de CapCut Pro. Si algo pide pago, detente y avísame.
+- No agregues música ni efectos: solo la voz.
+- Cada 3 partes escríbeme una línea: "Voy en la parte NN, voz: <nombre de la voz>".
+- Al terminar, dime: nombre de la voz usada, velocidad y dónde quedaron los 12 archivos.
