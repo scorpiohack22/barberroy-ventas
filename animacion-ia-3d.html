@@ -2,7 +2,7 @@
 <html lang="es">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- Abrir directamente en un navegador moderno. Única dependencia externa: Three.js r128 (cdnjs). Fuentes: Google Fonts (opcional, con alternativas). -->
+<!-- Abrir directamente en un navegador moderno. Única dependencia externa: Three.js r128 (cdnjs). -->
 <title>Dentro de la IA</title>
 <meta name="description" content="Animación 3D procedural en Three.js: qué ocurre dentro de un modelo de lenguaje cuando le envías un mensaje.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,8 @@
   color-scheme:dark;
 }
 [hidden]{display:none!important}
+/* Sin rótulo de secuencia, sin tiempo y sin subtítulos: solo los textos explicativos dentro de las escenas */
+#hud,#cap{display:none!important}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);overflow:hidden}
 body{font-family:var(--f-sub);-webkit-font-smoothing:antialiased}
 #app{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
