@@ -1,0 +1,31 @@
+{
+  "name": "reel-ia-scorpio-academy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reel vertical de 60 s sobre creación de contenido con IA — Scorpio Academy",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render ReelIA out/reel-ia.mp4 --codec=h264 --audio-codec=aac",
+    "preview": "node scripts/preview.mjs",
+    "sync": "python3 scripts/sync.py",
+    "assets": "node scripts/scan-assets.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.537",
+    "@remotion/cli": "^4.0.537",
+    "@remotion/google-fonts": "^4.0.537",
+    "@remotion/layout-utils": "^4.0.537",
+    "@remotion/media-utils": "^4.0.537",
+    "@remotion/renderer": "^4.0.537",
+    "@remotion/studio": "^4.0.537",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.537"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
