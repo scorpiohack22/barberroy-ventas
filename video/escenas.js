@@ -10,29 +10,29 @@ export const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 export const easeOut = x => 1 - Math.pow(1 - clamp(x), 3);
 export const easeInOut = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
 export const easeBack = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
-const lerp = (a, b, t) => a + (b - a) * t;
-const prog = (lt, a, b) => clamp((lt - a) / (b - a));
+export const lerp = (a, b, t) => a + (b - a) * t;
+export const prog = (lt, a, b) => clamp((lt - a) / (b - a));
 
-function rng(seed) { // mulberry32 determinista
+export function rng(seed) { // mulberry32 determinista
   return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
     t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 
-const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, flatShading: true, roughness: .85, metalness: 0, ...o });
+export const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, flatShading: true, roughness: .85, metalness: 0, ...o });
 
-function mesh(geo, material, { x = 0, y = 0, z = 0, rx = 0, cast = true, receive = true } = {}) {
+export function mesh(geo, material, { x = 0, y = 0, z = 0, rx = 0, cast = true, receive = true } = {}) {
   const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.rotation.x = rx;
   m.castShadow = cast; m.receiveShadow = receive; return m;
 }
 
-function canvasTex(w, h, draw) {
+export function canvasTex(w, h, draw) {
   const c = document.createElement('canvas'); c.width = w; c.height = h;
   const g = c.getContext('2d'); draw(g, w, h);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
   t.userData = { canvas: c, g, draw }; return t;
 }
 
-function gradientBg(top, bottom, mid) {
+export function gradientBg(top, bottom, mid) {
   return canvasTex(8, 512, (g, w, h) => {
     const gr = g.createLinearGradient(0, 0, 0, h);
     gr.addColorStop(0, top); if (mid) gr.addColorStop(.55, mid); gr.addColorStop(1, bottom);
@@ -40,7 +40,7 @@ function gradientBg(top, bottom, mid) {
   });
 }
 
-function baseScene({ top, bottom, mid, fog, fogNear = 20, fogFar = 90, sun = '#fff1dc', sunI = 2.4, sunPos = [-6, 12, 9], hemi = 1.1, shadowSize = 12 }) {
+export function baseScene({ top, bottom, mid, fog, fogNear = 20, fogFar = 90, sun = '#fff1dc', sunI = 2.4, sunPos = [-6, 12, 9], hemi = 1.1, shadowSize = 12 }) {
   const scene = new THREE.Scene();
   scene.background = gradientBg(top, bottom, mid);
   if (fog) scene.fog = new THREE.Fog(fog, fogNear, fogFar);
@@ -53,7 +53,7 @@ function baseScene({ top, bottom, mid, fog, fogNear = 20, fogFar = 90, sun = '#f
   return { scene, camera, sun: d };
 }
 
-function textSprite(text, { size = 64, color = '#fff', bg = null, stroke = '#000', font = 'Montserrat', weight = 900, pad = 18, scale = 1 } = {}) {
+export function textSprite(text, { size = 64, color = '#fff', bg = null, stroke = '#000', font = 'Montserrat', weight = 900, pad = 18, scale = 1 } = {}) {
   const tmp = document.createElement('canvas').getContext('2d');
   tmp.font = `${weight} ${size}px ${font}`;
   const tw = Math.ceil(tmp.measureText(text).width) + pad * 2, th = Math.ceil(size * 1.35) + pad * 2;
@@ -72,10 +72,10 @@ export function roundRect(g, x, y, w, h, r) {
   g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
 }
 
-function popScale(sprite, k) { const b = sprite.userData.base; sprite.scale.set(b.x * k, b.y * k, 1); sprite.visible = k > .001; }
+export function popScale(sprite, k) { const b = sprite.userData.base; sprite.scale.set(b.x * k, b.y * k, 1); sprite.visible = k > .001; }
 
 // ---------- personajes ----------
-function makePerson({ shirt = '#4f7d4f', pants = '#33384a', skin = '#e2b48c', hair = '#1c1917', apron = null, tufts = false, seed = 1 } = {}) {
+export function makePerson({ shirt = '#4f7d4f', pants = '#33384a', skin = '#e2b48c', hair = '#1c1917', apron = null, tufts = false, seed = 1 } = {}) {
   const g = new THREE.Group();
   const mSkin = mat(skin), mPants = mat(pants), mShirt = mat(shirt), mShoe = mat('#2a2522');
   const mHair = mat(hair, { roughness: .6 });
@@ -124,7 +124,7 @@ function makePerson({ shirt = '#4f7d4f', pants = '#33384a', skin = '#e2b48c', ha
   return g;
 }
 
-function walk(p, phase, amt = 1) {
+export function walk(p, phase, amt = 1) {
   const s = Math.sin(phase) * .55 * amt;
   p.userData.legs[0].rotation.x = s; p.userData.legs[1].rotation.x = -s;
   p.userData.arms[0].rotation.x = -s * .8; p.userData.arms[1].rotation.x = s * .8;
@@ -139,7 +139,7 @@ function tree(x, z, s = 1) {
   return g;
 }
 
-function stripeTex(colors, n = 6, diag = true) {
+export function stripeTex(colors, n = 6, diag = true) {
   const t = canvasTex(256, 256, (g, w, h) => {
     const sw = w / n;
     for (let i = -n; i < n * 2; i++) {
@@ -153,7 +153,7 @@ function stripeTex(colors, n = 6, diag = true) {
   t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
 }
 
-function signTex(text, bg, fg, w = 1024, h = 200, size = 120) {
+export function signTex(text, bg, fg, w = 1024, h = 200, size = 120) {
   return canvasTex(w, h, (g) => {
     g.fillStyle = bg; g.fillRect(0, 0, w, h);
     g.strokeStyle = fg; g.lineWidth = 8; g.strokeRect(14, 14, w - 28, h - 28);

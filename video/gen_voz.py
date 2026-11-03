@@ -1,9 +1,11 @@
-"""Genera la voz en off (voz/voz.wav) y timeline.json a partir de guion.json."""
+"""Uso: python3 gen_voz.py <historia>. Genera historias/<historia>/voz.wav y timeline.json desde guion.json."""
 import json, re, subprocess, wave, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODEL = os.path.join(HERE, "voz", "es_MX-ald-medium.onnx")
-g = json.load(open(os.path.join(HERE, "guion.json"), encoding="utf-8"))
+NAME = sys.argv[1] if len(sys.argv) > 1 else "barberroy"
+DIR = os.path.join(HERE, "historias", NAME)
+g = json.load(open(os.path.join(DIR, "guion.json"), encoding="utf-8"))
 gap, ls = g.get("gap", 0.25), g.get("lengthScale", 1.0)
 
 def weight(w):
@@ -17,7 +19,7 @@ frames, rate, t, lines_out = [], None, 0.35, []
 silence = lambda sec: b"\x00\x00" * int(rate * sec)
 for i, ln in enumerate(g["lines"]):
     tts = ln.get("tts") or ln["text"].replace("*", "")
-    path = os.path.join(HERE, "voz", f"l{i:02d}.wav")
+    path = os.path.join(DIR, f"l{i:02d}.wav")
     subprocess.run([sys.executable, "-m", "piper", "-m", MODEL, "-f", path, "--length-scale", str(ls)],
                    input=tts.encode(), check=True, capture_output=True)
     with wave.open(path) as w:
@@ -44,10 +46,10 @@ for i, ln in enumerate(g["lines"]):
                       "start": round(t, 3), "end": round(t + dur + gap, 3), "words": wout})
     t += dur + gap
 
-with wave.open(os.path.join(HERE, "voz", "voz.wav"), "wb") as out:
+with wave.open(os.path.join(DIR, "voz.wav"), "wb") as out:
     out.setnchannels(1); out.setsampwidth(2); out.setframerate(rate)
     out.writeframes(b"".join(frames) + silence(1.2))
 total = t + 1.2
-json.dump({"duration": round(total, 3), "lines": lines_out}, open(os.path.join(HERE, "timeline.json"), "w", encoding="utf-8"),
+json.dump({"escenas": g.get("escenas", "escenas.js"), "duration": round(total, 3), "lines": lines_out}, open(os.path.join(DIR, "timeline.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 print(f"OK: {len(lines_out)} líneas, {total:.1f}s")

@@ -1,0 +1,28 @@
+{
+ "escenas": "escenas_apolo13.js",
+ "gap": 0.18,
+ "lengthScale": 0.8,
+ "lines": [
+  { "scene": "lanzamiento", "text": "El once de abril de mil novecientos setenta, tres astronautas despegaron rumbo a la *Luna*.",
+    "counter": { "type": "text", "value": "11·04·1970", "caption": "DESPEGAN" } },
+  { "scene": "espacio", "text": "Dos días después, a más de *trescientos* mil kilómetros de casa,",
+    "counter": { "type": "number", "from": 0, "to": 321000, "caption": "KM DE LA TIERRA" } },
+  { "scene": "explosion", "text": "un tanque de *oxígeno* *explotó*." },
+  { "scene": "cabina", "text": "Houston, tenemos un *problema*.", "tts": "Jiúston, tenemos un problema." },
+  { "scene": "cabina", "text": "La nave perdía oxígeno y *energía*. Ya no iban a pisar la Luna. Ahora solo querían *volver*.",
+    "counter": { "type": "number", "from": 100, "to": 0, "caption": "% DE OXÍGENO" } },
+  { "scene": "modulo", "text": "Se refugiaron en el módulo lunar, hecho para *dos* personas durante *dos* días.",
+    "counter": { "type": "text", "value": "2 · 2", "caption": "PERSONAS · DÍAS" } },
+  { "scene": "modulo", "text": "Eran *tres*, y necesitaban *cuatro*.",
+    "counter": { "type": "text", "value": "3 · 4", "caption": "PERSONAS · DÍAS" } },
+  { "scene": "frio", "text": "Apagaron casi todo para ahorrar energía. Adentro, la temperatura bajó a *tres* grados.",
+    "counter": { "type": "number", "from": 21, "to": 3, "caption": "GRADOS" } },
+  { "scene": "filtro", "text": "Y el aire empezó a *envenenarlos*: los filtros eran *cuadrados*, y el hueco era *redondo*." },
+  { "scene": "filtro", "text": "Desde la Tierra inventaron un adaptador con *cartón*, *bolsas* y *cinta*. Y *funcionó*." },
+  { "scene": "luna", "text": "Rodearon la *Luna*, y usaron su gravedad para *regresar*." },
+  { "scene": "reentrada", "text": "Al entrar a la atmósfera, la radio se cortó. El silencio debía durar *cuatro* minutos. Duró casi *seis*.",
+    "counter": { "type": "clock", "from": "00:00", "to": "05:50", "caption": "SIN SEÑAL" } },
+  { "scene": "amerizaje", "text": "Hasta que, por fin, se vieron los *paracaídas*. Los tres estaban *vivos*." },
+  { "scene": "cierre", "text": "Veinticinco años después, esta historia se convirtió en *película*." }
+ ]
+}

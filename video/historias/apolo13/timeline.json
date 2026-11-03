@@ -1,0 +1,1270 @@
+{
+ "escenas": "escenas_apolo13.js",
+ "duration": 62.515,
+ "lines": [
+  {
+   "scene": "lanzamiento",
+   "text": "El once de abril de mil novecientos setenta, tres astronautas despegaron rumbo a la *Luna*.",
+   "counter": {
+    "type": "text",
+    "value": "11·04·1970",
+    "caption": "DESPEGAN"
+   },
+   "start": 0.35,
+   "end": 5.151,
+   "words": [
+    {
+     "w": "El",
+     "key": false,
+     "start": 0.47,
+     "end": 0.619,
+     "brk": false
+    },
+    {
+     "w": "once",
+     "key": false,
+     "start": 0.619,
+     "end": 0.854,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 0.854,
+     "end": 1.003,
+     "brk": false
+    },
+    {
+     "w": "abril",
+     "key": false,
+     "start": 1.003,
+     "end": 1.28,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 1.28,
+     "end": 1.43,
+     "brk": false
+    },
+    {
+     "w": "mil",
+     "key": false,
+     "start": 1.43,
+     "end": 1.622,
+     "brk": false
+    },
+    {
+     "w": "novecientos",
+     "key": false,
+     "start": 1.622,
+     "end": 2.155,
+     "brk": false
+    },
+    {
+     "w": "setenta,",
+     "key": false,
+     "start": 2.155,
+     "end": 2.517,
+     "brk": true
+    },
+    {
+     "w": "tres",
+     "key": false,
+     "start": 2.603,
+     "end": 2.837,
+     "brk": false
+    },
+    {
+     "w": "astronautas",
+     "key": false,
+     "start": 2.837,
+     "end": 3.371,
+     "brk": false
+    },
+    {
+     "w": "despegaron",
+     "key": false,
+     "start": 3.371,
+     "end": 3.861,
+     "brk": false
+    },
+    {
+     "w": "rumbo",
+     "key": false,
+     "start": 3.861,
+     "end": 4.138,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 4.138,
+     "end": 4.288,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 4.288,
+     "end": 4.437,
+     "brk": false
+    },
+    {
+     "w": "Luna.",
+     "key": true,
+     "start": 4.437,
+     "end": 4.671,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "espacio",
+   "text": "Dos días después, a más de *trescientos* mil kilómetros de casa,",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 321000,
+    "caption": "KM DE LA TIERRA"
+   },
+   "start": 5.151,
+   "end": 9.278,
+   "words": [
+    {
+     "w": "Dos",
+     "key": false,
+     "start": 5.271,
+     "end": 5.502,
+     "brk": false
+    },
+    {
+     "w": "días",
+     "key": false,
+     "start": 5.502,
+     "end": 5.785,
+     "brk": false
+    },
+    {
+     "w": "después,",
+     "key": false,
+     "start": 5.785,
+     "end": 6.222,
+     "brk": true
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 6.325,
+     "end": 6.505,
+     "brk": false
+    },
+    {
+     "w": "más",
+     "key": false,
+     "start": 6.505,
+     "end": 6.737,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 6.737,
+     "end": 6.917,
+     "brk": false
+    },
+    {
+     "w": "trescientos",
+     "key": true,
+     "start": 6.917,
+     "end": 7.559,
+     "brk": false
+    },
+    {
+     "w": "mil",
+     "key": false,
+     "start": 7.559,
+     "end": 7.791,
+     "brk": false
+    },
+    {
+     "w": "kilómetros",
+     "key": false,
+     "start": 7.791,
+     "end": 8.382,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 8.382,
+     "end": 8.562,
+     "brk": false
+    },
+    {
+     "w": "casa,",
+     "key": false,
+     "start": 8.562,
+     "end": 8.845,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "explosion",
+   "text": "un tanque de *oxígeno* *explotó*.",
+   "start": 9.278,
+   "end": 11.641,
+   "words": [
+    {
+     "w": "un",
+     "key": false,
+     "start": 9.398,
+     "end": 9.589,
+     "brk": false
+    },
+    {
+     "w": "tanque",
+     "key": false,
+     "start": 9.589,
+     "end": 9.999,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 9.999,
+     "end": 10.191,
+     "brk": false
+    },
+    {
+     "w": "oxígeno",
+     "key": true,
+     "start": 10.191,
+     "end": 10.655,
+     "brk": false
+    },
+    {
+     "w": "explotó.",
+     "key": true,
+     "start": 10.655,
+     "end": 11.12,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cabina",
+   "text": "Houston, tenemos un *problema*.",
+   "start": 11.641,
+   "end": 13.969,
+   "words": [
+    {
+     "w": "Houston,",
+     "key": false,
+     "start": 11.761,
+     "end": 12.21,
+     "brk": true
+    },
+    {
+     "w": "tenemos",
+     "key": false,
+     "start": 12.316,
+     "end": 12.766,
+     "brk": false
+    },
+    {
+     "w": "un",
+     "key": false,
+     "start": 12.766,
+     "end": 12.951,
+     "brk": false
+    },
+    {
+     "w": "problema.",
+     "key": true,
+     "start": 12.951,
+     "end": 13.454,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cabina",
+   "text": "La nave perdía oxígeno y *energía*. Ya no iban a pisar la Luna. Ahora solo querían *volver*.",
+   "counter": {
+    "type": "number",
+    "from": 100,
+    "to": 0,
+    "caption": "% DE OXÍGENO"
+   },
+   "start": 13.969,
+   "end": 20.163,
+   "words": [
+    {
+     "w": "La",
+     "key": false,
+     "start": 14.089,
+     "end": 14.277,
+     "brk": false
+    },
+    {
+     "w": "nave",
+     "key": false,
+     "start": 14.277,
+     "end": 14.572,
+     "brk": false
+    },
+    {
+     "w": "perdía",
+     "key": false,
+     "start": 14.572,
+     "end": 14.974,
+     "brk": false
+    },
+    {
+     "w": "oxígeno",
+     "key": false,
+     "start": 14.974,
+     "end": 15.431,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 15.431,
+     "end": 15.619,
+     "brk": false
+    },
+    {
+     "w": "energía.",
+     "key": true,
+     "start": 15.619,
+     "end": 16.075,
+     "brk": true
+    },
+    {
+     "w": "Ya",
+     "key": false,
+     "start": 16.263,
+     "end": 16.451,
+     "brk": false
+    },
+    {
+     "w": "no",
+     "key": false,
+     "start": 16.451,
+     "end": 16.639,
+     "brk": false
+    },
+    {
+     "w": "iban",
+     "key": false,
+     "start": 16.639,
+     "end": 16.934,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 16.934,
+     "end": 17.122,
+     "brk": false
+    },
+    {
+     "w": "pisar",
+     "key": false,
+     "start": 17.122,
+     "end": 17.471,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 17.471,
+     "end": 17.659,
+     "brk": false
+    },
+    {
+     "w": "Luna.",
+     "key": false,
+     "start": 17.659,
+     "end": 17.954,
+     "brk": true
+    },
+    {
+     "w": "Ahora",
+     "key": false,
+     "start": 18.142,
+     "end": 18.491,
+     "brk": false
+    },
+    {
+     "w": "solo",
+     "key": false,
+     "start": 18.491,
+     "end": 18.786,
+     "brk": false
+    },
+    {
+     "w": "querían",
+     "key": false,
+     "start": 18.786,
+     "end": 19.242,
+     "brk": false
+    },
+    {
+     "w": "volver.",
+     "key": true,
+     "start": 19.242,
+     "end": 19.645,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "modulo",
+   "text": "Se refugiaron en el módulo lunar, hecho para *dos* personas durante *dos* días.",
+   "counter": {
+    "type": "text",
+    "value": "2 · 2",
+    "caption": "PERSONAS · DÍAS"
+   },
+   "start": 20.163,
+   "end": 24.662,
+   "words": [
+    {
+     "w": "Se",
+     "key": false,
+     "start": 20.283,
+     "end": 20.447,
+     "brk": false
+    },
+    {
+     "w": "refugiaron",
+     "key": false,
+     "start": 20.447,
+     "end": 20.989,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 20.989,
+     "end": 21.154,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 21.154,
+     "end": 21.318,
+     "brk": false
+    },
+    {
+     "w": "módulo",
+     "key": false,
+     "start": 21.318,
+     "end": 21.672,
+     "brk": false
+    },
+    {
+     "w": "lunar,",
+     "key": false,
+     "start": 21.672,
+     "end": 21.978,
+     "brk": true
+    },
+    {
+     "w": "hecho",
+     "key": false,
+     "start": 22.072,
+     "end": 22.378,
+     "brk": false
+    },
+    {
+     "w": "para",
+     "key": false,
+     "start": 22.378,
+     "end": 22.637,
+     "brk": false
+    },
+    {
+     "w": "dos",
+     "key": true,
+     "start": 22.637,
+     "end": 22.849,
+     "brk": false
+    },
+    {
+     "w": "personas",
+     "key": false,
+     "start": 22.849,
+     "end": 23.296,
+     "brk": false
+    },
+    {
+     "w": "durante",
+     "key": false,
+     "start": 23.296,
+     "end": 23.696,
+     "brk": false
+    },
+    {
+     "w": "dos",
+     "key": true,
+     "start": 23.696,
+     "end": 23.908,
+     "brk": false
+    },
+    {
+     "w": "días.",
+     "key": false,
+     "start": 23.908,
+     "end": 24.167,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "modulo",
+   "text": "Eran *tres*, y necesitaban *cuatro*.",
+   "counter": {
+    "type": "text",
+    "value": "3 · 4",
+    "caption": "PERSONAS · DÍAS"
+   },
+   "start": 24.662,
+   "end": 27.245,
+   "words": [
+    {
+     "w": "Eran",
+     "key": false,
+     "start": 24.782,
+     "end": 25.075,
+     "brk": false
+    },
+    {
+     "w": "tres,",
+     "key": true,
+     "start": 25.075,
+     "end": 25.368,
+     "brk": true
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 25.475,
+     "end": 25.662,
+     "brk": false
+    },
+    {
+     "w": "necesitaban",
+     "key": false,
+     "start": 25.662,
+     "end": 26.328,
+     "brk": false
+    },
+    {
+     "w": "cuatro.",
+     "key": true,
+     "start": 26.328,
+     "end": 26.728,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "frio",
+   "text": "Apagaron casi todo para ahorrar energía. Adentro, la temperatura bajó a *tres* grados.",
+   "counter": {
+    "type": "number",
+    "from": 21,
+    "to": 3,
+    "caption": "GRADOS"
+   },
+   "start": 27.245,
+   "end": 32.835,
+   "words": [
+    {
+     "w": "Apagaron",
+     "key": false,
+     "start": 27.365,
+     "end": 27.861,
+     "brk": false
+    },
+    {
+     "w": "casi",
+     "key": false,
+     "start": 27.861,
+     "end": 28.148,
+     "brk": false
+    },
+    {
+     "w": "todo",
+     "key": false,
+     "start": 28.148,
+     "end": 28.435,
+     "brk": false
+    },
+    {
+     "w": "para",
+     "key": false,
+     "start": 28.435,
+     "end": 28.722,
+     "brk": false
+    },
+    {
+     "w": "ahorrar",
+     "key": false,
+     "start": 28.722,
+     "end": 29.165,
+     "brk": false
+    },
+    {
+     "w": "energía.",
+     "key": false,
+     "start": 29.165,
+     "end": 29.609,
+     "brk": true
+    },
+    {
+     "w": "Adentro,",
+     "key": false,
+     "start": 29.791,
+     "end": 30.235,
+     "brk": true
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 30.339,
+     "end": 30.522,
+     "brk": false
+    },
+    {
+     "w": "temperatura",
+     "key": false,
+     "start": 30.522,
+     "end": 31.174,
+     "brk": false
+    },
+    {
+     "w": "bajó",
+     "key": false,
+     "start": 31.174,
+     "end": 31.461,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 31.461,
+     "end": 31.644,
+     "brk": false
+    },
+    {
+     "w": "tres",
+     "key": true,
+     "start": 31.644,
+     "end": 31.931,
+     "brk": false
+    },
+    {
+     "w": "grados.",
+     "key": false,
+     "start": 31.931,
+     "end": 32.322,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "filtro",
+   "text": "Y el aire empezó a *envenenarlos*: los filtros eran *cuadrados*, y el hueco era *redondo*.",
+   "start": 32.835,
+   "end": 37.717,
+   "words": [
+    {
+     "w": "Y",
+     "key": false,
+     "start": 32.955,
+     "end": 33.11,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 33.11,
+     "end": 33.265,
+     "brk": false
+    },
+    {
+     "w": "aire",
+     "key": false,
+     "start": 33.265,
+     "end": 33.509,
+     "brk": false
+    },
+    {
+     "w": "empezó",
+     "key": false,
+     "start": 33.509,
+     "end": 33.841,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 33.841,
+     "end": 33.997,
+     "brk": false
+    },
+    {
+     "w": "envenenarlos:",
+     "key": true,
+     "start": 33.997,
+     "end": 34.595,
+     "brk": true
+    },
+    {
+     "w": "los",
+     "key": false,
+     "start": 34.684,
+     "end": 34.883,
+     "brk": false
+    },
+    {
+     "w": "filtros",
+     "key": false,
+     "start": 34.883,
+     "end": 35.26,
+     "brk": false
+    },
+    {
+     "w": "eran",
+     "key": false,
+     "start": 35.26,
+     "end": 35.504,
+     "brk": false
+    },
+    {
+     "w": "cuadrados,",
+     "key": true,
+     "start": 35.504,
+     "end": 35.969,
+     "brk": true
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 36.058,
+     "end": 36.213,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 36.213,
+     "end": 36.368,
+     "brk": false
+    },
+    {
+     "w": "hueco",
+     "key": false,
+     "start": 36.368,
+     "end": 36.656,
+     "brk": false
+    },
+    {
+     "w": "era",
+     "key": false,
+     "start": 36.656,
+     "end": 36.855,
+     "brk": false
+    },
+    {
+     "w": "redondo.",
+     "key": true,
+     "start": 36.855,
+     "end": 37.232,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "filtro",
+   "text": "Desde la Tierra inventaron un adaptador con *cartón*, *bolsas* y *cinta*. Y *funcionó*.",
+   "start": 37.717,
+   "end": 42.646,
+   "words": [
+    {
+     "w": "Desde",
+     "key": false,
+     "start": 37.837,
+     "end": 38.145,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 38.145,
+     "end": 38.311,
+     "brk": false
+    },
+    {
+     "w": "Tierra",
+     "key": false,
+     "start": 38.311,
+     "end": 38.666,
+     "brk": false
+    },
+    {
+     "w": "inventaron",
+     "key": false,
+     "start": 38.666,
+     "end": 39.211,
+     "brk": false
+    },
+    {
+     "w": "un",
+     "key": false,
+     "start": 39.211,
+     "end": 39.377,
+     "brk": false
+    },
+    {
+     "w": "adaptador",
+     "key": false,
+     "start": 39.377,
+     "end": 39.875,
+     "brk": false
+    },
+    {
+     "w": "con",
+     "key": false,
+     "start": 39.875,
+     "end": 40.088,
+     "brk": false
+    },
+    {
+     "w": "cartón,",
+     "key": true,
+     "start": 40.088,
+     "end": 40.444,
+     "brk": true
+    },
+    {
+     "w": "bolsas",
+     "key": true,
+     "start": 40.538,
+     "end": 40.894,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 40.894,
+     "end": 41.06,
+     "brk": false
+    },
+    {
+     "w": "cinta.",
+     "key": true,
+     "start": 41.06,
+     "end": 41.368,
+     "brk": true
+    },
+    {
+     "w": "Y",
+     "key": false,
+     "start": 41.534,
+     "end": 41.7,
+     "brk": false
+    },
+    {
+     "w": "funcionó.",
+     "key": true,
+     "start": 41.7,
+     "end": 42.15,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "luna",
+   "text": "Rodearon la *Luna*, y usaron su gravedad para *regresar*.",
+   "start": 42.646,
+   "end": 45.879,
+   "words": [
+    {
+     "w": "Rodearon",
+     "key": false,
+     "start": 42.766,
+     "end": 43.185,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 43.185,
+     "end": 43.34,
+     "brk": false
+    },
+    {
+     "w": "Luna,",
+     "key": true,
+     "start": 43.34,
+     "end": 43.583,
+     "brk": true
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 43.671,
+     "end": 43.826,
+     "brk": false
+    },
+    {
+     "w": "usaron",
+     "key": false,
+     "start": 43.826,
+     "end": 44.157,
+     "brk": false
+    },
+    {
+     "w": "su",
+     "key": false,
+     "start": 44.157,
+     "end": 44.312,
+     "brk": false
+    },
+    {
+     "w": "gravedad",
+     "key": false,
+     "start": 44.312,
+     "end": 44.732,
+     "brk": false
+    },
+    {
+     "w": "para",
+     "key": false,
+     "start": 44.732,
+     "end": 44.975,
+     "brk": false
+    },
+    {
+     "w": "regresar.",
+     "key": true,
+     "start": 44.975,
+     "end": 45.394,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "reentrada",
+   "text": "Al entrar a la atmósfera, la radio se cortó. El silencio debía durar *cuatro* minutos. Duró casi *seis*.",
+   "counter": {
+    "type": "clock",
+    "from": "00:00",
+    "to": "05:50",
+    "caption": "SIN SEÑAL"
+   },
+   "start": 45.879,
+   "end": 52.352,
+   "words": [
+    {
+     "w": "Al",
+     "key": false,
+     "start": 45.999,
+     "end": 46.175,
+     "brk": false
+    },
+    {
+     "w": "entrar",
+     "key": false,
+     "start": 46.175,
+     "end": 46.553,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 46.553,
+     "end": 46.73,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 46.73,
+     "end": 46.906,
+     "brk": false
+    },
+    {
+     "w": "atmósfera,",
+     "key": false,
+     "start": 46.906,
+     "end": 47.435,
+     "brk": true
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 47.536,
+     "end": 47.713,
+     "brk": false
+    },
+    {
+     "w": "radio",
+     "key": false,
+     "start": 47.713,
+     "end": 48.04,
+     "brk": false
+    },
+    {
+     "w": "se",
+     "key": false,
+     "start": 48.04,
+     "end": 48.217,
+     "brk": false
+    },
+    {
+     "w": "cortó.",
+     "key": false,
+     "start": 48.217,
+     "end": 48.544,
+     "brk": true
+    },
+    {
+     "w": "El",
+     "key": false,
+     "start": 48.721,
+     "end": 48.897,
+     "brk": false
+    },
+    {
+     "w": "silencio",
+     "key": false,
+     "start": 48.897,
+     "end": 49.376,
+     "brk": false
+    },
+    {
+     "w": "debía",
+     "key": false,
+     "start": 49.376,
+     "end": 49.703,
+     "brk": false
+    },
+    {
+     "w": "durar",
+     "key": false,
+     "start": 49.703,
+     "end": 50.031,
+     "brk": false
+    },
+    {
+     "w": "cuatro",
+     "key": true,
+     "start": 50.031,
+     "end": 50.409,
+     "brk": false
+    },
+    {
+     "w": "minutos.",
+     "key": false,
+     "start": 50.409,
+     "end": 50.837,
+     "brk": true
+    },
+    {
+     "w": "Duró",
+     "key": false,
+     "start": 51.014,
+     "end": 51.291,
+     "brk": false
+    },
+    {
+     "w": "casi",
+     "key": false,
+     "start": 51.291,
+     "end": 51.568,
+     "brk": false
+    },
+    {
+     "w": "seis.",
+     "key": true,
+     "start": 51.568,
+     "end": 51.845,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "amerizaje",
+   "text": "Hasta que, por fin, se vieron los *paracaídas*. Los tres estaban *vivos*.",
+   "start": 52.352,
+   "end": 57.385,
+   "words": [
+    {
+     "w": "Hasta",
+     "key": false,
+     "start": 52.472,
+     "end": 52.831,
+     "brk": false
+    },
+    {
+     "w": "que,",
+     "key": false,
+     "start": 52.831,
+     "end": 53.079,
+     "brk": true
+    },
+    {
+     "w": "por",
+     "key": false,
+     "start": 53.189,
+     "end": 53.438,
+     "brk": false
+    },
+    {
+     "w": "fin,",
+     "key": false,
+     "start": 53.438,
+     "end": 53.686,
+     "brk": true
+    },
+    {
+     "w": "se",
+     "key": false,
+     "start": 53.797,
+     "end": 53.99,
+     "brk": false
+    },
+    {
+     "w": "vieron",
+     "key": false,
+     "start": 53.99,
+     "end": 54.404,
+     "brk": false
+    },
+    {
+     "w": "los",
+     "key": false,
+     "start": 54.404,
+     "end": 54.653,
+     "brk": false
+    },
+    {
+     "w": "paracaídas.",
+     "key": true,
+     "start": 54.653,
+     "end": 55.288,
+     "brk": true
+    },
+    {
+     "w": "Los",
+     "key": false,
+     "start": 55.481,
+     "end": 55.729,
+     "brk": false
+    },
+    {
+     "w": "tres",
+     "key": false,
+     "start": 55.729,
+     "end": 56.033,
+     "brk": false
+    },
+    {
+     "w": "estaban",
+     "key": false,
+     "start": 56.033,
+     "end": 56.502,
+     "brk": false
+    },
+    {
+     "w": "vivos.",
+     "key": true,
+     "start": 56.502,
+     "end": 56.861,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cierre",
+   "text": "Veinticinco años después, esta historia se convirtió en *película*.",
+   "start": 57.385,
+   "end": 61.315,
+   "words": [
+    {
+     "w": "Veinticinco",
+     "key": false,
+     "start": 57.505,
+     "end": 58.092,
+     "brk": false
+    },
+    {
+     "w": "años",
+     "key": false,
+     "start": 58.092,
+     "end": 58.351,
+     "brk": false
+    },
+    {
+     "w": "después,",
+     "key": false,
+     "start": 58.351,
+     "end": 58.751,
+     "brk": true
+    },
+    {
+     "w": "esta",
+     "key": false,
+     "start": 58.845,
+     "end": 59.104,
+     "brk": false
+    },
+    {
+     "w": "historia",
+     "key": false,
+     "start": 59.104,
+     "end": 59.55,
+     "brk": false
+    },
+    {
+     "w": "se",
+     "key": false,
+     "start": 59.55,
+     "end": 59.715,
+     "brk": false
+    },
+    {
+     "w": "convirtió",
+     "key": false,
+     "start": 59.715,
+     "end": 60.209,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 60.209,
+     "end": 60.373,
+     "brk": false
+    },
+    {
+     "w": "película.",
+     "key": true,
+     "start": 60.373,
+     "end": 60.82,
+     "brk": true
+    }
+   ]
+  }
+ ]
+}

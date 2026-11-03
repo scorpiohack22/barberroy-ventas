@@ -22,10 +22,11 @@
 <canvas id="gl"></canvas>
 <canvas id="out" width="720" height="1280"></canvas>
 <div id="hint">Clic en el video para reproducir / pausar</div>
-<audio id="voz" src="voz/voz.wav" preload="auto"></audio>
+<audio id="voz" preload="auto"></audio>
 <script type="module">
 import * as THREE from 'three';
-import { SCENES, W, H, clamp, easeOut, easeBack, roundRect } from './escenas.js';
+import { W, H, clamp, easeOut, easeBack, roundRect } from './escenas.js';
+const HIST = new URLSearchParams(location.search).get('h') || 'barberroy';
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gl'), antialias: true, preserveDrawingBuffer: true });
 renderer.setPixelRatio(1); renderer.setSize(W, H, false);
@@ -34,7 +35,8 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure
 const out = document.getElementById('out'), ctx = out.getContext('2d');
 
 await Promise.all([600, 700, 800, 900].map(w => document.fonts.load(`${w} 40px Montserrat`)));
-const TL = await (await fetch('timeline.json', { cache: 'no-store' })).json();
+const TL = await (await fetch(`historias/${HIST}/timeline.json`, { cache: 'no-store' })).json();
+const { SCENES } = await import('./' + (TL.escenas || 'escenas.js'));
 
 // Agrupar líneas consecutivas con la misma escena en segmentos
 const segs = [];
@@ -94,25 +96,27 @@ function drawCounter(t) {
   if (k <= 0) return;
   const p = easeOut(clamp((lt - .25) / Math.max(.8, (ln.end - ln.start) * .6)));
   let value, fmt;
-  if (c.type === 'clock') {
+  if (c.type === 'text') { value = 0; fmt = () => c.value; }
+  else if (c.type === 'clock') {
     const m = s => { const [h, mm] = s.split(':').map(Number); return h * 60 + mm; };
     value = m(c.from) + (m(c.to) - m(c.from)) * p;
     fmt = v => { v = Math.floor(v); return String(Math.floor(v / 60)).padStart(2, '0') + ':' + String(v % 60).padStart(2, '0'); };
   } else { value = c.from + (c.to - c.from) * p; fmt = v => String(Math.floor(v)); }
-  const dir = Math.sign((c.type === 'clock' ? 1 : c.to - c.from) || 1);
+  const dir = c.type === 'text' ? 1 : Math.sign((c.type === 'clock' ? 1 : c.to - c.from) || 1);
   const base = dir > 0 ? Math.floor(value) : Math.ceil(value);
   const frac = Math.abs(value - base);
   const cur = fmt(base), nxt = fmt(base + dir);
+  const big = Math.max(cur.length, nxt.length) > 6;
   ctx.save(); ctx.translate(W / 2, 175); ctx.scale(k, k);
-  ctx.font = '900 92px Montserrat'; ctx.textBaseline = 'middle';
-  const cw = 64, digits = Math.max(cur.length, nxt.length);
+  ctx.font = `900 ${big ? 72 : 92}px Montserrat`; ctx.textBaseline = 'middle';
+  const cw = big ? 48 : 64, digits = Math.max(cur.length, nxt.length);
   const boxW = Math.max(220, digits * cw + 70), boxH = 168;
   ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 8;
   ctx.fillStyle = 'rgba(22,18,14,.94)'; roundRect(ctx, -boxW / 2, -boxH / 2, boxW, boxH, 14); ctx.fill();
   ctx.shadowColor = 'transparent';
   ctx.strokeStyle = 'rgba(232,186,92,.55)'; ctx.lineWidth = 3; ctx.stroke();
   const gold = ctx.createLinearGradient(0, -60, 0, 30); gold.addColorStop(0, '#ffe7a8'); gold.addColorStop(1, '#e0a33a');
-  ctx.save(); ctx.beginPath(); ctx.rect(-boxW / 2, -boxH / 2 + 8, boxW, 112); ctx.clip();
+  ctx.save(); ctx.beginPath(); ctx.rect(-boxW / 2, -66, boxW, 96); ctx.clip();
   const x0 = -(digits * cw) / 2 + cw / 2;
   const cs = cur.padStart(digits, ' '), ns = nxt.padStart(digits, ' ');
   for (let i = 0; i < digits; i++) {
@@ -149,7 +153,7 @@ function frame(t) {
 // Modo render (lo usa render.js) y modo vista previa
 window.DURATION = TL.duration;
 window.renderFrame = (t) => { frame(t); return out.toDataURL('image/jpeg', .93); };
-const audio = document.getElementById('voz');
+const audio = document.getElementById('voz'); audio.src = `historias/${HIST}/voz.wav`;
 frame(0.8);
 const loop = () => { frame(audio.currentTime); if (!audio.paused) requestAnimationFrame(loop); };
 out.onclick = () => { if (audio.paused) { if (audio.ended) audio.currentTime = 0; audio.play(); requestAnimationFrame(loop); } else audio.pause(); };

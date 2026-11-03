@@ -1,94 +1,95 @@
 {
- "duration": 45.539,
+ "escenas": "escenas.js",
+ "duration": 45.341,
  "lines": [
   {
    "scene": "barberia",
    "text": "Esta es la historia del *corte* que casi acaba con una *barbería*.",
    "start": 0.35,
-   "end": 4.396,
+   "end": 4.315,
    "words": [
     {
      "w": "Esta",
      "key": false,
      "start": 0.47,
-     "end": 0.741,
+     "end": 0.735,
      "brk": false
     },
     {
      "w": "es",
      "key": false,
-     "start": 0.741,
-     "end": 0.914,
+     "start": 0.735,
+     "end": 0.904,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 0.914,
-     "end": 1.087,
+     "start": 0.904,
+     "end": 1.072,
      "brk": false
     },
     {
      "w": "historia",
      "key": false,
-     "start": 1.087,
-     "end": 1.555,
+     "start": 1.072,
+     "end": 1.53,
      "brk": false
     },
     {
      "w": "del",
      "key": false,
-     "start": 1.555,
-     "end": 1.777,
+     "start": 1.53,
+     "end": 1.747,
      "brk": false
     },
     {
      "w": "corte",
      "key": true,
-     "start": 1.777,
-     "end": 2.098,
+     "start": 1.747,
+     "end": 2.06,
      "brk": false
     },
     {
      "w": "que",
      "key": false,
-     "start": 2.098,
-     "end": 2.32,
+     "start": 2.06,
+     "end": 2.277,
      "brk": false
     },
     {
      "w": "casi",
      "key": false,
-     "start": 2.32,
-     "end": 2.591,
+     "start": 2.277,
+     "end": 2.542,
      "brk": false
     },
     {
      "w": "acaba",
      "key": false,
-     "start": 2.591,
-     "end": 2.911,
+     "start": 2.542,
+     "end": 2.855,
      "brk": false
     },
     {
      "w": "con",
      "key": false,
-     "start": 2.911,
-     "end": 3.133,
+     "start": 2.855,
+     "end": 3.072,
      "brk": false
     },
     {
      "w": "una",
      "key": false,
-     "start": 3.133,
-     "end": 3.355,
+     "start": 3.072,
+     "end": 3.289,
      "brk": false
     },
     {
      "w": "barbería.",
      "key": true,
-     "start": 3.355,
-     "end": 3.824,
+     "start": 3.289,
+     "end": 3.747,
      "brk": true
     }
    ]
@@ -102,112 +103,112 @@
     "to": "16:00",
     "caption": "SÁBADO"
    },
-   "start": 4.396,
-   "end": 8.977,
+   "start": 4.315,
+   "end": 8.907,
    "words": [
     {
      "w": "Un",
      "key": false,
-     "start": 4.516,
-     "end": 4.686,
+     "start": 4.435,
+     "end": 4.605,
      "brk": false
     },
     {
      "w": "sábado",
      "key": true,
-     "start": 4.686,
-     "end": 5.048,
+     "start": 4.605,
+     "end": 4.968,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 5.048,
-     "end": 5.217,
+     "start": 4.968,
+     "end": 5.138,
      "brk": false
     },
     {
      "w": "las",
      "key": false,
-     "start": 5.217,
-     "end": 5.435,
+     "start": 5.138,
+     "end": 5.356,
      "brk": false
     },
     {
      "w": "cuatro",
      "key": false,
-     "start": 5.435,
-     "end": 5.797,
+     "start": 5.356,
+     "end": 5.72,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 5.797,
-     "end": 5.967,
+     "start": 5.72,
+     "end": 5.89,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 5.967,
-     "end": 6.136,
+     "start": 5.89,
+     "end": 6.059,
      "brk": false
     },
     {
      "w": "tarde,",
      "key": false,
-     "start": 6.136,
-     "end": 6.45,
+     "start": 6.059,
+     "end": 6.374,
      "brk": true
     },
     {
      "w": "entró",
      "key": false,
-     "start": 6.547,
-     "end": 6.861,
+     "start": 6.471,
+     "end": 6.786,
      "brk": false
     },
     {
      "w": "un",
      "key": false,
-     "start": 6.861,
-     "end": 7.03,
+     "start": 6.786,
+     "end": 6.956,
      "brk": false
     },
     {
      "w": "cliente",
      "key": false,
-     "start": 7.03,
-     "end": 7.441,
+     "start": 6.956,
+     "end": 7.368,
      "brk": false
     },
     {
      "w": "con",
      "key": false,
-     "start": 7.441,
-     "end": 7.659,
+     "start": 7.368,
+     "end": 7.586,
      "brk": false
     },
     {
      "w": "el",
      "key": false,
-     "start": 7.659,
-     "end": 7.828,
+     "start": 7.586,
+     "end": 7.756,
      "brk": false
     },
     {
      "w": "pelo",
      "key": false,
-     "start": 7.828,
-     "end": 8.094,
+     "start": 7.756,
+     "end": 8.023,
      "brk": false
     },
     {
      "w": "negro.",
      "key": true,
-     "start": 8.094,
-     "end": 8.408,
+     "start": 8.023,
+     "end": 8.338,
      "brk": true
     }
    ]
@@ -215,56 +216,56 @@
   {
    "scene": "cliente",
    "text": "Quería quedar *platinado*. En una sola *tarde*.",
-   "start": 8.977,
-   "end": 12.501,
+   "start": 8.907,
+   "end": 12.385,
    "words": [
     {
      "w": "Quería",
      "key": false,
-     "start": 9.097,
-     "end": 9.526,
+     "start": 9.027,
+     "end": 9.45,
      "brk": false
     },
     {
      "w": "quedar",
      "key": false,
-     "start": 9.526,
-     "end": 9.955,
+     "start": 9.45,
+     "end": 9.872,
      "brk": false
     },
     {
      "w": "platinado.",
      "key": true,
-     "start": 9.955,
-     "end": 10.556,
+     "start": 9.872,
+     "end": 10.464,
      "brk": true
     },
     {
      "w": "En",
      "key": false,
-     "start": 10.756,
-     "end": 10.957,
+     "start": 10.661,
+     "end": 10.858,
      "brk": false
     },
     {
      "w": "una",
      "key": false,
-     "start": 10.957,
-     "end": 11.214,
+     "start": 10.858,
+     "end": 11.112,
      "brk": false
     },
     {
      "w": "sola",
      "key": false,
-     "start": 11.214,
-     "end": 11.529,
+     "start": 11.112,
+     "end": 11.422,
      "brk": false
     },
     {
      "w": "tarde.",
      "key": true,
-     "start": 11.529,
-     "end": 11.901,
+     "start": 11.422,
+     "end": 11.788,
      "brk": true
     }
    ]
@@ -272,77 +273,77 @@
   {
    "scene": "duda",
    "text": "El barbero dijo que *sí*. Pero nunca había estudiado *colorimetría*.",
-   "start": 12.501,
-   "end": 17.07,
+   "start": 12.385,
+   "end": 16.768,
    "words": [
     {
      "w": "El",
      "key": false,
-     "start": 12.621,
-     "end": 12.81,
+     "start": 12.505,
+     "end": 12.685,
      "brk": false
     },
     {
      "w": "barbero",
      "key": false,
-     "start": 12.81,
-     "end": 13.269,
+     "start": 12.685,
+     "end": 13.123,
      "brk": false
     },
     {
      "w": "dijo",
      "key": false,
-     "start": 13.269,
-     "end": 13.566,
+     "start": 13.123,
+     "end": 13.406,
      "brk": false
     },
     {
      "w": "que",
      "key": false,
-     "start": 13.566,
-     "end": 13.809,
+     "start": 13.406,
+     "end": 13.638,
      "brk": false
     },
     {
      "w": "sí.",
      "key": true,
-     "start": 13.809,
-     "end": 13.998,
+     "start": 13.638,
+     "end": 13.818,
      "brk": true
     },
     {
      "w": "Pero",
      "key": false,
-     "start": 14.187,
-     "end": 14.483,
+     "start": 13.999,
+     "end": 14.282,
      "brk": false
     },
     {
      "w": "nunca",
      "key": false,
-     "start": 14.483,
-     "end": 14.834,
+     "start": 14.282,
+     "end": 14.617,
      "brk": false
     },
     {
      "w": "había",
      "key": false,
-     "start": 14.834,
-     "end": 15.185,
+     "start": 14.617,
+     "end": 14.952,
      "brk": false
     },
     {
      "w": "estudiado",
      "key": false,
-     "start": 15.185,
-     "end": 15.752,
+     "start": 14.952,
+     "end": 15.492,
      "brk": false
     },
     {
      "w": "colorimetría.",
      "key": true,
-     "start": 15.752,
-     "end": 16.481,
+     "start": 15.492,
+     "end": 16.188,
      "brk": true
     }
    ]
@@ -356,56 +357,56 @@
     "to": 40,
     "caption": "VOLÚMENES"
    },
-   "start": 17.07,
-   "end": 20.698,
+   "start": 16.768,
+   "end": 20.234,
    "words": [
     {
      "w": "Mezcló",
      "key": false,
-     "start": 17.19,
-     "end": 17.582,
+     "start": 16.888,
+     "end": 17.259,
      "brk": false
     },
     {
      "w": "decolorante",
      "key": false,
-     "start": 17.582,
-     "end": 18.235,
+     "start": 17.259,
+     "end": 17.878,
      "brk": false
     },
     {
      "w": "con",
      "key": false,
-     "start": 18.235,
-     "end": 18.47,
+     "start": 17.878,
+     "end": 18.101,
      "brk": false
     },
     {
      "w": "peróxido",
      "key": false,
-     "start": 18.47,
-     "end": 18.966,
+     "start": 18.101,
+     "end": 18.571,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 18.966,
-     "end": 19.149,
+     "start": 18.571,
+     "end": 18.745,
      "brk": false
     },
     {
      "w": "cuarenta",
      "key": true,
-     "start": 19.149,
-     "end": 19.645,
+     "start": 18.745,
+     "end": 19.215,
      "brk": false
     },
     {
      "w": "volúmenes,",
      "key": false,
-     "start": 19.645,
-     "end": 20.194,
+     "start": 19.215,
+     "end": 19.735,
      "brk": true
     }
    ]
@@ -419,49 +420,49 @@
     "to": 50,
     "caption": "MINUTOS"
    },
-   "start": 20.698,
-   "end": 23.99,
+   "start": 20.234,
+   "end": 23.294,
    "words": [
     {
      "w": "y",
      "key": false,
-     "start": 20.818,
-     "end": 21.047,
+     "start": 20.354,
+     "end": 20.563,
      "brk": false
     },
     {
      "w": "lo",
      "key": false,
-     "start": 21.047,
-     "end": 21.275,
+     "start": 20.563,
+     "end": 20.772,
      "brk": false
     },
     {
      "w": "dejó",
      "key": false,
-     "start": 21.275,
-     "end": 21.634,
+     "start": 20.772,
+     "end": 21.101,
      "brk": false
     },
     {
      "w": "actuar",
      "key": false,
-     "start": 21.634,
-     "end": 22.123,
+     "start": 21.101,
+     "end": 21.549,
      "brk": false
     },
     {
      "w": "cincuenta",
      "key": true,
-     "start": 22.123,
-     "end": 22.808,
+     "start": 21.549,
+     "end": 22.177,
      "brk": false
     },
     {
      "w": "minutos.",
      "key": false,
-     "start": 22.808,
-     "end": 23.362,
+     "start": 22.177,
+     "end": 22.684,
      "brk": true
     }
    ]
@@ -469,70 +470,70 @@
   {
    "scene": "naranja",
    "text": "Cuando enjuagó, el pelo no estaba platinado. Estaba *naranja*.",
-   "start": 23.99,
-   "end": 28.06,
+   "start": 23.294,
+   "end": 27.375,
    "words": [
     {
      "w": "Cuando",
      "key": false,
-     "start": 24.11,
-     "end": 24.483,
+     "start": 23.414,
+     "end": 23.787,
      "brk": false
     },
     {
      "w": "enjuagó,",
      "key": false,
-     "start": 24.483,
-     "end": 24.905,
+     "start": 23.787,
+     "end": 24.211,
      "brk": true
     },
     {
      "w": "el",
      "key": false,
-     "start": 25.004,
-     "end": 25.178,
+     "start": 24.31,
+     "end": 24.485,
      "brk": false
     },
     {
      "w": "pelo",
      "key": false,
-     "start": 25.178,
-     "end": 25.451,
+     "start": 24.485,
+     "end": 24.758,
      "brk": false
     },
     {
      "w": "no",
      "key": false,
-     "start": 25.451,
-     "end": 25.624,
+     "start": 24.758,
+     "end": 24.933,
      "brk": false
     },
     {
      "w": "estaba",
      "key": false,
-     "start": 25.624,
-     "end": 25.997,
+     "start": 24.933,
+     "end": 25.306,
      "brk": false
     },
     {
      "w": "platinado.",
      "key": false,
-     "start": 25.997,
-     "end": 26.518,
+     "start": 25.306,
+     "end": 25.829,
      "brk": true
     },
     {
      "w": "Estaba",
      "key": false,
-     "start": 26.692,
-     "end": 27.064,
+     "start": 26.004,
+     "end": 26.377,
      "brk": false
     },
     {
      "w": "naranja.",
      "key": true,
-     "start": 27.064,
-     "end": 27.486,
+     "start": 26.377,
+     "end": 26.801,
      "brk": true
     }
    ]
@@ -540,63 +541,63 @@
   {
    "scene": "rompe",
    "text": "Y lo peor: se *rompía* con solo tocarlo.",
-   "start": 28.06,
-   "end": 31.096,
+   "start": 27.375,
+   "end": 30.493,
    "words": [
     {
      "w": "Y",
      "key": false,
-     "start": 28.18,
-     "end": 28.365,
+     "start": 27.495,
+     "end": 27.686,
      "brk": false
     },
     {
      "w": "lo",
      "key": false,
-     "start": 28.365,
-     "end": 28.551,
+     "start": 27.686,
+     "end": 27.878,
      "brk": false
     },
     {
      "w": "peor:",
      "key": false,
-     "start": 28.551,
-     "end": 28.842,
+     "start": 27.878,
+     "end": 28.179,
      "brk": true
     },
     {
      "w": "se",
      "key": false,
-     "start": 28.948,
-     "end": 29.133,
+     "start": 28.288,
+     "end": 28.479,
      "brk": false
     },
     {
      "w": "rompía",
      "key": true,
-     "start": 29.133,
-     "end": 29.531,
+     "start": 28.479,
+     "end": 28.889,
      "brk": false
     },
     {
      "w": "con",
      "key": false,
-     "start": 29.531,
-     "end": 29.769,
+     "start": 28.889,
+     "end": 29.136,
      "brk": false
     },
     {
      "w": "solo",
      "key": false,
-     "start": 29.769,
-     "end": 30.061,
+     "start": 29.136,
+     "end": 29.436,
      "brk": false
     },
     {
      "w": "tocarlo.",
      "key": false,
-     "start": 30.061,
-     "end": 30.511,
+     "start": 29.436,
+     "end": 29.901,
      "brk": true
     }
    ]
@@ -610,91 +611,91 @@
     "to": 1,
     "caption": "ESTRELLAS"
    },
-   "start": 31.096,
-   "end": 35.514,
+   "start": 30.493,
+   "end": 34.876,
    "words": [
     {
      "w": "Esa",
      "key": false,
-     "start": 31.216,
-     "end": 31.452,
+     "start": 30.613,
+     "end": 30.846,
      "brk": false
     },
     {
      "w": "tarde",
      "key": false,
-     "start": 31.452,
-     "end": 31.792,
+     "start": 30.846,
+     "end": 31.183,
      "brk": false
     },
     {
      "w": "perdió",
      "key": false,
-     "start": 31.792,
-     "end": 32.184,
+     "start": 31.183,
+     "end": 31.572,
      "brk": false
     },
     {
      "w": "al",
      "key": false,
-     "start": 32.184,
-     "end": 32.367,
+     "start": 31.572,
+     "end": 31.753,
      "brk": false
     },
     {
      "w": "cliente,",
      "key": true,
-     "start": 32.367,
-     "end": 32.812,
+     "start": 31.753,
+     "end": 32.194,
      "brk": true
     },
     {
      "w": "y",
      "key": false,
-     "start": 32.917,
-     "end": 33.1,
+     "start": 32.298,
+     "end": 32.479,
      "brk": false
     },
     {
      "w": "ganó",
      "key": false,
-     "start": 33.1,
-     "end": 33.388,
+     "start": 32.479,
+     "end": 32.765,
      "brk": false
     },
     {
      "w": "una",
      "key": false,
-     "start": 33.388,
-     "end": 33.623,
+     "start": 32.765,
+     "end": 32.998,
      "brk": false
     },
     {
      "w": "reseña",
      "key": false,
-     "start": 33.623,
-     "end": 34.016,
+     "start": 32.998,
+     "end": 33.387,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 34.016,
-     "end": 34.199,
+     "start": 33.387,
+     "end": 33.568,
      "brk": false
     },
     {
      "w": "una",
      "key": true,
-     "start": 34.199,
-     "end": 34.434,
+     "start": 33.568,
+     "end": 33.802,
      "brk": false
     },
     {
      "w": "estrella.",
      "key": false,
-     "start": 34.434,
-     "end": 34.931,
+     "start": 33.802,
+     "end": 34.294,
      "brk": true
     }
    ]
@@ -702,77 +703,77 @@
   {
    "scene": "circulo",
    "text": "Ahí entendió algo: el color *no* se adivina. Se *estudia*.",
-   "start": 35.514,
-   "end": 39.526,
+   "start": 34.876,
+   "end": 39.12,
    "words": [
     {
      "w": "Ahí",
      "key": false,
-     "start": 35.634,
-     "end": 35.872,
+     "start": 34.996,
+     "end": 35.25,
      "brk": false
     },
     {
      "w": "entendió",
      "key": false,
-     "start": 35.872,
-     "end": 36.375,
+     "start": 35.25,
+     "end": 35.786,
      "brk": false
     },
     {
      "w": "algo:",
      "key": false,
-     "start": 36.375,
-     "end": 36.666,
+     "start": 35.786,
+     "end": 36.096,
      "brk": true
     },
     {
      "w": "el",
      "key": false,
-     "start": 36.772,
-     "end": 36.957,
+     "start": 36.209,
+     "end": 36.406,
      "brk": false
     },
     {
      "w": "color",
      "key": false,
-     "start": 36.957,
-     "end": 37.301,
+     "start": 36.406,
+     "end": 36.773,
      "brk": false
     },
     {
      "w": "no",
      "key": true,
-     "start": 37.301,
-     "end": 37.486,
+     "start": 36.773,
+     "end": 36.97,
      "brk": false
     },
     {
      "w": "se",
      "key": false,
-     "start": 37.486,
-     "end": 37.671,
+     "start": 36.97,
+     "end": 37.168,
      "brk": false
     },
     {
      "w": "adivina.",
      "key": false,
-     "start": 37.671,
-     "end": 38.121,
+     "start": 37.168,
+     "end": 37.648,
      "brk": true
     },
     {
      "w": "Se",
      "key": false,
-     "start": 38.306,
-     "end": 38.491,
+     "start": 37.845,
+     "end": 38.043,
      "brk": false
     },
     {
      "w": "estudia.",
      "key": true,
-     "start": 38.491,
-     "end": 38.941,
+     "start": 38.043,
+     "end": 38.522,
      "brk": true
     }
    ]
@@ -780,91 +781,91 @@
   {
    "scene": "cta",
    "text": "En *BarberRoy* Academy te enseñamos colorimetría *desde* *cero*. *Link* en la bio.",
-   "start": 39.526,
-   "end": 44.339,
+   "start": 39.12,
+   "end": 44.141,
    "words": [
     {
      "w": "En",
      "key": false,
-     "start": 39.646,
-     "end": 39.821,
+     "start": 39.24,
+     "end": 39.423,
      "brk": false
     },
     {
      "w": "BarberRoy",
      "key": true,
-     "start": 39.821,
-     "end": 40.345,
+     "start": 39.423,
+     "end": 39.972,
      "brk": false
     },
     {
      "w": "Academy",
      "key": false,
-     "start": 40.345,
-     "end": 40.769,
+     "start": 39.972,
+     "end": 40.417,
      "brk": false
     },
     {
      "w": "te",
      "key": false,
-     "start": 40.769,
-     "end": 40.944,
+     "start": 40.417,
+     "end": 40.601,
      "brk": false
     },
     {
      "w": "enseñamos",
      "key": false,
-     "start": 40.944,
-     "end": 41.468,
+     "start": 40.601,
+     "end": 41.15,
      "brk": false
     },
     {
      "w": "colorimetría",
      "key": false,
-     "start": 41.468,
-     "end": 42.142,
+     "start": 41.15,
+     "end": 41.857,
      "brk": false
     },
     {
      "w": "desde",
      "key": true,
-     "start": 42.142,
-     "end": 42.466,
+     "start": 41.857,
+     "end": 42.197,
      "brk": false
     },
     {
      "w": "cero.",
      "key": true,
-     "start": 42.466,
-     "end": 42.741,
+     "start": 42.197,
+     "end": 42.485,
      "brk": true
     },
     {
      "w": "Link",
      "key": true,
-     "start": 42.915,
-     "end": 43.19,
+     "start": 42.668,
+     "end": 42.956,
      "brk": false
     },
     {
      "w": "en",
      "key": false,
-     "start": 43.19,
-     "end": 43.365,
+     "start": 42.956,
+     "end": 43.139,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 43.365,
-     "end": 43.539,
+     "start": 43.139,
+     "end": 43.323,
      "brk": false
     },
     {
      "w": "bio.",
      "key": false,
-     "start": 43.539,
-     "end": 43.764,
+     "start": 43.323,
+     "end": 43.558,
      "brk": true
     }
    ]
