@@ -34,3 +34,13 @@ node render.js apolo13                    # 3) video final (~6 min)
 ## Nueva película
 Copia `historias/apolo13/` con otro nombre, escribe el guion, crea su archivo de escenas
 (exporta `SCENES`) y repite los 3 pasos.
+
+## Usar una voz de ElevenLabs (o cualquier grabación)
+1. En ElevenLabs elige la voz (p. ej. Fabián), modelo *Multilingual v2*, y pega `historias/<historia>/narracion.txt`
+   (ya trae `<break time="0.5s" />` entre frases para poder cortarla).
+2. Descarga el MP3 y corre:
+```bash
+python3 alinear_voz.py apolo13 ruta/al/audio.mp3   # reemplaza voz.wav y recalcula los tiempos
+node render.js apolo13
+```
+Las escenas y los subtítulos se ajustan solos a la duración de la nueva voz.

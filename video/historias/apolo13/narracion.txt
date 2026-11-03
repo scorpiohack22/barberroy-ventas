@@ -1,0 +1,14 @@
+El once de abril de mil novecientos setenta, tres astronautas despegaron rumbo a la Luna. <break time="0.5s" />
+Dos días después, a más de trescientos mil kilómetros de casa, <break time="0.5s" />
+un tanque de oxígeno explotó. <break time="0.5s" />
+Houston, tenemos un problema. <break time="0.5s" />
+La nave perdía oxígeno y energía. Ya no iban a pisar la Luna. Ahora solo querían volver. <break time="0.5s" />
+Se refugiaron en el módulo lunar, hecho para dos personas durante dos días. <break time="0.5s" />
+Eran tres, y necesitaban cuatro. <break time="0.5s" />
+Apagaron casi todo para ahorrar energía. Adentro, la temperatura bajó a tres grados. <break time="0.5s" />
+Y el aire empezó a envenenarlos: los filtros eran cuadrados, y el hueco era redondo. <break time="0.5s" />
+Desde la Tierra inventaron un adaptador con cartón, bolsas y cinta. Y funcionó. <break time="0.5s" />
+Rodearon la Luna, y usaron su gravedad para regresar. <break time="0.5s" />
+Al entrar a la atmósfera, la radio se cortó. El silencio debía durar cuatro minutos. Duró casi seis. <break time="0.5s" />
+Hasta que, por fin, se vieron los paracaídas. Los tres estaban vivos. <break time="0.5s" />
+Veinticinco años después, esta historia se convirtió en película.
