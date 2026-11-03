@@ -29,7 +29,7 @@ import { W, H, clamp, easeOut, easeBack, roundRect } from './escenas.js';
 const HIST = new URLSearchParams(location.search).get('h') || 'barberroy';
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gl'), antialias: true, preserveDrawingBuffer: true });
-renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.setPixelRatio(+(new URLSearchParams(location.search).get('ss') || 1.5)); renderer.setSize(W, H, false);
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 const out = document.getElementById('out'), ctx = out.getContext('2d');
@@ -100,7 +100,7 @@ for (const ln of TL.lines) {
     cur.push(w);
     const len = cur.reduce((a, x) => a + x.w.length + 1, 0), last = i === ln.words.length - 1;
     const strong = /[.!?:]$/.test(w.w), comma = /,$/.test(w.w);
-    if (last || strong || (comma && cur.length >= 3) || len > 30) { kChunks.push({ words: cur, start: cur[0].start }); cur = []; }
+    if (last || strong || (comma && cur.length >= 2) || len > 20) { kChunks.push({ words: cur, start: cur[0].start }); cur = []; }
   });
 }
 kChunks.forEach((c, i) => c.end = Math.min(kChunks[i + 1]?.start ?? TL.duration, c.words[c.words.length - 1].end + .8));
@@ -109,7 +109,7 @@ function drawKaraoke(t) {
   const c = kChunks.find(c => t >= c.start - .05 && t < c.end); if (!c) return;
   const a = clamp((t - c.start + .05) / .15);
   ctx.save(); ctx.textBaseline = 'middle'; ctx.globalAlpha = a;
-  const font = w => `${w.key ? 800 : 600} 40px Montserrat`;
+  const font = w => `${w.key ? 800 : 700} 44px Montserrat`;
   const sp = 11, maxW = 600, rows = [[]]; let rw = 0;
   for (const w of c.words) { ctx.font = font(w); const ww = ctx.measureText(w.w).width;
     if (rw + ww > maxW && rows[rows.length - 1].length) { rows.push([]); rw = 0; }
@@ -124,7 +124,7 @@ function drawKaraoke(t) {
       if (curr) { ctx.fillStyle = 'rgba(70,95,170,.35)'; roundRect(ctx, x - 7, y - 25, w.ww + 14, 50, 8); ctx.fill();
         ctx.strokeStyle = 'rgba(170,195,255,.95)'; ctx.lineWidth = 2.5; ctx.stroke(); }
       ctx.font = font(w); ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 2;
-      ctx.fillStyle = t >= w.start ? '#ffffff' : 'rgba(255,255,255,.38)'; ctx.fillText(w.w, x, y);
+      if (t >= w.start - .03) { ctx.fillStyle = w.key ? '#ffe08a' : '#ffffff'; ctx.fillText(w.w, x, y); }
       ctx.shadowColor = 'transparent'; x += w.ww + sp;
     }
   });

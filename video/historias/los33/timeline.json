@@ -6,11 +6,6 @@
   {
    "scene": "entrada",
    "text": "El cinco de agosto de dos mil diez, en el desierto de *Atacama*, treinta y tres mineros bajaron a trabajar.",
-   "counter": {
-    "type": "text",
-    "value": "Cobre y oro",
-    "caption": "MINA SAN JOSÉ"
-   },
    "start": 0,
    "end": 5.935,
    "words": [
@@ -258,13 +253,6 @@
   {
    "scene": "derrumbe",
    "text": "Esa tarde, la montaña *crujió*. Setecientas mil toneladas de roca bloquearon la *salida*.",
-   "counter": {
-    "type": "number",
-    "from": 0,
-    "to": 700000,
-    "suffix": " t",
-    "caption": "DE ROCA"
-   },
    "start": 9.487,
    "end": 15.12,
    "words": [
@@ -527,11 +515,6 @@
   {
    "scene": "racion",
    "text": "Así que la racionaron: *dos* cucharadas de atún cada dos días.",
-   "counter": {
-    "type": "text",
-    "value": "2 cucharadas",
-    "caption": "DE ATÚN"
-   },
    "start": 22.413,
    "end": 25.954,
    "words": [
@@ -991,11 +974,6 @@
   {
    "scene": "capsula",
    "text": "Con ayuda de la *NASA*, construyeron una cápsula para sacarlos: la *Fénix*.",
-   "counter": {
-    "type": "text",
-    "value": "+ NASA",
-    "caption": "CÁPSULA FÉNIX"
-   },
    "start": 41.489,
    "end": 45.889,
    "words": [

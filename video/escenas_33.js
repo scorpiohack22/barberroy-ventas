@@ -4,13 +4,15 @@ import {
   W, H, clamp, easeOut, easeInOut, easeBack, roundRect, mat, mesh, canvasTex, gradientBg, baseScene,
   textSprite, popScale, makePerson, walk, rng, lerp, prog, stripeTex
 } from './escenas.js';
+import { makeMinerV2, makeCharacter, walk2 } from './personajes.js';
 
 const ROCK = '#8a5f4c', ROCK2 = '#6e4a3b', SAND = '#d8a594', MOUNT = '#b9786a';
 const SKIN = ['#e2b48c', '#c99271', '#a8754f', '#d9a47c', '#8c5a3c'];
 const HAIR = ['#1c1917', '#3a2a1c', '#4a3b30', '#1c1917', '#6a6a6a'];
 
 // ---------- piezas ----------
-function makeMiner(seed = 1, { lamp = true } = {}) {
+function makeMiner(seed = 1, { lamp = true } = {}) { return makeMinerV2(rng(seed * 7 + 3), { lamp }); }
+function makeMinerOld(seed = 1, { lamp = true } = {}) {
   const r = rng(seed * 7 + 3);
   const p = makePerson({ shirt: '#3d4356', pants: '#2c3140', skin: SKIN[(r() * SKIN.length) | 0], hair: HAIR[(r() * HAIR.length) | 0], seed });
   const vestCol = r() < .7 ? '#e8642a' : '#c9b13a';
@@ -26,7 +28,7 @@ function makeMiner(seed = 1, { lamp = true } = {}) {
 
 function sit(p) {
   p.userData.legs.forEach(l => l.rotation.x = -Math.PI / 2 + .1);
-  p.position.y = -.42;
+  p.position.y = -.4;
 }
 
 function desert(scene, { mountain = true } = {}) {
@@ -76,10 +78,11 @@ function tunnel(scene, { len = 18, w = 3.4, h = 3, lamps = 4, dark = false } = {
 
 function caveScene(top = '#140d0a', bottom = '#2a1a14') {
   const scene = new THREE.Scene(); scene.background = gradientBg(top, bottom);
-  scene.add(new THREE.HemisphereLight('#ffdcc0', '#2a1a12', .55));
+  scene.add(new THREE.HemisphereLight('#ffdcc0', '#2a1a12', .8));
   const key = new THREE.DirectionalLight('#ffd8b0', .9); key.position.set(2, 6, 5); key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024); Object.assign(key.shadow.camera, { left: -8, right: 8, top: 8, bottom: -8 }); scene.add(key);
   const camera = new THREE.PerspectiveCamera(46, W / H, .05, 300);
+  scene.add(camera); const fill = new THREE.PointLight('#ffe6cc', 3.5, 9, 1.2); fill.position.set(.3, .4, 0); camera.add(fill);
   return { scene, camera };
 }
 
@@ -108,7 +111,7 @@ function entrada() {
       const p = easeInOut(lt / info.dur);
       camera.position.set(lerp(3, 1, p), lerp(2.6, 2.2, p), lerp(13, 8, p)); camera.lookAt(0, 1.8, -4);
       miners.forEach((mn, i) => { const z = 4 - lt * 1.15 - (i % 3) * .8 - i * .5; const x = -1.2 + (i % 3) * .9 + (i > 2 ? .4 : 0);
-        mn.position.set(x, 0, Math.max(-4.6, z)); walk(mn, lt * 7 + i, z > -4.6 ? 1 : 0); mn.visible = z > -4.9; });
+        mn.position.set(x, 0, Math.max(-4.6, z)); walk2(mn, lt * 7 + i, z > -4.6 ? 1 : 0); mn.visible = z > -4.9; });
       void m;
     }
   };
@@ -201,7 +204,6 @@ function comida() {
   const lamp = new THREE.PointLight('#ffd49a', 14, 10, 1.4); lamp.position.set(0, 3.6, 2); scene.add(lamp);
   const two = textSprite('2 DÍAS', { size: 70, color: '#ffd98a', bg: 'rgba(20,14,10,.85)', stroke: null, scale: .65 });
   const n33 = textSprite('33 PERSONAS', { size: 70, color: '#fff', bg: '#c8382c', stroke: null, scale: .65 });
-  scene.add(two); scene.add(n33);
   return {
     scene, camera,
     update(lt, info) {
@@ -229,7 +231,7 @@ function racion() {
   spoon.add(mesh(new THREE.BoxGeometry(.09, .03, 1.6), mat('#d6d9de', { metalness: .8, roughness: .25 }), { z: .9 }));
   const bowl = mesh(new THREE.SphereGeometry(.2, 12, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), mat('#d6d9de', { metalness: .8, roughness: .25, side: THREE.DoubleSide })); bowl.scale.set(1, .5, 1.3); spoon.add(bowl);
   const tuna = mesh(new THREE.SphereGeometry(.15, 10, 6), mat('#c9a184'), { y: .02 }); tuna.scale.set(1, .4, 1.2); spoon.add(tuna);
-  const marks = [0, 1].map(i => { const s = textSprite(String(i + 1), { size: 110, color: '#ffd98a', stroke: '#2a1a10', scale: .8 }); scene.add(s); return s; });
+  const marks = [0, 1].map(i => { const s = textSprite(String(i + 1), { size: 110, color: '#ffd98a', stroke: '#2a1a10', scale: .8 }); return s; });
   return {
     scene, camera,
     update(lt, info) {
@@ -248,9 +250,9 @@ function racion() {
 function espera() {
   const { scene, camera } = caveScene('#0b0705', '#1e130d');
   tunnel(scene, { len: 10, w: 4, h: 3, lamps: 1, dark: true });
-  const m = makeMiner(41); sit(m); m.position.set(-1.2, -.42, -1.5); m.rotation.y = .5; scene.add(m);
+  const m = makeMiner(41); sit(m); m.position.set(-1.2, -.4, -1.5); m.rotation.y = .5; scene.add(m);
   m.userData.arms.forEach(a => { a.rotation.x = -1.0; }); m.userData.head.rotation.x = .35;
-  const m2 = makeMiner(42); sit(m2); m2.position.set(1.1, -.42, -2.6); m2.rotation.y = -.6; scene.add(m2);
+  const m2 = makeMiner(42); sit(m2); m2.position.set(1.1, -.4, -2.6); m2.rotation.y = -.6; scene.add(m2);
   const can = mesh(new THREE.CylinderGeometry(.14, .14, .12, 12), mat('#c9ccd2', { metalness: .6 }), { x: -.6, y: .06, z: -.9 }); scene.add(can);
   const lamp = new THREE.PointLight('#ffcf8a', 5, 6, 1.6); lamp.position.set(-1, 1.2, -.5); scene.add(lamp);
   return {
@@ -334,7 +336,7 @@ function palomas() {
   const r = rng(3);
   for (let i = 0; i < 9; i++) scene.add(mesh(new THREE.BoxGeometry(.08, .22, .02), new THREE.MeshBasicMaterial({ color: ['#f2c230', '#e8642a'][i % 2] }), { x: -.9 + i * .22, y: -3.5, z: .08, cast: false }));
   const tube = mesh(new THREE.CylinderGeometry(.09, .09, .7, 12), mat('#2f6fd0', { emissive: '#2f6fd0', emissiveIntensity: .4 }), { cast: false }); scene.add(tube);
-  const items = ['AGUA', 'COMIDA', 'CARTAS'].map(t => { const s = textSprite(t, { size: 46, color: '#fff', bg: 'rgba(30,20,15,.85)', stroke: null, scale: 1.2 }); scene.add(s); return s; });
+  const items = ['AGUA', 'COMIDA', 'CARTAS'].map(t => { const s = textSprite(t, { size: 46, color: '#fff', bg: 'rgba(30,20,15,.85)', stroke: null, scale: 1.2 }); return s; });
   return {
     scene, camera,
     update(lt, info) {
@@ -387,7 +389,7 @@ function rescate() {
   const inner = new THREE.Group(); inner.add(rider); inner.add(shell); scene.add(inner);
   const r = rng(12);
   for (let i = 0; i < 14; i++) { const a = Math.PI * (.2 + r() * .6) + Math.PI, rr = 4 + r() * 2.5;
-    const p = makePerson({ shirt: ['#c8382c', '#2f55c8', '#e8e8e8', '#3d6a4a'][i % 4], pants: '#2c3140', skin: SKIN[i % 5], hair: HAIR[i % 5], seed: 200 + i });
+    const p = makeCharacter({ shirt: ['#c8382c', '#2f55c8', '#e8e8e8', '#3d6a4a', '#d9a845'][i % 5], pants: ['#2c3140', '#4a5a7a', '#3a2e2a'][i % 3], skin: SKIN[i % 5], hair: HAIR[(i + 2) % 5], female: i % 3 === 1, hairStyle: i % 3 === 1 ? 'long' : 'short', beard: i % 4 === 0 });
     p.position.set(Math.cos(a) * rr, 0, Math.sin(a) * rr - 1); p.lookAt(0, 0, 0); scene.add(p); p.userData.cheer = r(); }
   const crowd = scene.children.filter(c => c.userData && c.userData.cheer !== undefined);
   for (const [x, z] of [[-3, -5], [3.5, -5.5]]) { const f = canvasTex(96, 64, (c, w, h) => { c.fillStyle = '#f4f4f0'; c.fillRect(0, 0, w, h / 2); c.fillStyle = '#d52b1e'; c.fillRect(0, h / 2, w, h / 2); c.fillStyle = '#0039a6'; c.fillRect(0, 0, w / 3, h / 2); c.fillStyle = '#fff'; c.font = '20px sans-serif'; c.fillText('★', 9, 24); });
@@ -413,7 +415,7 @@ function superficie() {
   const miners = [];
   for (let i = 0; i < 33; i++) { const m = makeMiner(300 + i, { lamp: false }); const row = Math.floor(i / 11), col = i % 11;
     m.position.set(-5 + col * 1.0 + (row % 2) * .5, 0, -row * 1.1); scene.add(m); miners.push(m);
-    m.userData.head.add(mesh(new THREE.BoxGeometry(.3, .07, .04), mat('#111', { roughness: .2 }), { y: .02, z: .22, cast: false })); }
+    m.userData.head.add(mesh(new THREE.BoxGeometry(.2, .05, .03), mat('#111', { roughness: .2 }), { y: .02, z: .15, cast: false })); }
   const r = rng(9), conf = [];
   for (let i = 0; i < 90; i++) { const c = mesh(new THREE.BoxGeometry(.08, .08, .01), new THREE.MeshBasicMaterial({ color: ['#d52b1e', '#0039a6', '#ffffff', '#f2c230'][i % 4] }), { cast: false });
     c.userData = { x: (r() - .5) * 12, z: (r() - .5) * 4, o: r(), s: .5 + r() }; scene.add(c); conf.push(c); }

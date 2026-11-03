@@ -3,28 +3,94 @@
  "estilo": "karaoke",
  "gap": 0.2,
  "lines": [
-  { "scene": "entrada", "text": "El cinco de agosto de dos mil diez, en el desierto de *Atacama*, treinta y tres mineros bajaron a trabajar.",
-    "counter": { "type": "text", "value": "Cobre y oro", "caption": "MINA SAN JOSÉ" } },
-  { "scene": "rampa", "text": "La mina era un túnel en espiral de *cinco* kilómetros hacia abajo.",
-    "counter": { "type": "number", "from": 0, "to": 5, "suffix": " km", "caption": "DE CURVAS HACIA ABAJO" } },
-  { "scene": "derrumbe", "text": "Esa tarde, la montaña *crujió*. Setecientas mil toneladas de roca bloquearon la *salida*.",
-    "counter": { "type": "number", "from": 0, "to": 700000, "suffix": " t", "caption": "DE ROCA" } },
-  { "scene": "refugio", "text": "Quedaron atrapados a *setecientos* metros bajo tierra.",
-    "counter": { "type": "number", "from": 0, "to": 700, "suffix": " m", "caption": "BAJO TIERRA" } },
-  { "scene": "comida", "text": "En el refugio había comida para *dos* días. Y eran *treinta* *y* *tres*." },
-  { "scene": "racion", "text": "Así que la racionaron: *dos* cucharadas de atún cada dos días.",
-    "counter": { "type": "text", "value": "2 cucharadas", "caption": "DE ATÚN" } },
-  { "scene": "espera", "text": "Pasaron *diecisiete* días sin saber si alguien los buscaba.",
-    "counter": { "type": "number", "from": 1, "to": 17, "caption": "DÍAS SIN CONTACTO" } },
-  { "scene": "sonda", "text": "Hasta que, de pronto, la punta de una *sonda* atravesó el techo." },
-  { "scene": "mensaje", "text": "Le amarraron una nota: estamos bien en el refugio, los *treinta* *y* *tres*." },
-  { "scene": "palomas", "text": "Por ese agujero les mandaron comida, agua y *cartas*, dentro de tubos de plástico." },
-  { "scene": "capsula", "text": "Con ayuda de la *NASA*, construyeron una cápsula para sacarlos: la *Fénix*.",
-    "counter": { "type": "text", "value": "+ NASA", "caption": "CÁPSULA FÉNIX" } },
-  { "scene": "rescate", "text": "Después de *sesenta* *y* *nueve* días, uno por uno, empezaron a *subir*.",
-    "counter": { "type": "number", "from": 0, "to": 69, "caption": "DÍAS BAJO TIERRA" } },
-  { "scene": "superficie", "text": "Los treinta y tres salieron *vivos*. Más de mil millones de personas lo vieron en vivo.",
-    "counter": { "type": "number", "from": 0, "to": 33, "suffix": " / 33", "caption": "RESCATADOS" } },
-  { "scene": "cierre", "text": "Cinco años después, su historia llegó al *cine*." }
+  {
+   "scene": "entrada",
+   "text": "El cinco de agosto de dos mil diez, en el desierto de *Atacama*, treinta y tres mineros bajaron a trabajar."
+  },
+  {
+   "scene": "rampa",
+   "text": "La mina era un túnel en espiral de *cinco* kilómetros hacia abajo.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 5,
+    "suffix": " km",
+    "caption": "DE CURVAS HACIA ABAJO"
+   }
+  },
+  {
+   "scene": "derrumbe",
+   "text": "Esa tarde, la montaña *crujió*. Setecientas mil toneladas de roca bloquearon la *salida*."
+  },
+  {
+   "scene": "refugio",
+   "text": "Quedaron atrapados a *setecientos* metros bajo tierra.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 700,
+    "suffix": " m",
+    "caption": "BAJO TIERRA"
+   }
+  },
+  {
+   "scene": "comida",
+   "text": "En el refugio había comida para *dos* días. Y eran *treinta* *y* *tres*."
+  },
+  {
+   "scene": "racion",
+   "text": "Así que la racionaron: *dos* cucharadas de atún cada dos días."
+  },
+  {
+   "scene": "espera",
+   "text": "Pasaron *diecisiete* días sin saber si alguien los buscaba.",
+   "counter": {
+    "type": "number",
+    "from": 1,
+    "to": 17,
+    "caption": "DÍAS SIN CONTACTO"
+   }
+  },
+  {
+   "scene": "sonda",
+   "text": "Hasta que, de pronto, la punta de una *sonda* atravesó el techo."
+  },
+  {
+   "scene": "mensaje",
+   "text": "Le amarraron una nota: estamos bien en el refugio, los *treinta* *y* *tres*."
+  },
+  {
+   "scene": "palomas",
+   "text": "Por ese agujero les mandaron comida, agua y *cartas*, dentro de tubos de plástico."
+  },
+  {
+   "scene": "capsula",
+   "text": "Con ayuda de la *NASA*, construyeron una cápsula para sacarlos: la *Fénix*."
+  },
+  {
+   "scene": "rescate",
+   "text": "Después de *sesenta* *y* *nueve* días, uno por uno, empezaron a *subir*.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 69,
+    "caption": "DÍAS BAJO TIERRA"
+   }
+  },
+  {
+   "scene": "superficie",
+   "text": "Los treinta y tres salieron *vivos*. Más de mil millones de personas lo vieron en vivo.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 33,
+    "suffix": " / 33",
+    "caption": "RESCATADOS"
+   }
+  },
+  {
+   "scene": "cierre",
+   "text": "Cinco años después, su historia llegó al *cine*."
+  }
  ]
 }
