@@ -1,0 +1,4 @@
+node_modules/
+voz/*.onnx
+voz/*.onnx.json
+salida/still_*

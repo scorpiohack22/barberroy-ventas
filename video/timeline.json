@@ -1,0 +1,873 @@
+{
+ "duration": 45.539,
+ "lines": [
+  {
+   "scene": "barberia",
+   "text": "Esta es la historia del *corte* que casi acaba con una *barbería*.",
+   "start": 0.35,
+   "end": 4.396,
+   "words": [
+    {
+     "w": "Esta",
+     "key": false,
+     "start": 0.47,
+     "end": 0.741,
+     "brk": false
+    },
+    {
+     "w": "es",
+     "key": false,
+     "start": 0.741,
+     "end": 0.914,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 0.914,
+     "end": 1.087,
+     "brk": false
+    },
+    {
+     "w": "historia",
+     "key": false,
+     "start": 1.087,
+     "end": 1.555,
+     "brk": false
+    },
+    {
+     "w": "del",
+     "key": false,
+     "start": 1.555,
+     "end": 1.777,
+     "brk": false
+    },
+    {
+     "w": "corte",
+     "key": true,
+     "start": 1.777,
+     "end": 2.098,
+     "brk": false
+    },
+    {
+     "w": "que",
+     "key": false,
+     "start": 2.098,
+     "end": 2.32,
+     "brk": false
+    },
+    {
+     "w": "casi",
+     "key": false,
+     "start": 2.32,
+     "end": 2.591,
+     "brk": false
+    },
+    {
+     "w": "acaba",
+     "key": false,
+     "start": 2.591,
+     "end": 2.911,
+     "brk": false
+    },
+    {
+     "w": "con",
+     "key": false,
+     "start": 2.911,
+     "end": 3.133,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 3.133,
+     "end": 3.355,
+     "brk": false
+    },
+    {
+     "w": "barbería.",
+     "key": true,
+     "start": 3.355,
+     "end": 3.824,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cliente",
+   "text": "Un *sábado* a las cuatro de la tarde, entró un cliente con el pelo *negro*.",
+   "counter": {
+    "type": "clock",
+    "from": "15:58",
+    "to": "16:00",
+    "caption": "SÁBADO"
+   },
+   "start": 4.396,
+   "end": 8.977,
+   "words": [
+    {
+     "w": "Un",
+     "key": false,
+     "start": 4.516,
+     "end": 4.686,
+     "brk": false
+    },
+    {
+     "w": "sábado",
+     "key": true,
+     "start": 4.686,
+     "end": 5.048,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 5.048,
+     "end": 5.217,
+     "brk": false
+    },
+    {
+     "w": "las",
+     "key": false,
+     "start": 5.217,
+     "end": 5.435,
+     "brk": false
+    },
+    {
+     "w": "cuatro",
+     "key": false,
+     "start": 5.435,
+     "end": 5.797,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 5.797,
+     "end": 5.967,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 5.967,
+     "end": 6.136,
+     "brk": false
+    },
+    {
+     "w": "tarde,",
+     "key": false,
+     "start": 6.136,
+     "end": 6.45,
+     "brk": true
+    },
+    {
+     "w": "entró",
+     "key": false,
+     "start": 6.547,
+     "end": 6.861,
+     "brk": false
+    },
+    {
+     "w": "un",
+     "key": false,
+     "start": 6.861,
+     "end": 7.03,
+     "brk": false
+    },
+    {
+     "w": "cliente",
+     "key": false,
+     "start": 7.03,
+     "end": 7.441,
+     "brk": false
+    },
+    {
+     "w": "con",
+     "key": false,
+     "start": 7.441,
+     "end": 7.659,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 7.659,
+     "end": 7.828,
+     "brk": false
+    },
+    {
+     "w": "pelo",
+     "key": false,
+     "start": 7.828,
+     "end": 8.094,
+     "brk": false
+    },
+    {
+     "w": "negro.",
+     "key": true,
+     "start": 8.094,
+     "end": 8.408,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cliente",
+   "text": "Quería quedar *platinado*. En una sola *tarde*.",
+   "start": 8.977,
+   "end": 12.501,
+   "words": [
+    {
+     "w": "Quería",
+     "key": false,
+     "start": 9.097,
+     "end": 9.526,
+     "brk": false
+    },
+    {
+     "w": "quedar",
+     "key": false,
+     "start": 9.526,
+     "end": 9.955,
+     "brk": false
+    },
+    {
+     "w": "platinado.",
+     "key": true,
+     "start": 9.955,
+     "end": 10.556,
+     "brk": true
+    },
+    {
+     "w": "En",
+     "key": false,
+     "start": 10.756,
+     "end": 10.957,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 10.957,
+     "end": 11.214,
+     "brk": false
+    },
+    {
+     "w": "sola",
+     "key": false,
+     "start": 11.214,
+     "end": 11.529,
+     "brk": false
+    },
+    {
+     "w": "tarde.",
+     "key": true,
+     "start": 11.529,
+     "end": 11.901,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "duda",
+   "text": "El barbero dijo que *sí*. Pero nunca había estudiado *colorimetría*.",
+   "start": 12.501,
+   "end": 17.07,
+   "words": [
+    {
+     "w": "El",
+     "key": false,
+     "start": 12.621,
+     "end": 12.81,
+     "brk": false
+    },
+    {
+     "w": "barbero",
+     "key": false,
+     "start": 12.81,
+     "end": 13.269,
+     "brk": false
+    },
+    {
+     "w": "dijo",
+     "key": false,
+     "start": 13.269,
+     "end": 13.566,
+     "brk": false
+    },
+    {
+     "w": "que",
+     "key": false,
+     "start": 13.566,
+     "end": 13.809,
+     "brk": false
+    },
+    {
+     "w": "sí.",
+     "key": true,
+     "start": 13.809,
+     "end": 13.998,
+     "brk": true
+    },
+    {
+     "w": "Pero",
+     "key": false,
+     "start": 14.187,
+     "end": 14.483,
+     "brk": false
+    },
+    {
+     "w": "nunca",
+     "key": false,
+     "start": 14.483,
+     "end": 14.834,
+     "brk": false
+    },
+    {
+     "w": "había",
+     "key": false,
+     "start": 14.834,
+     "end": 15.185,
+     "brk": false
+    },
+    {
+     "w": "estudiado",
+     "key": false,
+     "start": 15.185,
+     "end": 15.752,
+     "brk": false
+    },
+    {
+     "w": "colorimetría.",
+     "key": true,
+     "start": 15.752,
+     "end": 16.481,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "mezcla",
+   "text": "Mezcló decolorante con peróxido de *cuarenta* volúmenes,",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 40,
+    "caption": "VOLÚMENES"
+   },
+   "start": 17.07,
+   "end": 20.698,
+   "words": [
+    {
+     "w": "Mezcló",
+     "key": false,
+     "start": 17.19,
+     "end": 17.582,
+     "brk": false
+    },
+    {
+     "w": "decolorante",
+     "key": false,
+     "start": 17.582,
+     "end": 18.235,
+     "brk": false
+    },
+    {
+     "w": "con",
+     "key": false,
+     "start": 18.235,
+     "end": 18.47,
+     "brk": false
+    },
+    {
+     "w": "peróxido",
+     "key": false,
+     "start": 18.47,
+     "end": 18.966,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 18.966,
+     "end": 19.149,
+     "brk": false
+    },
+    {
+     "w": "cuarenta",
+     "key": true,
+     "start": 19.149,
+     "end": 19.645,
+     "brk": false
+    },
+    {
+     "w": "volúmenes,",
+     "key": false,
+     "start": 19.645,
+     "end": 20.194,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "mezcla",
+   "text": "y lo dejó actuar *cincuenta* minutos.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 50,
+    "caption": "MINUTOS"
+   },
+   "start": 20.698,
+   "end": 23.99,
+   "words": [
+    {
+     "w": "y",
+     "key": false,
+     "start": 20.818,
+     "end": 21.047,
+     "brk": false
+    },
+    {
+     "w": "lo",
+     "key": false,
+     "start": 21.047,
+     "end": 21.275,
+     "brk": false
+    },
+    {
+     "w": "dejó",
+     "key": false,
+     "start": 21.275,
+     "end": 21.634,
+     "brk": false
+    },
+    {
+     "w": "actuar",
+     "key": false,
+     "start": 21.634,
+     "end": 22.123,
+     "brk": false
+    },
+    {
+     "w": "cincuenta",
+     "key": true,
+     "start": 22.123,
+     "end": 22.808,
+     "brk": false
+    },
+    {
+     "w": "minutos.",
+     "key": false,
+     "start": 22.808,
+     "end": 23.362,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "naranja",
+   "text": "Cuando enjuagó, el pelo no estaba platinado. Estaba *naranja*.",
+   "start": 23.99,
+   "end": 28.06,
+   "words": [
+    {
+     "w": "Cuando",
+     "key": false,
+     "start": 24.11,
+     "end": 24.483,
+     "brk": false
+    },
+    {
+     "w": "enjuagó,",
+     "key": false,
+     "start": 24.483,
+     "end": 24.905,
+     "brk": true
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 25.004,
+     "end": 25.178,
+     "brk": false
+    },
+    {
+     "w": "pelo",
+     "key": false,
+     "start": 25.178,
+     "end": 25.451,
+     "brk": false
+    },
+    {
+     "w": "no",
+     "key": false,
+     "start": 25.451,
+     "end": 25.624,
+     "brk": false
+    },
+    {
+     "w": "estaba",
+     "key": false,
+     "start": 25.624,
+     "end": 25.997,
+     "brk": false
+    },
+    {
+     "w": "platinado.",
+     "key": false,
+     "start": 25.997,
+     "end": 26.518,
+     "brk": true
+    },
+    {
+     "w": "Estaba",
+     "key": false,
+     "start": 26.692,
+     "end": 27.064,
+     "brk": false
+    },
+    {
+     "w": "naranja.",
+     "key": true,
+     "start": 27.064,
+     "end": 27.486,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "rompe",
+   "text": "Y lo peor: se *rompía* con solo tocarlo.",
+   "start": 28.06,
+   "end": 31.096,
+   "words": [
+    {
+     "w": "Y",
+     "key": false,
+     "start": 28.18,
+     "end": 28.365,
+     "brk": false
+    },
+    {
+     "w": "lo",
+     "key": false,
+     "start": 28.365,
+     "end": 28.551,
+     "brk": false
+    },
+    {
+     "w": "peor:",
+     "key": false,
+     "start": 28.551,
+     "end": 28.842,
+     "brk": true
+    },
+    {
+     "w": "se",
+     "key": false,
+     "start": 28.948,
+     "end": 29.133,
+     "brk": false
+    },
+    {
+     "w": "rompía",
+     "key": true,
+     "start": 29.133,
+     "end": 29.531,
+     "brk": false
+    },
+    {
+     "w": "con",
+     "key": false,
+     "start": 29.531,
+     "end": 29.769,
+     "brk": false
+    },
+    {
+     "w": "solo",
+     "key": false,
+     "start": 29.769,
+     "end": 30.061,
+     "brk": false
+    },
+    {
+     "w": "tocarlo.",
+     "key": false,
+     "start": 30.061,
+     "end": 30.511,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "resena",
+   "text": "Esa tarde perdió al *cliente*, y ganó una reseña de *una* estrella.",
+   "counter": {
+    "type": "number",
+    "from": 5,
+    "to": 1,
+    "caption": "ESTRELLAS"
+   },
+   "start": 31.096,
+   "end": 35.514,
+   "words": [
+    {
+     "w": "Esa",
+     "key": false,
+     "start": 31.216,
+     "end": 31.452,
+     "brk": false
+    },
+    {
+     "w": "tarde",
+     "key": false,
+     "start": 31.452,
+     "end": 31.792,
+     "brk": false
+    },
+    {
+     "w": "perdió",
+     "key": false,
+     "start": 31.792,
+     "end": 32.184,
+     "brk": false
+    },
+    {
+     "w": "al",
+     "key": false,
+     "start": 32.184,
+     "end": 32.367,
+     "brk": false
+    },
+    {
+     "w": "cliente,",
+     "key": true,
+     "start": 32.367,
+     "end": 32.812,
+     "brk": true
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 32.917,
+     "end": 33.1,
+     "brk": false
+    },
+    {
+     "w": "ganó",
+     "key": false,
+     "start": 33.1,
+     "end": 33.388,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 33.388,
+     "end": 33.623,
+     "brk": false
+    },
+    {
+     "w": "reseña",
+     "key": false,
+     "start": 33.623,
+     "end": 34.016,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 34.016,
+     "end": 34.199,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": true,
+     "start": 34.199,
+     "end": 34.434,
+     "brk": false
+    },
+    {
+     "w": "estrella.",
+     "key": false,
+     "start": 34.434,
+     "end": 34.931,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "circulo",
+   "text": "Ahí entendió algo: el color *no* se adivina. Se *estudia*.",
+   "start": 35.514,
+   "end": 39.526,
+   "words": [
+    {
+     "w": "Ahí",
+     "key": false,
+     "start": 35.634,
+     "end": 35.872,
+     "brk": false
+    },
+    {
+     "w": "entendió",
+     "key": false,
+     "start": 35.872,
+     "end": 36.375,
+     "brk": false
+    },
+    {
+     "w": "algo:",
+     "key": false,
+     "start": 36.375,
+     "end": 36.666,
+     "brk": true
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 36.772,
+     "end": 36.957,
+     "brk": false
+    },
+    {
+     "w": "color",
+     "key": false,
+     "start": 36.957,
+     "end": 37.301,
+     "brk": false
+    },
+    {
+     "w": "no",
+     "key": true,
+     "start": 37.301,
+     "end": 37.486,
+     "brk": false
+    },
+    {
+     "w": "se",
+     "key": false,
+     "start": 37.486,
+     "end": 37.671,
+     "brk": false
+    },
+    {
+     "w": "adivina.",
+     "key": false,
+     "start": 37.671,
+     "end": 38.121,
+     "brk": true
+    },
+    {
+     "w": "Se",
+     "key": false,
+     "start": 38.306,
+     "end": 38.491,
+     "brk": false
+    },
+    {
+     "w": "estudia.",
+     "key": true,
+     "start": 38.491,
+     "end": 38.941,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cta",
+   "text": "En *BarberRoy* Academy te enseñamos colorimetría *desde* *cero*. *Link* en la bio.",
+   "start": 39.526,
+   "end": 44.339,
+   "words": [
+    {
+     "w": "En",
+     "key": false,
+     "start": 39.646,
+     "end": 39.821,
+     "brk": false
+    },
+    {
+     "w": "BarberRoy",
+     "key": true,
+     "start": 39.821,
+     "end": 40.345,
+     "brk": false
+    },
+    {
+     "w": "Academy",
+     "key": false,
+     "start": 40.345,
+     "end": 40.769,
+     "brk": false
+    },
+    {
+     "w": "te",
+     "key": false,
+     "start": 40.769,
+     "end": 40.944,
+     "brk": false
+    },
+    {
+     "w": "enseñamos",
+     "key": false,
+     "start": 40.944,
+     "end": 41.468,
+     "brk": false
+    },
+    {
+     "w": "colorimetría",
+     "key": false,
+     "start": 41.468,
+     "end": 42.142,
+     "brk": false
+    },
+    {
+     "w": "desde",
+     "key": true,
+     "start": 42.142,
+     "end": 42.466,
+     "brk": false
+    },
+    {
+     "w": "cero.",
+     "key": true,
+     "start": 42.466,
+     "end": 42.741,
+     "brk": true
+    },
+    {
+     "w": "Link",
+     "key": true,
+     "start": 42.915,
+     "end": 43.19,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 43.19,
+     "end": 43.365,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 43.365,
+     "end": 43.539,
+     "brk": false
+    },
+    {
+     "w": "bio.",
+     "key": false,
+     "start": 43.539,
+     "end": 43.764,
+     "brk": true
+    }
+   ]
+  }
+ ]
+}

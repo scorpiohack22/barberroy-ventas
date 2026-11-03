@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Video BarberRoy</title>
+<style>
+  @font-face { font-family: Montserrat; font-weight: 600; src: url(node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2); }
+  @font-face { font-family: Montserrat; font-weight: 700; src: url(node_modules/@fontsource/montserrat/files/montserrat-latin-700-normal.woff2); }
+  @font-face { font-family: Montserrat; font-weight: 800; src: url(node_modules/@fontsource/montserrat/files/montserrat-latin-800-normal.woff2); }
+  @font-face { font-family: Montserrat; font-weight: 900; src: url(node_modules/@fontsource/montserrat/files/montserrat-latin-900-normal.woff2); }
+  html, body { margin: 0; height: 100%; background: #111; display: grid; place-items: center; font-family: Montserrat, sans-serif; }
+  #out { height: 96vh; aspect-ratio: 9/16; background: #000; cursor: pointer; }
+  #gl { display: none; }
+  #hint { position: fixed; top: 12px; left: 12px; color: #aaa; font-size: 13px; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="out" width="720" height="1280"></canvas>
+<div id="hint">Clic en el video para reproducir / pausar</div>
+<audio id="voz" src="voz/voz.wav" preload="auto"></audio>
+<script type="module">
+import * as THREE from 'three';
+import { SCENES, W, H, clamp, easeOut, easeBack, roundRect } from './escenas.js';
+
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gl'), antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const out = document.getElementById('out'), ctx = out.getContext('2d');
+
+await Promise.all([600, 700, 800, 900].map(w => document.fonts.load(`${w} 40px Montserrat`)));
+const TL = await (await fetch('timeline.json', { cache: 'no-store' })).json();
+
+// Agrupar líneas consecutivas con la misma escena en segmentos
+const segs = [];
+for (const ln of TL.lines) {
+  const last = segs[segs.length - 1];
+  if (last && last.name === ln.scene) { last.end = ln.end; last.lines.push(ln); }
+  else segs.push({ name: ln.scene, start: ln.start, end: ln.end, lines: [ln] });
+}
+segs[0].start = 0; segs[segs.length - 1].end = TL.duration;
+for (const s of segs) {
+  s.inst = SCENES[s.name]();
+  s.info = { dur: s.end - s.start, marks: s.lines.map(l => l.start - s.start) };
+  renderer.compile(s.inst.scene, s.inst.camera);
+}
+
+// Subtítulos: grupos de hasta 3 palabras, cortando en puntuación
+const chunks = [];
+for (const ln of TL.lines) {
+  let cur = [];
+  ln.words.forEach((w, i) => {
+    cur.push(w);
+    const len = cur.reduce((a, x) => a + x.w.length, 0);
+    if (w.brk || cur.length >= 3 || len > 15 || i === ln.words.length - 1) { chunks.push({ words: cur, start: cur[0].start }); cur = []; }
+  });
+}
+chunks.forEach((c, i) => c.end = Math.min(chunks[i + 1]?.start ?? TL.duration, c.words[c.words.length - 1].end + .6));
+
+function drawSubs(t) {
+  const c = chunks.find(c => t >= c.start && t < c.end); if (!c) return;
+  const k = .82 + .18 * easeBack(clamp((t - c.start) / .14));
+  ctx.save(); ctx.translate(W / 2, 1000); ctx.scale(k, k);
+  ctx.font = '900 54px Montserrat'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+  const words = c.words.map(w => ({ ...w, txt: w.w.toUpperCase() }));
+  const sp = ctx.measureText(' ').width, maxW = 640;
+  const rows = [[]]; let rw = 0;
+  for (const w of words) { const ww = ctx.measureText(w.txt).width;
+    if (rw + ww > maxW && rows[rows.length - 1].length) { rows.push([]); rw = 0; }
+    rows[rows.length - 1].push({ ...w, ww }); rw += ww + sp; }
+  rows.forEach((row, ri) => {
+    const total = row.reduce((a, w) => a + w.ww, 0) + sp * (row.length - 1);
+    let x = -total / 2; const y = (ri - (rows.length - 1) / 2) * 64;
+    for (const w of row) {
+      ctx.lineWidth = 12; ctx.strokeStyle = '#000'; ctx.strokeText(w.txt, x, y + 3);
+      ctx.strokeText(w.txt, x, y);
+      ctx.fillStyle = w.key ? '#ffe41a' : '#fff'; ctx.fillText(w.txt, x, y);
+      x += w.ww + sp;
+    }
+  });
+  ctx.restore();
+}
+
+// Contador tipo marcador (números que ruedan)
+function drawCounter(t) {
+  const ln = TL.lines.find(l => l.counter && t >= l.start && t < l.end); if (!ln) return;
+  const c = ln.counter, lt = t - ln.start, rem = ln.end - t;
+  const k = easeBack(clamp(lt / .35)) * (rem < .2 ? rem / .2 : 1);
+  if (k <= 0) return;
+  const p = easeOut(clamp((lt - .25) / Math.max(.8, (ln.end - ln.start) * .6)));
+  let value, fmt;
+  if (c.type === 'clock') {
+    const m = s => { const [h, mm] = s.split(':').map(Number); return h * 60 + mm; };
+    value = m(c.from) + (m(c.to) - m(c.from)) * p;
+    fmt = v => { v = Math.floor(v); return String(Math.floor(v / 60)).padStart(2, '0') + ':' + String(v % 60).padStart(2, '0'); };
+  } else { value = c.from + (c.to - c.from) * p; fmt = v => String(Math.floor(v)); }
+  const dir = Math.sign((c.type === 'clock' ? 1 : c.to - c.from) || 1);
+  const base = dir > 0 ? Math.floor(value) : Math.ceil(value);
+  const frac = Math.abs(value - base);
+  const cur = fmt(base), nxt = fmt(base + dir);
+  ctx.save(); ctx.translate(W / 2, 175); ctx.scale(k, k);
+  ctx.font = '900 92px Montserrat'; ctx.textBaseline = 'middle';
+  const cw = 64, digits = Math.max(cur.length, nxt.length);
+  const boxW = Math.max(220, digits * cw + 70), boxH = 168;
+  ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 8;
+  ctx.fillStyle = 'rgba(22,18,14,.94)'; roundRect(ctx, -boxW / 2, -boxH / 2, boxW, boxH, 14); ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.strokeStyle = 'rgba(232,186,92,.55)'; ctx.lineWidth = 3; ctx.stroke();
+  const gold = ctx.createLinearGradient(0, -60, 0, 30); gold.addColorStop(0, '#ffe7a8'); gold.addColorStop(1, '#e0a33a');
+  ctx.save(); ctx.beginPath(); ctx.rect(-boxW / 2, -boxH / 2 + 8, boxW, 112); ctx.clip();
+  const x0 = -(digits * cw) / 2 + cw / 2;
+  const cs = cur.padStart(digits, ' '), ns = nxt.padStart(digits, ' ');
+  for (let i = 0; i < digits; i++) {
+    const x = x0 + i * cw; ctx.textAlign = 'center'; ctx.fillStyle = gold;
+    if (cs[i] === ns[i] || frac === 0) ctx.fillText(cs[i], x, -18);
+    else { const off = frac * 100 * dir; ctx.fillText(cs[i], x, -18 - off); ctx.fillText(ns[i], x, -18 - off + 100 * dir); }
+  }
+  ctx.restore();
+  ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(-boxW / 2 + 6, -20, boxW - 12, 2);
+  ctx.font = '800 22px Montserrat'; ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.fillText(c.caption, 0, 56);
+  ctx.restore();
+}
+
+let vignette;
+{ const v = document.createElement('canvas'); v.width = W; v.height = H; const g = v.getContext('2d');
+  const r = g.createRadialGradient(W / 2, H / 2, H * .25, W / 2, H / 2, H * .75);
+  r.addColorStop(0, 'rgba(0,0,0,0)'); r.addColorStop(1, 'rgba(0,0,0,.38)'); g.fillStyle = r; g.fillRect(0, 0, W, H); vignette = v; }
+
+function frame(t) {
+  const s = segs.find(s => t >= s.start && t < s.end) || segs[segs.length - 1];
+  const lt = t - s.start;
+  s.inst.update(lt, s.info);
+  renderer.render(s.inst.scene, s.inst.camera);
+  const z = 1 + .07 * (1 - easeOut(clamp(lt / .35)));   // "punch" en cada corte
+  ctx.drawImage(renderer.domElement, W / 2 - W * z / 2, H / 2 - H * z / 2, W * z, H * z);
+  ctx.drawImage(vignette, 0, 0);
+  const fl = 1 - clamp(lt / .12); if (fl > 0 && s !== segs[0]) { ctx.fillStyle = `rgba(255,255,255,${fl * .5})`; ctx.fillRect(0, 0, W, H); }
+  s.inst.draw2d?.(ctx, lt, s.info);
+  drawCounter(t); drawSubs(t);
+  const fi = clamp(t / .3), fo = clamp((TL.duration - t) / .5);
+  if (fi < 1 || fo < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - Math.min(fi, fo)})`; ctx.fillRect(0, 0, W, H); }
+}
+
+// Modo render (lo usa render.js) y modo vista previa
+window.DURATION = TL.duration;
+window.renderFrame = (t) => { frame(t); return out.toDataURL('image/jpeg', .93); };
+const audio = document.getElementById('voz');
+frame(0.8);
+const loop = () => { frame(audio.currentTime); if (!audio.paused) requestAnimationFrame(loop); };
+out.onclick = () => { if (audio.paused) { if (audio.ended) audio.currentTime = 0; audio.play(); requestAnimationFrame(loop); } else audio.pause(); };
+window.READY = true;
+</script>
+</body>
+</html>
