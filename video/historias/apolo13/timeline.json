@@ -1,6 +1,6 @@
 {
  "escenas": "escenas_apolo13.js",
- "duration": 62.515,
+ "duration": 62.012,
  "lines": [
   {
    "scene": "lanzamiento",
@@ -10,112 +10,112 @@
     "value": "11·04·1970",
     "caption": "DESPEGAN"
    },
-   "start": 0.35,
-   "end": 5.151,
+   "start": 0,
+   "end": 5.013,
    "words": [
     {
      "w": "El",
      "key": false,
-     "start": 0.47,
-     "end": 0.619,
+     "start": 0.41,
+     "end": 0.595,
      "brk": false
     },
     {
      "w": "once",
      "key": false,
-     "start": 0.619,
-     "end": 0.854,
+     "start": 0.606,
+     "end": 0.823,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 0.854,
-     "end": 1.003,
+     "start": 0.834,
+     "end": 0.921,
      "brk": false
     },
     {
      "w": "abril",
      "key": false,
-     "start": 1.003,
-     "end": 1.28,
+     "start": 0.932,
+     "end": 1.16,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 1.28,
-     "end": 1.43,
+     "start": 1.171,
+     "end": 1.247,
      "brk": false
     },
     {
      "w": "mil",
      "key": false,
-     "start": 1.43,
-     "end": 1.622,
+     "start": 1.258,
+     "end": 1.432,
      "brk": false
     },
     {
      "w": "novecientos",
      "key": false,
-     "start": 1.622,
-     "end": 2.155,
+     "start": 1.443,
+     "end": 1.932,
      "brk": false
     },
     {
      "w": "setenta,",
      "key": false,
-     "start": 2.155,
-     "end": 2.517,
+     "start": 1.943,
+     "end": 2.367,
      "brk": true
     },
     {
      "w": "tres",
      "key": false,
-     "start": 2.603,
-     "end": 2.837,
+     "start": 2.627,
+     "end": 2.845,
      "brk": false
     },
     {
      "w": "astronautas",
      "key": false,
-     "start": 2.837,
-     "end": 3.371,
+     "start": 2.856,
+     "end": 3.443,
      "brk": false
     },
     {
      "w": "despegaron",
      "key": false,
-     "start": 3.371,
-     "end": 3.861,
+     "start": 3.454,
+     "end": 3.964,
      "brk": false
     },
     {
      "w": "rumbo",
      "key": false,
-     "start": 3.861,
-     "end": 4.138,
+     "start": 3.975,
+     "end": 4.214,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 4.138,
-     "end": 4.288,
+     "start": 4.225,
+     "end": 4.236,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 4.288,
-     "end": 4.437,
+     "start": 4.247,
+     "end": 4.334,
      "brk": false
     },
     {
      "w": "Luna.",
      "key": true,
-     "start": 4.437,
-     "end": 4.671,
+     "start": 4.345,
+     "end": 4.693,
      "brk": true
     }
    ]
@@ -129,84 +129,84 @@
     "to": 321000,
     "caption": "KM DE LA TIERRA"
    },
-   "start": 5.151,
-   "end": 9.278,
+   "start": 5.013,
+   "end": 8.621,
    "words": [
     {
      "w": "Dos",
      "key": false,
-     "start": 5.271,
-     "end": 5.502,
+     "start": 5.073,
+     "end": 5.323,
      "brk": false
     },
     {
      "w": "días",
      "key": false,
-     "start": 5.502,
-     "end": 5.785,
+     "start": 5.334,
+     "end": 5.562,
      "brk": false
     },
     {
      "w": "después,",
      "key": false,
-     "start": 5.785,
-     "end": 6.222,
+     "start": 5.573,
+     "end": 6.029,
      "brk": true
     },
     {
      "w": "a",
      "key": false,
-     "start": 6.325,
-     "end": 6.505,
+     "start": 6.203,
+     "end": 6.279,
      "brk": false
     },
     {
      "w": "más",
      "key": false,
-     "start": 6.505,
-     "end": 6.737,
+     "start": 6.29,
+     "end": 6.507,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 6.737,
-     "end": 6.917,
+     "start": 6.518,
+     "end": 6.605,
      "brk": false
     },
     {
      "w": "trescientos",
      "key": true,
-     "start": 6.917,
-     "end": 7.559,
+     "start": 6.616,
+     "end": 7.127,
      "brk": false
     },
     {
      "w": "mil",
      "key": false,
-     "start": 7.559,
-     "end": 7.791,
+     "start": 7.138,
+     "end": 7.29,
      "brk": false
     },
     {
      "w": "kilómetros",
      "key": false,
-     "start": 7.791,
-     "end": 8.382,
+     "start": 7.301,
+     "end": 7.834,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 8.382,
-     "end": 8.562,
+     "start": 7.844,
+     "end": 7.92,
      "brk": false
     },
     {
      "w": "casa,",
      "key": false,
-     "start": 8.562,
-     "end": 8.845,
+     "start": 7.931,
+     "end": 8.301,
      "brk": true
     }
    ]
@@ -214,42 +214,42 @@
   {
    "scene": "explosion",
    "text": "un tanque de *oxígeno* *explotó*.",
-   "start": 9.278,
-   "end": 11.641,
+   "start": 8.621,
+   "end": 10.468,
    "words": [
     {
      "w": "un",
      "key": false,
-     "start": 9.398,
-     "end": 9.589,
+     "start": 8.681,
+     "end": 8.822,
      "brk": false
     },
     {
      "w": "tanque",
      "key": false,
-     "start": 9.589,
-     "end": 9.999,
+     "start": 8.833,
+     "end": 9.105,
      "brk": false
     },
     {
      "w": "de",
      "key": false,
-     "start": 9.999,
-     "end": 10.191,
+     "start": 9.116,
+     "end": 9.192,
      "brk": false
     },
     {
      "w": "oxígeno",
      "key": true,
-     "start": 10.191,
-     "end": 10.655,
+     "start": 9.203,
+     "end": 9.637,
      "brk": false
     },
     {
      "w": "explotó.",
      "key": true,
-     "start": 10.655,
-     "end": 11.12,
+     "start": 9.648,
+     "end": 10.148,
      "brk": true
     }
    ]
@@ -257,35 +257,35 @@
   {
    "scene": "cabina",
    "text": "Houston, tenemos un *problema*.",
-   "start": 11.641,
-   "end": 13.969,
+   "start": 10.468,
+   "end": 12.544,
    "words": [
     {
      "w": "Houston,",
      "key": false,
-     "start": 11.761,
-     "end": 12.21,
+     "start": 10.528,
+     "end": 11.017,
      "brk": true
     },
     {
      "w": "tenemos",
      "key": false,
-     "start": 12.316,
-     "end": 12.766,
+     "start": 11.267,
+     "end": 11.637,
      "brk": false
     },
     {
      "w": "un",
      "key": false,
-     "start": 12.766,
-     "end": 12.951,
+     "start": 11.648,
+     "end": 11.757,
      "brk": false
     },
     {
      "w": "problema.",
      "key": true,
-     "start": 12.951,
-     "end": 13.454,
+     "start": 11.767,
+     "end": 12.224,
      "brk": true
     }
    ]
@@ -299,126 +299,126 @@
     "to": 0,
     "caption": "% DE OXÍGENO"
    },
-   "start": 13.969,
-   "end": 20.163,
+   "start": 12.544,
+   "end": 19.004,
    "words": [
     {
      "w": "La",
      "key": false,
-     "start": 14.089,
-     "end": 14.277,
+     "start": 12.604,
+     "end": 12.745,
      "brk": false
     },
     {
      "w": "nave",
      "key": false,
-     "start": 14.277,
-     "end": 14.572,
+     "start": 12.756,
+     "end": 12.984,
      "brk": false
     },
     {
      "w": "perdía",
      "key": false,
-     "start": 14.572,
-     "end": 14.974,
+     "start": 12.995,
+     "end": 13.343,
      "brk": false
     },
     {
      "w": "oxígeno",
      "key": false,
-     "start": 14.974,
-     "end": 15.431,
+     "start": 13.354,
+     "end": 13.811,
      "brk": false
     },
     {
      "w": "y",
      "key": false,
-     "start": 15.431,
-     "end": 15.619,
+     "start": 13.821,
+     "end": 13.908,
      "brk": false
     },
     {
      "w": "energía.",
      "key": true,
-     "start": 15.619,
-     "end": 16.075,
+     "start": 13.919,
+     "end": 14.43,
      "brk": true
     },
     {
      "w": "Ya",
      "key": false,
-     "start": 16.263,
-     "end": 16.451,
+     "start": 15.174,
+     "end": 15.326,
      "brk": false
     },
     {
      "w": "no",
      "key": false,
-     "start": 16.451,
-     "end": 16.639,
+     "start": 15.337,
+     "end": 15.467,
      "brk": false
     },
     {
      "w": "iban",
      "key": false,
-     "start": 16.639,
-     "end": 16.934,
+     "start": 15.478,
+     "end": 15.739,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 16.934,
-     "end": 17.122,
+     "start": 15.75,
+     "end": 15.793,
      "brk": false
     },
     {
      "w": "pisar",
      "key": false,
-     "start": 17.122,
-     "end": 17.471,
+     "start": 15.804,
+     "end": 16.119,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 17.471,
-     "end": 17.659,
+     "start": 16.13,
+     "end": 16.195,
      "brk": false
     },
     {
      "w": "Luna.",
      "key": false,
-     "start": 17.659,
-     "end": 17.954,
+     "start": 16.206,
+     "end": 16.543,
      "brk": true
     },
     {
      "w": "Ahora",
      "key": false,
-     "start": 18.142,
-     "end": 18.491,
+     "start": 17.293,
+     "end": 17.619,
      "brk": false
     },
     {
      "w": "solo",
      "key": false,
-     "start": 18.491,
-     "end": 18.786,
+     "start": 17.63,
+     "end": 17.902,
      "brk": false
     },
     {
      "w": "querían",
      "key": false,
-     "start": 18.786,
-     "end": 19.242,
+     "start": 17.913,
+     "end": 18.261,
      "brk": false
     },
     {
      "w": "volver.",
      "key": true,
-     "start": 19.242,
-     "end": 19.645,
+     "start": 18.271,
+     "end": 18.684,
      "brk": true
     }
    ]
@@ -431,98 +431,98 @@
     "value": "2 · 2",
     "caption": "PERSONAS · DÍAS"
    },
-   "start": 20.163,
-   "end": 24.662,
+   "start": 19.004,
+   "end": 23.265,
    "words": [
     {
      "w": "Se",
      "key": false,
-     "start": 20.283,
-     "end": 20.447,
+     "start": 19.064,
+     "end": 19.26,
      "brk": false
     },
     {
      "w": "refugiaron",
      "key": false,
-     "start": 20.447,
-     "end": 20.989,
+     "start": 19.271,
+     "end": 19.825,
      "brk": false
     },
     {
      "w": "en",
      "key": false,
-     "start": 20.989,
-     "end": 21.154,
+     "start": 19.836,
+     "end": 19.945,
      "brk": false
     },
     {
      "w": "el",
      "key": false,
-     "start": 21.154,
-     "end": 21.318,
+     "start": 19.956,
+     "end": 20.075,
      "brk": false
     },
     {
      "w": "módulo",
      "key": false,
-     "start": 21.318,
-     "end": 21.672,
+     "start": 20.086,
+     "end": 20.412,
      "brk": false
     },
     {
      "w": "lunar,",
      "key": false,
-     "start": 21.672,
-     "end": 21.978,
+     "start": 20.423,
+     "end": 20.706,
      "brk": true
     },
     {
      "w": "hecho",
      "key": false,
-     "start": 22.072,
-     "end": 22.378,
+     "start": 20.967,
+     "end": 21.184,
      "brk": false
     },
     {
      "w": "para",
      "key": false,
-     "start": 22.378,
-     "end": 22.637,
+     "start": 21.195,
+     "end": 21.369,
      "brk": false
     },
     {
      "w": "dos",
      "key": true,
-     "start": 22.637,
-     "end": 22.849,
+     "start": 21.38,
+     "end": 21.586,
      "brk": false
     },
     {
      "w": "personas",
      "key": false,
-     "start": 22.849,
-     "end": 23.296,
+     "start": 21.597,
+     "end": 22.043,
      "brk": false
     },
     {
      "w": "durante",
      "key": false,
-     "start": 23.296,
-     "end": 23.696,
+     "start": 22.054,
+     "end": 22.347,
      "brk": false
     },
     {
      "w": "dos",
      "key": true,
-     "start": 23.696,
-     "end": 23.908,
+     "start": 22.358,
+     "end": 22.543,
      "brk": false
     },
     {
      "w": "días.",
      "key": false,
-     "start": 23.908,
-     "end": 24.167,
+     "start": 22.554,
+     "end": 22.945,
      "brk": true
     }
    ]
@@ -535,42 +535,42 @@
     "value": "3 · 4",
     "caption": "PERSONAS · DÍAS"
    },
-   "start": 24.662,
-   "end": 27.245,
+   "start": 23.265,
+   "end": 25.601,
    "words": [
     {
      "w": "Eran",
      "key": false,
-     "start": 24.782,
-     "end": 25.075,
+     "start": 23.325,
+     "end": 23.608,
      "brk": false
     },
     {
      "w": "tres,",
      "key": true,
-     "start": 25.075,
-     "end": 25.368,
+     "start": 23.618,
+     "end": 23.966,
      "brk": true
     },
     {
      "w": "y",
      "key": false,
-     "start": 25.475,
-     "end": 25.662,
+     "start": 24.162,
+     "end": 24.216,
      "brk": false
     },
     {
      "w": "necesitaban",
      "key": false,
-     "start": 25.662,
-     "end": 26.328,
+     "start": 24.227,
+     "end": 24.89,
      "brk": false
     },
     {
      "w": "cuatro.",
      "key": true,
-     "start": 26.328,
-     "end": 26.728,
+     "start": 24.901,
+     "end": 25.281,
      "brk": true
     }
    ]
@@ -584,98 +584,98 @@
     "to": 3,
     "caption": "GRADOS"
    },
-   "start": 27.245,
-   "end": 32.835,
+   "start": 25.601,
+   "end": 31.301,
    "words": [
     {
      "w": "Apagaron",
      "key": false,
-     "start": 27.365,
-     "end": 27.861,
+     "start": 25.661,
+     "end": 26.14,
      "brk": false
     },
     {
      "w": "casi",
      "key": false,
-     "start": 27.861,
-     "end": 28.148,
+     "start": 26.151,
+     "end": 26.455,
      "brk": false
     },
     {
      "w": "todo",
      "key": false,
-     "start": 28.148,
-     "end": 28.435,
+     "start": 26.466,
+     "end": 26.727,
      "brk": false
     },
     {
      "w": "para",
      "key": false,
-     "start": 28.435,
-     "end": 28.722,
+     "start": 26.738,
+     "end": 26.911,
      "brk": false
     },
     {
      "w": "ahorrar",
      "key": false,
-     "start": 28.722,
-     "end": 29.165,
+     "start": 26.922,
+     "end": 27.248,
      "brk": false
     },
     {
      "w": "energía.",
      "key": false,
-     "start": 29.165,
-     "end": 29.609,
+     "start": 27.259,
+     "end": 27.759,
      "brk": true
     },
     {
      "w": "Adentro,",
      "key": false,
-     "start": 29.791,
-     "end": 30.235,
+     "start": 28.514,
+     "end": 28.992,
      "brk": true
     },
     {
      "w": "la",
      "key": false,
-     "start": 30.339,
-     "end": 30.522,
+     "start": 29.253,
+     "end": 29.329,
      "brk": false
     },
     {
      "w": "temperatura",
      "key": false,
-     "start": 30.522,
-     "end": 31.174,
+     "start": 29.34,
+     "end": 29.894,
      "brk": false
     },
     {
      "w": "bajó",
      "key": false,
-     "start": 31.174,
-     "end": 31.461,
+     "start": 29.905,
+     "end": 30.188,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 31.461,
-     "end": 31.644,
+     "start": 30.198,
+     "end": 30.242,
      "brk": false
     },
     {
      "w": "tres",
      "key": true,
-     "start": 31.644,
-     "end": 31.931,
+     "start": 30.253,
+     "end": 30.514,
      "brk": false
     },
     {
      "w": "grados.",
      "key": false,
-     "start": 31.931,
-     "end": 32.322,
+     "start": 30.525,
+     "end": 30.981,
      "brk": true
     }
    ]
@@ -683,112 +683,112 @@
   {
    "scene": "filtro",
    "text": "Y el aire empezó a *envenenarlos*: los filtros eran *cuadrados*, y el hueco era *redondo*.",
-   "start": 32.835,
-   "end": 37.717,
+   "start": 31.301,
+   "end": 36.181,
    "words": [
     {
      "w": "Y",
      "key": false,
-     "start": 32.955,
-     "end": 33.11,
+     "start": 31.361,
+     "end": 31.524,
      "brk": false
     },
     {
      "w": "el",
      "key": false,
-     "start": 33.11,
-     "end": 33.265,
+     "start": 31.535,
+     "end": 31.665,
      "brk": false
     },
     {
      "w": "aire",
      "key": false,
-     "start": 33.265,
-     "end": 33.509,
+     "start": 31.676,
+     "end": 31.883,
      "brk": false
     },
     {
      "w": "empezó",
      "key": false,
-     "start": 33.509,
-     "end": 33.841,
+     "start": 31.894,
+     "end": 32.252,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 33.841,
-     "end": 33.997,
+     "start": 32.263,
+     "end": 32.296,
      "brk": false
     },
     {
      "w": "envenenarlos:",
      "key": true,
-     "start": 33.997,
-     "end": 34.595,
+     "start": 32.307,
+     "end": 32.97,
      "brk": true
     },
     {
      "w": "los",
      "key": false,
-     "start": 34.684,
-     "end": 34.883,
+     "start": 33.209,
+     "end": 33.328,
      "brk": false
     },
     {
      "w": "filtros",
      "key": false,
-     "start": 34.883,
-     "end": 35.26,
+     "start": 33.339,
+     "end": 33.731,
      "brk": false
     },
     {
      "w": "eran",
      "key": false,
-     "start": 35.26,
-     "end": 35.504,
+     "start": 33.742,
+     "end": 33.915,
      "brk": false
     },
     {
      "w": "cuadrados,",
      "key": true,
-     "start": 35.504,
-     "end": 35.969,
+     "start": 33.926,
+     "end": 34.448,
      "brk": true
     },
     {
      "w": "y",
      "key": false,
-     "start": 36.058,
-     "end": 36.213,
+     "start": 34.655,
+     "end": 34.752,
      "brk": false
     },
     {
      "w": "el",
      "key": false,
-     "start": 36.213,
-     "end": 36.368,
+     "start": 34.763,
+     "end": 34.872,
      "brk": false
     },
     {
      "w": "hueco",
      "key": false,
-     "start": 36.368,
-     "end": 36.656,
+     "start": 34.883,
+     "end": 35.187,
      "brk": false
     },
     {
      "w": "era",
      "key": false,
-     "start": 36.656,
-     "end": 36.855,
+     "start": 35.198,
+     "end": 35.383,
      "brk": false
     },
     {
      "w": "redondo.",
      "key": true,
-     "start": 36.855,
-     "end": 37.232,
+     "start": 35.394,
+     "end": 35.861,
      "brk": true
     }
    ]
@@ -796,98 +796,98 @@
   {
    "scene": "filtro",
    "text": "Desde la Tierra inventaron un adaptador con *cartón*, *bolsas* y *cinta*. Y *funcionó*.",
-   "start": 37.717,
-   "end": 42.646,
+   "start": 36.181,
+   "end": 41.424,
    "words": [
     {
      "w": "Desde",
      "key": false,
-     "start": 37.837,
-     "end": 38.145,
+     "start": 36.241,
+     "end": 36.535,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 38.145,
-     "end": 38.311,
+     "start": 36.545,
+     "end": 36.632,
      "brk": false
     },
     {
      "w": "Tierra",
      "key": false,
-     "start": 38.311,
-     "end": 38.666,
+     "start": 36.643,
+     "end": 36.904,
      "brk": false
     },
     {
      "w": "inventaron",
      "key": false,
-     "start": 38.666,
-     "end": 39.211,
+     "start": 36.915,
+     "end": 37.415,
      "brk": false
     },
     {
      "w": "un",
      "key": false,
-     "start": 39.211,
-     "end": 39.377,
+     "start": 37.426,
+     "end": 37.535,
      "brk": false
     },
     {
      "w": "adaptador",
      "key": false,
-     "start": 39.377,
-     "end": 39.875,
+     "start": 37.545,
+     "end": 38.013,
      "brk": false
     },
     {
      "w": "con",
      "key": false,
-     "start": 39.875,
-     "end": 40.088,
+     "start": 38.024,
+     "end": 38.165,
      "brk": false
     },
     {
      "w": "cartón,",
      "key": true,
-     "start": 40.088,
-     "end": 40.444,
+     "start": 38.176,
+     "end": 38.6,
      "brk": true
     },
     {
      "w": "bolsas",
      "key": true,
-     "start": 40.538,
-     "end": 40.894,
+     "start": 38.839,
+     "end": 39.208,
      "brk": false
     },
     {
      "w": "y",
      "key": false,
-     "start": 40.894,
-     "end": 41.06,
+     "start": 39.219,
+     "end": 39.263,
      "brk": false
     },
     {
      "w": "cinta.",
      "key": true,
-     "start": 41.06,
-     "end": 41.368,
+     "start": 39.274,
+     "end": 39.665,
      "brk": true
     },
     {
      "w": "Y",
      "key": false,
-     "start": 41.534,
-     "end": 41.7,
+     "start": 40.408,
+     "end": 40.517,
      "brk": false
     },
     {
      "w": "funcionó.",
      "key": true,
-     "start": 41.7,
-     "end": 42.15,
+     "start": 40.528,
+     "end": 41.104,
      "brk": true
     }
    ]
@@ -895,70 +895,70 @@
   {
    "scene": "luna",
    "text": "Rodearon la *Luna*, y usaron su gravedad para *regresar*.",
-   "start": 42.646,
-   "end": 45.879,
+   "start": 41.424,
+   "end": 44.652,
    "words": [
     {
      "w": "Rodearon",
      "key": false,
-     "start": 42.766,
-     "end": 43.185,
+     "start": 41.484,
+     "end": 41.919,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 43.185,
-     "end": 43.34,
+     "start": 41.93,
+     "end": 42.006,
      "brk": false
     },
     {
      "w": "Luna,",
      "key": true,
-     "start": 43.34,
-     "end": 43.583,
+     "start": 42.017,
+     "end": 42.321,
      "brk": true
     },
     {
      "w": "y",
      "key": false,
-     "start": 43.671,
-     "end": 43.826,
+     "start": 42.571,
+     "end": 42.647,
      "brk": false
     },
     {
      "w": "usaron",
      "key": false,
-     "start": 43.826,
-     "end": 44.157,
+     "start": 42.658,
+     "end": 42.995,
      "brk": false
     },
     {
      "w": "su",
      "key": false,
-     "start": 44.157,
-     "end": 44.312,
+     "start": 43.006,
+     "end": 43.125,
      "brk": false
     },
     {
      "w": "gravedad",
      "key": false,
-     "start": 44.312,
-     "end": 44.732,
+     "start": 43.136,
+     "end": 43.56,
      "brk": false
     },
     {
      "w": "para",
      "key": false,
-     "start": 44.732,
-     "end": 44.975,
+     "start": 43.571,
+     "end": 43.756,
      "brk": false
     },
     {
      "w": "regresar.",
      "key": true,
-     "start": 44.975,
-     "end": 45.394,
+     "start": 43.767,
+     "end": 44.332,
      "brk": true
     }
    ]
@@ -972,133 +972,133 @@
     "to": "05:50",
     "caption": "SIN SEÑAL"
    },
-   "start": 45.879,
-   "end": 52.352,
+   "start": 44.652,
+   "end": 52.047,
    "words": [
     {
      "w": "Al",
      "key": false,
-     "start": 45.999,
-     "end": 46.175,
+     "start": 44.712,
+     "end": 44.875,
      "brk": false
     },
     {
      "w": "entrar",
      "key": false,
-     "start": 46.175,
-     "end": 46.553,
+     "start": 44.886,
+     "end": 45.223,
      "brk": false
     },
     {
      "w": "a",
      "key": false,
-     "start": 46.553,
-     "end": 46.73,
+     "start": 45.234,
+     "end": 45.266,
      "brk": false
     },
     {
      "w": "la",
      "key": false,
-     "start": 46.73,
-     "end": 46.906,
+     "start": 45.277,
+     "end": 45.364,
      "brk": false
     },
     {
      "w": "atmósfera,",
      "key": false,
-     "start": 46.906,
-     "end": 47.435,
+     "start": 45.375,
+     "end": 45.875,
      "brk": true
     },
     {
      "w": "la",
      "key": false,
-     "start": 47.536,
-     "end": 47.713,
+     "start": 46.147,
+     "end": 46.245,
      "brk": false
     },
     {
      "w": "radio",
      "key": false,
-     "start": 47.713,
-     "end": 48.04,
+     "start": 46.255,
+     "end": 46.549,
      "brk": false
     },
     {
      "w": "se",
      "key": false,
-     "start": 48.04,
-     "end": 48.217,
+     "start": 46.56,
+     "end": 46.668,
      "brk": false
     },
     {
      "w": "cortó.",
      "key": false,
-     "start": 48.217,
-     "end": 48.544,
+     "start": 46.679,
+     "end": 47.092,
      "brk": true
     },
     {
      "w": "El",
      "key": false,
-     "start": 48.721,
-     "end": 48.897,
+     "start": 47.836,
+     "end": 48.01,
      "brk": false
     },
     {
      "w": "silencio",
      "key": false,
-     "start": 48.897,
-     "end": 49.376,
+     "start": 48.021,
+     "end": 48.477,
      "brk": false
     },
     {
      "w": "debía",
      "key": false,
-     "start": 49.376,
-     "end": 49.703,
+     "start": 48.488,
+     "end": 48.781,
      "brk": false
     },
     {
      "w": "durar",
      "key": false,
-     "start": 49.703,
-     "end": 50.031,
+     "start": 48.792,
+     "end": 49.086,
      "brk": false
     },
     {
      "w": "cuatro",
      "key": true,
-     "start": 50.031,
-     "end": 50.409,
+     "start": 49.097,
+     "end": 49.379,
      "brk": false
     },
     {
      "w": "minutos.",
      "key": false,
-     "start": 50.409,
-     "end": 50.837,
+     "start": 49.39,
+     "end": 49.934,
      "brk": true
     },
     {
      "w": "Duró",
      "key": false,
-     "start": 51.014,
-     "end": 51.291,
+     "start": 50.684,
+     "end": 50.966,
      "brk": false
     },
     {
      "w": "casi",
      "key": false,
-     "start": 51.291,
-     "end": 51.568,
+     "start": 50.977,
+     "end": 51.26,
      "brk": false
     },
     {
      "w": "seis.",
      "key": true,
-     "start": 51.568,
-     "end": 51.845,
+     "start": 51.271,
+     "end": 51.727,
      "brk": true
     }
    ]
@@ -1106,91 +1106,91 @@
   {
    "scene": "amerizaje",
    "text": "Hasta que, por fin, se vieron los *paracaídas*. Los tres estaban *vivos*.",
-   "start": 52.352,
-   "end": 57.385,
+   "start": 52.047,
+   "end": 57.073,
    "words": [
     {
      "w": "Hasta",
      "key": false,
-     "start": 52.472,
-     "end": 52.831,
+     "start": 52.107,
+     "end": 52.39,
      "brk": false
     },
     {
      "w": "que,",
      "key": false,
-     "start": 52.831,
-     "end": 53.079,
+     "start": 52.401,
+     "end": 52.618,
      "brk": true
     },
     {
      "w": "por",
      "key": false,
-     "start": 53.189,
-     "end": 53.438,
+     "start": 52.781,
+     "end": 52.933,
      "brk": false
     },
     {
      "w": "fin,",
      "key": false,
-     "start": 53.438,
-     "end": 53.686,
+     "start": 52.944,
+     "end": 53.194,
      "brk": true
     },
     {
      "w": "se",
      "key": false,
-     "start": 53.797,
-     "end": 53.99,
+     "start": 53.422,
+     "end": 53.564,
      "brk": false
     },
     {
      "w": "vieron",
      "key": false,
-     "start": 53.99,
-     "end": 54.404,
+     "start": 53.575,
+     "end": 53.835,
      "brk": false
     },
     {
      "w": "los",
      "key": false,
-     "start": 54.404,
-     "end": 54.653,
+     "start": 53.846,
+     "end": 53.966,
      "brk": false
     },
     {
      "w": "paracaídas.",
      "key": true,
-     "start": 54.653,
-     "end": 55.288,
+     "start": 53.977,
+     "end": 54.716,
      "brk": true
     },
     {
      "w": "Los",
      "key": false,
-     "start": 55.481,
-     "end": 55.729,
+     "start": 55.459,
+     "end": 55.655,
      "brk": false
     },
     {
      "w": "tres",
      "key": false,
-     "start": 55.729,
-     "end": 56.033,
+     "start": 55.666,
+     "end": 55.894,
      "brk": false
     },
     {
      "w": "estaban",
      "key": false,
-     "start": 56.033,
-     "end": 56.502,
+     "start": 55.905,
+     "end": 56.285,
      "brk": false
     },
     {
      "w": "vivos.",
      "key": true,
-     "start": 56.502,
-     "end": 56.861,
+     "start": 56.296,
+     "end": 56.753,
      "brk": true
     }
    ]
@@ -1198,70 +1198,70 @@
   {
    "scene": "cierre",
    "text": "Veinticinco años después, esta historia se convirtió en *película*.",
-   "start": 57.385,
-   "end": 61.315,
+   "start": 57.073,
+   "end": 60.812,
    "words": [
     {
      "w": "Veinticinco",
      "key": false,
-     "start": 57.505,
-     "end": 58.092,
+     "start": 57.133,
+     "end": 57.763,
      "brk": false
     },
     {
      "w": "años",
      "key": false,
-     "start": 58.092,
-     "end": 58.351,
+     "start": 57.774,
+     "end": 58.013,
      "brk": false
     },
     {
      "w": "después,",
      "key": false,
-     "start": 58.351,
-     "end": 58.751,
+     "start": 58.024,
+     "end": 58.459,
      "brk": true
     },
     {
      "w": "esta",
      "key": false,
-     "start": 58.845,
-     "end": 59.104,
+     "start": 58.698,
+     "end": 58.915,
      "brk": false
     },
     {
      "w": "historia",
      "key": false,
-     "start": 59.104,
-     "end": 59.55,
+     "start": 58.926,
+     "end": 59.307,
      "brk": false
     },
     {
      "w": "se",
      "key": false,
-     "start": 59.55,
-     "end": 59.715,
+     "start": 59.318,
+     "end": 59.437,
      "brk": false
     },
     {
      "w": "convirtió",
      "key": false,
-     "start": 59.715,
-     "end": 60.209,
+     "start": 59.448,
+     "end": 59.894,
      "brk": false
     },
     {
      "w": "en",
      "key": false,
-     "start": 60.209,
-     "end": 60.373,
+     "start": 59.905,
+     "end": 59.981,
      "brk": false
     },
     {
      "w": "película.",
      "key": true,
-     "start": 60.373,
-     "end": 60.82,
+     "start": 59.992,
+     "end": 60.492,
      "brk": true
     }
    ]

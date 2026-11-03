@@ -20,7 +20,15 @@ y contadores tipo marcador.
 - `gen_voz.py <nombre>` — genera `voz.wav` y `timeline.json` de esa historia.
 - `render.js <nombre>` — exporta `salida/<nombre>.mp4`.
 
-## Cómo regenerar
+## Voz recomendada: neuronal gratis (fluida)
+```bash
+pip install edge-tts
+python3 gen_voz_edge.py apolo13                       # voz es-MX-JorgeNeural, tiempos exactos por palabra
+python3 gen_voz_edge.py apolo13 --voz es-CO-GonzaloNeural --rate +10%   # otra voz / velocidad
+```
+Voces en español: `edge-tts --list-voices | grep ^es-` (Jorge y Dalia de México, Gonzalo y Salomé de Colombia, Tomás de Argentina, Álvaro de España…).
+
+## Cómo regenerar (voz offline con Piper)
 ```bash
 npm install                      # three + fuente Montserrat
 pip install piper-tts            # voz
