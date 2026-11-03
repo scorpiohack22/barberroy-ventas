@@ -2,3 +2,5 @@ node_modules/
 voz/*.onnx
 voz/*.onnx.json
 salida/*_still_*
+salida/*_parte*.mp4
+salida/*_partes.txt
