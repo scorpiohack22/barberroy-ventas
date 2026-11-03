@@ -50,6 +50,6 @@ with wave.open(os.path.join(DIR, "voz.wav"), "wb") as out:
     out.setnchannels(1); out.setsampwidth(2); out.setframerate(rate)
     out.writeframes(b"".join(frames) + silence(1.2))
 total = t + 1.2
-json.dump({"escenas": g.get("escenas", "escenas.js"), "duration": round(total, 3), "lines": lines_out}, open(os.path.join(DIR, "timeline.json"), "w", encoding="utf-8"),
+json.dump({"escenas": g.get("escenas", "escenas.js"), "estilo": g.get("estilo", "clasico"), "duration": round(total, 3), "lines": lines_out}, open(os.path.join(DIR, "timeline.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 print(f"OK: {len(lines_out)} líneas, {total:.1f}s")

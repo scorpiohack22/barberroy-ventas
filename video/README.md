@@ -7,12 +7,14 @@ y contadores tipo marcador.
 ## Historias
 | Historia | Guion | Escenas | Video |
 |----------|-------|---------|-------|
+| Los 33 (1 min, estilo karaoke) | `historias/los33/guion.json` | `escenas_33.js` | `salida/los33.mp4` |
 | Apolo 13 (1 min) | `historias/apolo13/guion.json` | `escenas_apolo13.js` | `salida/apolo13.mp4` |
 | BarberRoy — colorimetría (45 s) | `historias/barberroy/guion.json` | `escenas.js` | `salida/barberroy.mp4` |
 
 ## Archivos
 - `historias/<nombre>/guion.json` — EL GUION. `escenas` (archivo JS de escenas) y `lines`: cada línea tiene
   `scene`, `text` (palabras clave con `*asi*`), `counter` opcional y `tts` opcional (pronunciación).
+  `estilo`: `clasico` (subtítulos grandes abajo, contador arriba) o `karaoke` (frase arriba con la palabra actual resaltada, etiqueta dorada al centro).
   Tipos de contador: `number` (from/to), `clock` (from/to "MM:SS" o "HH:MM"), `text` (value fijo).
 - `escenas.js` — utilidades compartidas (personajes, materiales, textos) + escenas de BarberRoy.
 - `escenas_apolo13.js` — escenas del Apolo 13.

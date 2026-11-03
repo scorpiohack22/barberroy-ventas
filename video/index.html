@@ -89,6 +89,67 @@ function drawSubs(t) {
 }
 
 // Contador tipo marcador (números que ruedan)
+const KARAOKE = TL.estilo === 'karaoke';
+const miles = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+// Estilo karaoke: frase arriba, palabras futuras tenues, palabra actual resaltada
+const kChunks = [];
+for (const ln of TL.lines) {
+  let cur = [];
+  ln.words.forEach((w, i) => {
+    cur.push(w);
+    const len = cur.reduce((a, x) => a + x.w.length + 1, 0), last = i === ln.words.length - 1;
+    const strong = /[.!?:]$/.test(w.w), comma = /,$/.test(w.w);
+    if (last || strong || (comma && cur.length >= 3) || len > 30) { kChunks.push({ words: cur, start: cur[0].start }); cur = []; }
+  });
+}
+kChunks.forEach((c, i) => c.end = Math.min(kChunks[i + 1]?.start ?? TL.duration, c.words[c.words.length - 1].end + .8));
+
+function drawKaraoke(t) {
+  const c = kChunks.find(c => t >= c.start - .05 && t < c.end); if (!c) return;
+  const a = clamp((t - c.start + .05) / .15);
+  ctx.save(); ctx.textBaseline = 'middle'; ctx.globalAlpha = a;
+  const font = w => `${w.key ? 800 : 600} 40px Montserrat`;
+  const sp = 11, maxW = 600, rows = [[]]; let rw = 0;
+  for (const w of c.words) { ctx.font = font(w); const ww = ctx.measureText(w.w).width;
+    if (rw + ww > maxW && rows[rows.length - 1].length) { rows.push([]); rw = 0; }
+    rows[rows.length - 1].push({ ...w, ww }); rw += ww + sp; }
+  const y0 = 232 - (rows.length - 1) * 26;
+  rows.forEach((row, ri) => {
+    const total = row.reduce((s, w) => s + w.ww, 0) + sp * (row.length - 1);
+    let x = W / 2 - total / 2; const y = y0 + ri * 52;
+    for (const w of row) {
+      const nextStart = c.words[c.words.indexOf(c.words.find(z => z.start === w.start && z.w === w.w)) + 1]?.start ?? w.end + .3;
+      const curr = t >= w.start && t < Math.max(w.end, nextStart);
+      if (curr) { ctx.fillStyle = 'rgba(70,95,170,.35)'; roundRect(ctx, x - 7, y - 25, w.ww + 14, 50, 8); ctx.fill();
+        ctx.strokeStyle = 'rgba(170,195,255,.95)'; ctx.lineWidth = 2.5; ctx.stroke(); }
+      ctx.font = font(w); ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 2;
+      ctx.fillStyle = t >= w.start ? '#ffffff' : 'rgba(255,255,255,.38)'; ctx.fillText(w.w, x, y);
+      ctx.shadowColor = 'transparent'; x += w.ww + sp;
+    }
+  });
+  ctx.restore();
+}
+
+// Etiqueta estilo karaoke: caja oscura con borde dorado, a media altura
+function drawLabel(t) {
+  const ln = TL.lines.find(l => l.counter && t >= l.start && t < l.end); if (!ln) return;
+  const c = ln.counter, lt = t - ln.start, rem = ln.end - t;
+  const k = easeBack(clamp(lt / .35)) * (rem < .2 ? rem / .2 : 1); if (k <= 0) return;
+  const p = easeOut(clamp((lt - .2) / Math.max(.8, (ln.end - ln.start) * .55)));
+  const txt = c.type === 'text' ? c.value : miles(Math.round(c.from + (c.to - c.from) * p)) + (c.suffix || '');
+  ctx.save(); ctx.translate(W / 2, 880); ctx.scale(k, k); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = '800 58px Montserrat'; const tw = ctx.measureText(txt).width;
+  ctx.font = '800 15px Montserrat'; const cw = ctx.measureText(c.caption).width;
+  const bw = Math.max(tw, cw) + 44, bh = 104;
+  ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;
+  ctx.fillStyle = 'rgba(28,20,14,.92)'; roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 10); ctx.fill();
+  ctx.shadowColor = 'transparent'; ctx.strokeStyle = '#d9a845'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.font = '800 58px Montserrat'; ctx.fillStyle = '#ffd98a'; ctx.fillText(txt, 0, -10);
+  ctx.font = '800 15px Montserrat'; ctx.fillStyle = '#fff'; ctx.letterSpacing = '1px'; ctx.fillText(c.caption, 0, 34);
+  ctx.restore();
+}
+
 function drawCounter(t) {
   const ln = TL.lines.find(l => l.counter && t >= l.start && t < l.end); if (!ln) return;
   const c = ln.counter, lt = t - ln.start, rem = ln.end - t;
@@ -101,7 +162,7 @@ function drawCounter(t) {
     const m = s => { const [h, mm] = s.split(':').map(Number); return h * 60 + mm; };
     value = m(c.from) + (m(c.to) - m(c.from)) * p;
     fmt = v => { v = Math.floor(v); return String(Math.floor(v / 60)).padStart(2, '0') + ':' + String(v % 60).padStart(2, '0'); };
-  } else { value = c.from + (c.to - c.from) * p; fmt = v => String(Math.floor(v)); }
+  } else { value = c.from + (c.to - c.from) * p; fmt = v => String(Math.floor(v)) + (c.suffix || ''); }
   const dir = c.type === 'text' ? 1 : Math.sign((c.type === 'clock' ? 1 : c.to - c.from) || 1);
   const base = dir > 0 ? Math.floor(value) : Math.ceil(value);
   const frac = Math.abs(value - base);
@@ -145,7 +206,7 @@ function frame(t) {
   ctx.drawImage(vignette, 0, 0);
   const fl = 1 - clamp(lt / .12); if (fl > 0 && s !== segs[0]) { ctx.fillStyle = `rgba(255,255,255,${fl * .5})`; ctx.fillRect(0, 0, W, H); }
   s.inst.draw2d?.(ctx, lt, s.info);
-  drawCounter(t); drawSubs(t);
+  if (KARAOKE) { drawLabel(t); drawKaraoke(t); } else { drawCounter(t); drawSubs(t); }
   const fi = clamp(t / .3), fo = clamp((TL.duration - t) / .5);
   if (fi < 1 || fo < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - Math.min(fi, fo)})`; ctx.fillRect(0, 0, W, H); }
 }

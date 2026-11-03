@@ -1,0 +1,1378 @@
+{
+ "escenas": "escenas_33.js",
+ "estilo": "karaoke",
+ "duration": 59.033,
+ "lines": [
+  {
+   "scene": "entrada",
+   "text": "El cinco de agosto de dos mil diez, en el desierto de *Atacama*, treinta y tres mineros bajaron a trabajar.",
+   "counter": {
+    "type": "text",
+    "value": "Cobre y oro",
+    "caption": "MINA SAN JOSÉ"
+   },
+   "start": 0,
+   "end": 5.935,
+   "words": [
+    {
+     "w": "El",
+     "key": false,
+     "start": 0.41,
+     "end": 0.584,
+     "brk": false
+    },
+    {
+     "w": "cinco",
+     "key": false,
+     "start": 0.595,
+     "end": 0.888,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 0.899,
+     "end": 0.964,
+     "brk": false
+    },
+    {
+     "w": "agosto",
+     "key": false,
+     "start": 0.975,
+     "end": 1.312,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 1.323,
+     "end": 1.399,
+     "brk": false
+    },
+    {
+     "w": "dos",
+     "key": false,
+     "start": 1.41,
+     "end": 1.595,
+     "brk": false
+    },
+    {
+     "w": "mil",
+     "key": false,
+     "start": 1.606,
+     "end": 1.736,
+     "brk": false
+    },
+    {
+     "w": "diez,",
+     "key": false,
+     "start": 1.747,
+     "end": 2.019,
+     "brk": true
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 2.149,
+     "end": 2.269,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 2.28,
+     "end": 2.367,
+     "brk": false
+    },
+    {
+     "w": "desierto",
+     "key": false,
+     "start": 2.377,
+     "end": 2.801,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 2.812,
+     "end": 2.888,
+     "brk": false
+    },
+    {
+     "w": "Atacama,",
+     "key": true,
+     "start": 2.899,
+     "end": 3.345,
+     "brk": true
+    },
+    {
+     "w": "treinta",
+     "key": false,
+     "start": 3.595,
+     "end": 3.899,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 3.91,
+     "end": 3.964,
+     "brk": false
+    },
+    {
+     "w": "tres",
+     "key": false,
+     "start": 3.975,
+     "end": 4.214,
+     "brk": false
+    },
+    {
+     "w": "mineros",
+     "key": false,
+     "start": 4.225,
+     "end": 4.617,
+     "brk": false
+    },
+    {
+     "w": "bajaron",
+     "key": false,
+     "start": 4.627,
+     "end": 5.008,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 5.019,
+     "end": 5.062,
+     "brk": false
+    },
+    {
+     "w": "trabajar.",
+     "key": false,
+     "start": 5.073,
+     "end": 5.595,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "rampa",
+   "text": "La mina era un túnel en espiral de *cinco* kilómetros hacia abajo.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 5,
+    "suffix": " km",
+    "caption": "DE CURVAS HACIA ABAJO"
+   },
+   "start": 5.935,
+   "end": 9.487,
+   "words": [
+    {
+     "w": "La",
+     "key": false,
+     "start": 5.995,
+     "end": 6.136,
+     "brk": false
+    },
+    {
+     "w": "mina",
+     "key": false,
+     "start": 6.147,
+     "end": 6.44,
+     "brk": false
+    },
+    {
+     "w": "era",
+     "key": false,
+     "start": 6.451,
+     "end": 6.582,
+     "brk": false
+    },
+    {
+     "w": "un",
+     "key": false,
+     "start": 6.593,
+     "end": 6.723,
+     "brk": false
+    },
+    {
+     "w": "túnel",
+     "key": false,
+     "start": 6.734,
+     "end": 7.049,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 7.06,
+     "end": 7.136,
+     "brk": false
+    },
+    {
+     "w": "espiral",
+     "key": false,
+     "start": 7.147,
+     "end": 7.549,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 7.56,
+     "end": 7.636,
+     "brk": false
+    },
+    {
+     "w": "cinco",
+     "key": true,
+     "start": 7.647,
+     "end": 7.984,
+     "brk": false
+    },
+    {
+     "w": "kilómetros",
+     "key": false,
+     "start": 7.995,
+     "end": 8.56,
+     "brk": false
+    },
+    {
+     "w": "hacia",
+     "key": false,
+     "start": 8.571,
+     "end": 8.777,
+     "brk": false
+    },
+    {
+     "w": "abajo.",
+     "key": false,
+     "start": 8.788,
+     "end": 9.147,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "derrumbe",
+   "text": "Esa tarde, la montaña *crujió*. Setecientas mil toneladas de roca bloquearon la *salida*.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 700000,
+    "suffix": " t",
+    "caption": "DE ROCA"
+   },
+   "start": 9.487,
+   "end": 15.12,
+   "words": [
+    {
+     "w": "Esa",
+     "key": false,
+     "start": 9.547,
+     "end": 9.797,
+     "brk": false
+    },
+    {
+     "w": "tarde,",
+     "key": false,
+     "start": 9.808,
+     "end": 10.145,
+     "brk": true
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 10.406,
+     "end": 10.471,
+     "brk": false
+    },
+    {
+     "w": "montaña",
+     "key": false,
+     "start": 10.482,
+     "end": 10.906,
+     "brk": false
+    },
+    {
+     "w": "crujió.",
+     "key": true,
+     "start": 10.917,
+     "end": 11.33,
+     "brk": true
+    },
+    {
+     "w": "Setecientas",
+     "key": false,
+     "start": 12.084,
+     "end": 12.769,
+     "brk": false
+    },
+    {
+     "w": "mil",
+     "key": false,
+     "start": 12.78,
+     "end": 12.921,
+     "brk": false
+    },
+    {
+     "w": "toneladas",
+     "key": false,
+     "start": 12.932,
+     "end": 13.41,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 13.421,
+     "end": 13.497,
+     "brk": false
+    },
+    {
+     "w": "roca",
+     "key": false,
+     "start": 13.508,
+     "end": 13.791,
+     "brk": false
+    },
+    {
+     "w": "bloquearon",
+     "key": false,
+     "start": 13.801,
+     "end": 14.236,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 14.247,
+     "end": 14.323,
+     "brk": false
+    },
+    {
+     "w": "salida.",
+     "key": true,
+     "start": 14.334,
+     "end": 14.78,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "refugio",
+   "text": "Quedaron atrapados a *setecientos* metros bajo tierra.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 700,
+    "suffix": " m",
+    "caption": "BAJO TIERRA"
+   },
+   "start": 15.12,
+   "end": 18.041,
+   "words": [
+    {
+     "w": "Quedaron",
+     "key": false,
+     "start": 15.18,
+     "end": 15.549,
+     "brk": false
+    },
+    {
+     "w": "atrapados",
+     "key": false,
+     "start": 15.56,
+     "end": 16.06,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 16.071,
+     "end": 16.114,
+     "brk": false
+    },
+    {
+     "w": "setecientos",
+     "key": true,
+     "start": 16.125,
+     "end": 16.745,
+     "brk": false
+    },
+    {
+     "w": "metros",
+     "key": false,
+     "start": 16.756,
+     "end": 17.082,
+     "brk": false
+    },
+    {
+     "w": "bajo",
+     "key": false,
+     "start": 17.093,
+     "end": 17.31,
+     "brk": false
+    },
+    {
+     "w": "tierra.",
+     "key": false,
+     "start": 17.321,
+     "end": 17.701,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "comida",
+   "text": "En el refugio había comida para *dos* días. Y eran *treinta* *y* *tres*.",
+   "start": 18.041,
+   "end": 22.413,
+   "words": [
+    {
+     "w": "En",
+     "key": false,
+     "start": 18.101,
+     "end": 18.254,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 18.264,
+     "end": 18.351,
+     "brk": false
+    },
+    {
+     "w": "refugio",
+     "key": false,
+     "start": 18.362,
+     "end": 18.732,
+     "brk": false
+    },
+    {
+     "w": "había",
+     "key": false,
+     "start": 18.743,
+     "end": 18.971,
+     "brk": false
+    },
+    {
+     "w": "comida",
+     "key": false,
+     "start": 18.982,
+     "end": 19.351,
+     "brk": false
+    },
+    {
+     "w": "para",
+     "key": false,
+     "start": 19.362,
+     "end": 19.536,
+     "brk": false
+    },
+    {
+     "w": "dos",
+     "key": true,
+     "start": 19.547,
+     "end": 19.743,
+     "brk": false
+    },
+    {
+     "w": "días.",
+     "key": false,
+     "start": 19.754,
+     "end": 20.145,
+     "brk": true
+    },
+    {
+     "w": "Y",
+     "key": false,
+     "start": 20.888,
+     "end": 21.062,
+     "brk": false
+    },
+    {
+     "w": "eran",
+     "key": false,
+     "start": 21.073,
+     "end": 21.291,
+     "brk": false
+    },
+    {
+     "w": "treinta",
+     "key": true,
+     "start": 21.301,
+     "end": 21.584,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": true,
+     "start": 21.595,
+     "end": 21.649,
+     "brk": false
+    },
+    {
+     "w": "tres.",
+     "key": true,
+     "start": 21.66,
+     "end": 22.073,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "racion",
+   "text": "Así que la racionaron: *dos* cucharadas de atún cada dos días.",
+   "counter": {
+    "type": "text",
+    "value": "2 cucharadas",
+    "caption": "DE ATÚN"
+   },
+   "start": 22.413,
+   "end": 25.954,
+   "words": [
+    {
+     "w": "Así",
+     "key": false,
+     "start": 22.473,
+     "end": 22.745,
+     "brk": false
+    },
+    {
+     "w": "que",
+     "key": false,
+     "start": 22.756,
+     "end": 22.864,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 22.875,
+     "end": 22.962,
+     "brk": false
+    },
+    {
+     "w": "racionaron:",
+     "key": false,
+     "start": 22.973,
+     "end": 23.495,
+     "brk": true
+    },
+    {
+     "w": "dos",
+     "key": true,
+     "start": 23.756,
+     "end": 23.93,
+     "brk": false
+    },
+    {
+     "w": "cucharadas",
+     "key": false,
+     "start": 23.941,
+     "end": 24.441,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 24.451,
+     "end": 24.517,
+     "brk": false
+    },
+    {
+     "w": "atún",
+     "key": false,
+     "start": 24.528,
+     "end": 24.767,
+     "brk": false
+    },
+    {
+     "w": "cada",
+     "key": false,
+     "start": 24.778,
+     "end": 25.006,
+     "brk": false
+    },
+    {
+     "w": "dos",
+     "key": false,
+     "start": 25.017,
+     "end": 25.212,
+     "brk": false
+    },
+    {
+     "w": "días.",
+     "key": false,
+     "start": 25.223,
+     "end": 25.614,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "espera",
+   "text": "Pasaron *diecisiete* días sin saber si alguien los buscaba.",
+   "counter": {
+    "type": "number",
+    "from": 1,
+    "to": 17,
+    "caption": "DÍAS SIN CONTACTO"
+   },
+   "start": 25.954,
+   "end": 29.072,
+   "words": [
+    {
+     "w": "Pasaron",
+     "key": false,
+     "start": 26.014,
+     "end": 26.406,
+     "brk": false
+    },
+    {
+     "w": "diecisiete",
+     "key": true,
+     "start": 26.417,
+     "end": 26.917,
+     "brk": false
+    },
+    {
+     "w": "días",
+     "key": false,
+     "start": 26.928,
+     "end": 27.188,
+     "brk": false
+    },
+    {
+     "w": "sin",
+     "key": false,
+     "start": 27.199,
+     "end": 27.362,
+     "brk": false
+    },
+    {
+     "w": "saber",
+     "key": false,
+     "start": 27.373,
+     "end": 27.667,
+     "brk": false
+    },
+    {
+     "w": "si",
+     "key": false,
+     "start": 27.678,
+     "end": 27.851,
+     "brk": false
+    },
+    {
+     "w": "alguien",
+     "key": false,
+     "start": 27.862,
+     "end": 28.145,
+     "brk": false
+    },
+    {
+     "w": "los",
+     "key": false,
+     "start": 28.156,
+     "end": 28.275,
+     "brk": false
+    },
+    {
+     "w": "buscaba.",
+     "key": false,
+     "start": 28.286,
+     "end": 28.732,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "sonda",
+   "text": "Hasta que, de pronto, la punta de una *sonda* atravesó el techo.",
+   "start": 29.072,
+   "end": 32.863,
+   "words": [
+    {
+     "w": "Hasta",
+     "key": false,
+     "start": 29.132,
+     "end": 29.414,
+     "brk": false
+    },
+    {
+     "w": "que,",
+     "key": false,
+     "start": 29.425,
+     "end": 29.621,
+     "brk": true
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 29.849,
+     "end": 29.925,
+     "brk": false
+    },
+    {
+     "w": "pronto,",
+     "key": false,
+     "start": 29.936,
+     "end": 30.317,
+     "brk": true
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 30.599,
+     "end": 30.686,
+     "brk": false
+    },
+    {
+     "w": "punta",
+     "key": false,
+     "start": 30.697,
+     "end": 30.969,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 30.98,
+     "end": 31.078,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 31.088,
+     "end": 31.273,
+     "brk": false
+    },
+    {
+     "w": "sonda",
+     "key": true,
+     "start": 31.284,
+     "end": 31.578,
+     "brk": false
+    },
+    {
+     "w": "atravesó",
+     "key": false,
+     "start": 31.588,
+     "end": 32.034,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 32.045,
+     "end": 32.143,
+     "brk": false
+    },
+    {
+     "w": "techo.",
+     "key": false,
+     "start": 32.154,
+     "end": 32.523,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "mensaje",
+   "text": "Le amarraron una nota: estamos bien en el refugio, los *treinta* *y* *tres*.",
+   "start": 32.863,
+   "end": 37.002,
+   "words": [
+    {
+     "w": "Le",
+     "key": false,
+     "start": 32.923,
+     "end": 33.064,
+     "brk": false
+    },
+    {
+     "w": "amarraron",
+     "key": false,
+     "start": 33.075,
+     "end": 33.51,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 33.521,
+     "end": 33.673,
+     "brk": false
+    },
+    {
+     "w": "nota:",
+     "key": false,
+     "start": 33.684,
+     "end": 34.01,
+     "brk": true
+    },
+    {
+     "w": "estamos",
+     "key": false,
+     "start": 34.228,
+     "end": 34.651,
+     "brk": false
+    },
+    {
+     "w": "bien",
+     "key": false,
+     "start": 34.662,
+     "end": 34.847,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 34.858,
+     "end": 34.956,
+     "brk": false
+    },
+    {
+     "w": "el",
+     "key": false,
+     "start": 34.967,
+     "end": 35.054,
+     "brk": false
+    },
+    {
+     "w": "refugio,",
+     "key": false,
+     "start": 35.065,
+     "end": 35.543,
+     "brk": true
+    },
+    {
+     "w": "los",
+     "key": false,
+     "start": 35.782,
+     "end": 35.912,
+     "brk": false
+    },
+    {
+     "w": "treinta",
+     "key": true,
+     "start": 35.923,
+     "end": 36.184,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": true,
+     "start": 36.195,
+     "end": 36.249,
+     "brk": false
+    },
+    {
+     "w": "tres.",
+     "key": true,
+     "start": 36.26,
+     "end": 36.662,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "palomas",
+   "text": "Por ese agujero les mandaron comida, agua y *cartas*, dentro de tubos de plástico.",
+   "start": 37.002,
+   "end": 41.489,
+   "words": [
+    {
+     "w": "Por",
+     "key": false,
+     "start": 37.062,
+     "end": 37.204,
+     "brk": false
+    },
+    {
+     "w": "ese",
+     "key": false,
+     "start": 37.215,
+     "end": 37.367,
+     "brk": false
+    },
+    {
+     "w": "agujero",
+     "key": false,
+     "start": 37.378,
+     "end": 37.747,
+     "brk": false
+    },
+    {
+     "w": "les",
+     "key": false,
+     "start": 37.758,
+     "end": 37.921,
+     "brk": false
+    },
+    {
+     "w": "mandaron",
+     "key": false,
+     "start": 37.932,
+     "end": 38.291,
+     "brk": false
+    },
+    {
+     "w": "comida,",
+     "key": false,
+     "start": 38.301,
+     "end": 38.66,
+     "brk": true
+    },
+    {
+     "w": "agua",
+     "key": false,
+     "start": 38.878,
+     "end": 39.095,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 39.106,
+     "end": 39.16,
+     "brk": false
+    },
+    {
+     "w": "cartas,",
+     "key": true,
+     "start": 39.171,
+     "end": 39.617,
+     "brk": true
+    },
+    {
+     "w": "dentro",
+     "key": false,
+     "start": 39.845,
+     "end": 40.149,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 40.16,
+     "end": 40.258,
+     "brk": false
+    },
+    {
+     "w": "tubos",
+     "key": false,
+     "start": 40.269,
+     "end": 40.562,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 40.573,
+     "end": 40.649,
+     "brk": false
+    },
+    {
+     "w": "plástico.",
+     "key": false,
+     "start": 40.66,
+     "end": 41.149,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "capsula",
+   "text": "Con ayuda de la *NASA*, construyeron una cápsula para sacarlos: la *Fénix*.",
+   "counter": {
+    "type": "text",
+    "value": "+ NASA",
+    "caption": "CÁPSULA FÉNIX"
+   },
+   "start": 41.489,
+   "end": 45.889,
+   "words": [
+    {
+     "w": "Con",
+     "key": false,
+     "start": 41.549,
+     "end": 41.712,
+     "brk": false
+    },
+    {
+     "w": "ayuda",
+     "key": false,
+     "start": 41.723,
+     "end": 41.984,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 41.995,
+     "end": 42.093,
+     "brk": false
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 42.104,
+     "end": 42.169,
+     "brk": false
+    },
+    {
+     "w": "NASA,",
+     "key": true,
+     "start": 42.18,
+     "end": 42.538,
+     "brk": true
+    },
+    {
+     "w": "construyeron",
+     "key": false,
+     "start": 42.767,
+     "end": 43.354,
+     "brk": false
+    },
+    {
+     "w": "una",
+     "key": false,
+     "start": 43.365,
+     "end": 43.517,
+     "brk": false
+    },
+    {
+     "w": "cápsula",
+     "key": false,
+     "start": 43.528,
+     "end": 43.941,
+     "brk": false
+    },
+    {
+     "w": "para",
+     "key": false,
+     "start": 43.951,
+     "end": 44.136,
+     "brk": false
+    },
+    {
+     "w": "sacarlos:",
+     "key": false,
+     "start": 44.147,
+     "end": 44.712,
+     "brk": true
+    },
+    {
+     "w": "la",
+     "key": false,
+     "start": 44.93,
+     "end": 45.028,
+     "brk": false
+    },
+    {
+     "w": "Fénix.",
+     "key": true,
+     "start": 45.038,
+     "end": 45.549,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "rescate",
+   "text": "Después de *sesenta* *y* *nueve* días, uno por uno, empezaron a *subir*.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 69,
+    "caption": "DÍAS BAJO TIERRA"
+   },
+   "start": 45.889,
+   "end": 49.789,
+   "words": [
+    {
+     "w": "Después",
+     "key": false,
+     "start": 45.949,
+     "end": 46.33,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 46.341,
+     "end": 46.406,
+     "brk": false
+    },
+    {
+     "w": "sesenta",
+     "key": true,
+     "start": 46.417,
+     "end": 46.786,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": true,
+     "start": 46.797,
+     "end": 46.83,
+     "brk": false
+    },
+    {
+     "w": "nueve",
+     "key": true,
+     "start": 46.841,
+     "end": 47.047,
+     "brk": false
+    },
+    {
+     "w": "días,",
+     "key": false,
+     "start": 47.058,
+     "end": 47.395,
+     "brk": true
+    },
+    {
+     "w": "uno",
+     "key": false,
+     "start": 47.645,
+     "end": 47.797,
+     "brk": false
+    },
+    {
+     "w": "por",
+     "key": false,
+     "start": 47.808,
+     "end": 47.971,
+     "brk": false
+    },
+    {
+     "w": "uno,",
+     "key": false,
+     "start": 47.982,
+     "end": 48.232,
+     "brk": true
+    },
+    {
+     "w": "empezaron",
+     "key": false,
+     "start": 48.428,
+     "end": 48.982,
+     "brk": false
+    },
+    {
+     "w": "a",
+     "key": false,
+     "start": 48.993,
+     "end": 49.025,
+     "brk": false
+    },
+    {
+     "w": "subir.",
+     "key": true,
+     "start": 49.036,
+     "end": 49.449,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "superficie",
+   "text": "Los treinta y tres salieron *vivos*. Más de mil millones de personas lo vieron en vivo.",
+   "counter": {
+    "type": "number",
+    "from": 0,
+    "to": 33,
+    "suffix": " / 33",
+    "caption": "RESCATADOS"
+   },
+   "start": 49.789,
+   "end": 54.933,
+   "words": [
+    {
+     "w": "Los",
+     "key": false,
+     "start": 49.849,
+     "end": 50.056,
+     "brk": false
+    },
+    {
+     "w": "treinta",
+     "key": false,
+     "start": 50.067,
+     "end": 50.338,
+     "brk": false
+    },
+    {
+     "w": "y",
+     "key": false,
+     "start": 50.349,
+     "end": 50.404,
+     "brk": false
+    },
+    {
+     "w": "tres",
+     "key": false,
+     "start": 50.415,
+     "end": 50.643,
+     "brk": false
+    },
+    {
+     "w": "salieron",
+     "key": false,
+     "start": 50.654,
+     "end": 51.056,
+     "brk": false
+    },
+    {
+     "w": "vivos.",
+     "key": true,
+     "start": 51.067,
+     "end": 51.523,
+     "brk": true
+    },
+    {
+     "w": "Más",
+     "key": false,
+     "start": 52.267,
+     "end": 52.517,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 52.528,
+     "end": 52.593,
+     "brk": false
+    },
+    {
+     "w": "mil",
+     "key": false,
+     "start": 52.604,
+     "end": 52.788,
+     "brk": false
+    },
+    {
+     "w": "millones",
+     "key": false,
+     "start": 52.799,
+     "end": 53.191,
+     "brk": false
+    },
+    {
+     "w": "de",
+     "key": false,
+     "start": 53.202,
+     "end": 53.278,
+     "brk": false
+    },
+    {
+     "w": "personas",
+     "key": false,
+     "start": 53.288,
+     "end": 53.767,
+     "brk": false
+    },
+    {
+     "w": "lo",
+     "key": false,
+     "start": 53.778,
+     "end": 53.865,
+     "brk": false
+    },
+    {
+     "w": "vieron",
+     "key": false,
+     "start": 53.875,
+     "end": 54.158,
+     "brk": false
+    },
+    {
+     "w": "en",
+     "key": false,
+     "start": 54.169,
+     "end": 54.267,
+     "brk": false
+    },
+    {
+     "w": "vivo.",
+     "key": false,
+     "start": 54.278,
+     "end": 54.593,
+     "brk": true
+    }
+   ]
+  },
+  {
+   "scene": "cierre",
+   "text": "Cinco años después, su historia llegó al *cine*.",
+   "start": 54.933,
+   "end": 57.833,
+   "words": [
+    {
+     "w": "Cinco",
+     "key": false,
+     "start": 54.993,
+     "end": 55.395,
+     "brk": false
+    },
+    {
+     "w": "años",
+     "key": false,
+     "start": 55.406,
+     "end": 55.634,
+     "brk": false
+    },
+    {
+     "w": "después,",
+     "key": false,
+     "start": 55.645,
+     "end": 56.058,
+     "brk": true
+    },
+    {
+     "w": "su",
+     "key": false,
+     "start": 56.254,
+     "end": 56.384,
+     "brk": false
+    },
+    {
+     "w": "historia",
+     "key": false,
+     "start": 56.395,
+     "end": 56.775,
+     "brk": false
+    },
+    {
+     "w": "llegó",
+     "key": false,
+     "start": 56.786,
+     "end": 57.047,
+     "brk": false
+    },
+    {
+     "w": "al",
+     "key": false,
+     "start": 57.058,
+     "end": 57.145,
+     "brk": false
+    },
+    {
+     "w": "cine.",
+     "key": true,
+     "start": 57.156,
+     "end": 57.493,
+     "brk": true
+    }
+   ]
+  }
+ ]
+}

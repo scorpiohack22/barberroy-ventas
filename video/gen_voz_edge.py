@@ -64,7 +64,7 @@ async def main():
     pcm.append(b"\x00\x00" * int(SR * 1.2)); t += 1.2
     with wave.open(os.path.join(DIR, "voz.wav"), "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(b"".join(pcm))
-    json.dump({"escenas": g.get("escenas", "escenas.js"), "duration": round(t, 3), "lines": out},
+    json.dump({"escenas": g.get("escenas", "escenas.js"), "estilo": g.get("estilo", "clasico"), "duration": round(t, 3), "lines": out},
               open(os.path.join(DIR, "timeline.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"OK {VOICE}: {t:.1f}s")
 

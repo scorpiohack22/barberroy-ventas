@@ -61,6 +61,6 @@ for i, l in enumerate(lines):
         wout.append({"w": w.replace("*", ""), "key": w.startswith("*"), "start": round(cur, 3), "end": round(cur + d * (a - p) / a, 3), "brk": p > 0})
         cur += d
     out.append({**{k: v for k, v in l.items() if k != "tts"}, "start": round(start, 3), "end": round(end, 3), "words": wout})
-json.dump({"escenas": g.get("escenas", "escenas.js"), "duration": round(dur, 3), "lines": out},
+json.dump({"escenas": g.get("escenas", "escenas.js"), "estilo": g.get("estilo", "clasico"), "duration": round(dur, 3), "lines": out},
           open(os.path.join(DIR, "timeline.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(f"OK: {len(out)} líneas alineadas, {dur:.1f}s, {sum(1 for c in cuts if c[1] != c[2])}/{len(cuts)} cortes en pausas reales")
